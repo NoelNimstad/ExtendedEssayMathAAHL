@@ -10,11 +10,11 @@
 
 % custom commands
 \newcommand{\fatf}{\mathbf{F}} % for Vector field F
-\DeclareMathOperator{\definedas}{\stackrel{\Delta}{=}} % definitions
+\newcommand{\definedas}{\stackrel{\Delta}{=}} % definitions
 % > derivatives
-\newcommand{\der}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
-\newcommand{\partialder}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\materialder}[2]{\frac{\mathrm{D} #1}{\mathrm{D} #2}}
+\newcommand{\der}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}} % derivative
+\newcommand{\partialder}[2]{\frac{\partial #1}{\partial #2}} % partial derivative
+\newcommand{\materialder}[2]{\frac{\mathrm{D} #1}{\mathrm{D} #2}} % material derivative
 % > vector calculus operators
 \DeclareMathOperator{\gradient}{\nabla} % gradient operator
 \DeclareMathOperator{\divergence}{\nabla\cdot} % divergence operator
@@ -47,7 +47,7 @@
 % > background
 \subsection{Scope}
 This essay will for simplicity's sake only cover fluid flow in $\mathbb{R}^2$ spaces; an alaysis of fluid flow in $\mathbb{R}^3$ spaces would be orders of magnitude more complex.
-Furthermore, only incompressible fluids ($\divergence\fatf=0$), such that there are no sinks nor wells, will be analyzed. Test
+Furthermore, only incompressible fluids (any fluid such that $\divergence\fatf=0$), such that there are no sinks nor wells, will be analyzed. Test
 
 % > background
 \subsection{Background}
@@ -55,17 +55,17 @@ Vector calculus is the mathematical study of applying multi-variable calculus to
 
 $$f:\mathbb{R}^n\rightarrow\mathbb{R}^n\ni n>1,n\in\mathbb{Z}$$
 \begin{equation}
-	\left.\leadsto\nabla\definedas
+	\left.\leadsto\nabla=
 	\left[\begin{matrix}
-		\frac{\partial}{\partial x} \\
-		\frac{\partial}{\partial y} \\
-		\frac{\partial}{\partial z} \\
-		\vdots 					    \\
+		\partialder{}{x} \\
+		\partialder{}{y} \\
+		\partialder{}{z} \\
+		\vdots 	         \\
 	\end{matrix}\right]
 	\color{gray}\right\} \color{gray}n\text{ times}\color{black}
 \end{equation}
 \begin{equation}
-	\materialder{f}{t}=\partialder{f}{t}+\vec{v}\cdot\nabla f
+	\materialder{f}{t}\definedas\partialder{f}{t}+\vec{v}\cdot\nabla f
 \end{equation}
 $$\vec{v_1}\otimes\vec{v_2}$$
 
@@ -76,7 +76,7 @@ An incompressible fluid is any fluid such that $\divergence\fatf=0$, which is to
 % > the navier-stokes equations
 \subsection{The Navier-Stokes equations}
 \begin{equation} % navier-stokes
-	\frac{\mathbf{D}f}{\mathbf{Dt}}=\iiint\limits_{V}(\frac{\mathbf{D}\rho}{\mathbf{Dt}}+\rho(\nabla\cdot u))dV
+	\materialder{f}{\mathbf{t}}=\iiint\limits_{V}(\materialder{\rho}{\mathbf{t}}+\rho(\nabla\cdot u))dV
 \end{equation}
 Lorem ipsum dolor sit amet \cite{peyret2012computational}
 
