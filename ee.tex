@@ -1,16 +1,13 @@
-\documentclass[a4paper, 12pt]{article}
+\documentclass[a4paper, 12pt]{article} % 12pt, A4 page
 
 % packages
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{graphicx}
-\usepackage{xcolor}
-\usepackage{setspace}
+\usepackage{amsmath} % math symbols
+\usepackage{amsfonts} % 〃    〃
+\usepackage{xcolor} % text coloring
+\usepackage{setspace} % spacing
 
 % custom commands
-\newcommand{\equationpadding}{\vspace{0.5cm}}
-% \newcommand{\medium}{\large} % 12pt, as required by IB
-\newcommand{\fatf}{\mathbf{F}} % 12pt, as required by IB
+\newcommand{\fatf}{\mathbf{F}} % for Vector field F
 \DeclareMathOperator{\definedas}{\stackrel{\Delta}{=}} % definitions
 % > vector calculus operators
 \DeclareMathOperator{\gradient}{\nabla} % gradient operator
@@ -19,7 +16,7 @@
 
 % formatting
 \doublespacing % double spacing
-\pagenumbering{arabic} % roman page numbers
+\pagenumbering{arabic} % page numbering
 
 \begin{document}
 \begin{titlepage} % title page
@@ -68,9 +65,9 @@ An incompressible fluid is any fluid such that $\divergence\fatf=0$, which is to
 
 % > the navier-stokes equations
 \subsection{The Navier-Stokes equations}
-\equationpadding\begin{equation} % navier-stokes
+\begin{equation} % navier-stokes
 	\frac{\mathbf{D}f}{\mathbf{Dt}}=\iiint\limits_{V}(\frac{\mathbf{D}\rho}{\mathbf{Dt}}+\rho(\nabla\cdot u))dV
-\end{equation}\equationpadding
+\end{equation}
 Lorem ipsum dolor sit amet
 
 \end{document}
