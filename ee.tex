@@ -1,0 +1,78 @@
+\documentclass[a4paper]{article}
+
+% packages
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{setspace}
+
+% custom commands
+\newcommand{\equationpadding}{\vspace{0.5cm}}
+\newcommand{\medium}{\large} % 12pt, as required by IB
+\newcommand{\fatf}{\mathbf{F}} % 12pt, as required by IB
+\DeclareMathOperator{\definedas}{\stackrel{\Delta}{=}} % definitions
+% > vector calculus operators
+\DeclareMathOperator{\gradient}{\nabla} % gradient operator
+\DeclareMathOperator{\divergence}{\nabla\cdot} % divergence operator
+\DeclareMathOperator{\curl}{\nabla\times} % divergence operator
+
+% formatting
+\doublespacing % double spacing
+\pagenumbering{arabic} % roman page numbers
+
+\begin{document}
+\begin{titlepage} % title page
+	\begin{center}
+		\vspace*{0.5cm}
+		\LARGE
+		\textbf{How can vector calculus be used to model and analyze incompressible fluid flow in two-dimensional spaces, and what insights can this provide about real-world fluid systems?}
+
+		\vspace{1.5cm}
+		\Large
+		\textbf{Mathematics AA HL}
+
+		\vspace{9cm}\color{darkgray}
+		Word Count: 150 % (maximum 4000)
+	\end{center}
+\end{titlepage}
+
+\tableofcontents\newpage % table of contents
+\medium
+
+% INTRODUCTION
+\section{Introduction}
+% > background
+\subsection{Scope}
+This essay will for simplicity's sake only cover fluid flow in $\mathbb{R}^2$ spaces; an alaysis of fluid flow in $\mathbb{R}^3$ spaces would be orders of magnitude more complex.
+Furthermore, only incompressible fluids ($\divergence\fatf=0$), such that there are no sinks nore wells, will be analyzed.
+
+% > background
+\subsection{Background}
+Vector calculus is the mathematical study of applying multi-variable calculus to vector valued functions, often for the spaces $\mathbb{R}^2$ and $\mathbb{R}^3$.
+
+$$f:\mathbb{R}^n\rightarrow\mathbb{R}^n\ni n>1,n\in\mathbb{Z}$$
+\begin{equation}
+	\left.\leadsto\nabla\definedas
+	\left[\begin{matrix}
+		\frac{\partial}{\partial x} \\
+		\frac{\partial}{\partial y} \\
+		\frac{\partial}{\partial z} \\
+		\vdots 					    \\
+	\end{matrix}\right]
+	\color{gray}\right\} \color{gray}n\text{ times}\color{black}
+\end{equation}
+
+% > fluid dynamics
+\subsection{Fluid dynamics}
+An incompressible fluid is any fluid such that $\divergence\fatf=0$, which is to say that the divergence of the fluid is 0.
+
+% > the navier-stokes equations
+\subsection{The Navier-Stokes equations}
+\equationpadding\begin{equation} % navier-stokes
+	\frac{\mathbf{D}f}{\mathbf{Dt}}=\iiint\limits_{V}(\frac{\mathbf{D}\rho}{\mathbf{Dt}}+\rho(\nabla\cdot u))dV
+\end{equation}\equationpadding
+\medium
+Lorem ipsum dolor sit amet
+
+\end{document}
