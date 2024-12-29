@@ -5,6 +5,7 @@
 \usepackage{amsfonts} % 〃    〃
 \usepackage{xcolor} % text coloring
 \usepackage{setspace} % spacing
+\usepackage{cite}
 
 % custom commands
 \newcommand{\fatf}{\mathbf{F}} % for Vector field F
@@ -22,11 +23,11 @@
 \begin{titlepage} % title page
 	\begin{center}
 		\vspace*{0.5cm}
-		\LARGE
+		\Large
 		\textbf{How can vector calculus be used to model and analyze incompressible fluid flow in two-dimensional spaces, and what insights can this provide about real-world fluid systems?}
 
 		\vspace{1.5cm}
-		\Large
+		\large
 		\textbf{Mathematics AA HL}
 
 		\vspace{9cm}\color{darkgray}
@@ -68,6 +69,9 @@ An incompressible fluid is any fluid such that $\divergence\fatf=0$, which is to
 \begin{equation} % navier-stokes
 	\frac{\mathbf{D}f}{\mathbf{Dt}}=\iiint\limits_{V}(\frac{\mathbf{D}\rho}{\mathbf{Dt}}+\rho(\nabla\cdot u))dV
 \end{equation}
-Lorem ipsum dolor sit amet
+Lorem ipsum dolor sit amet \cite{Nobody06}
 
+\newpage
+\bibliography{sources}{}
+\bibliographystyle{plain}
 \end{document}
