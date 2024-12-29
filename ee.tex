@@ -11,6 +11,10 @@
 % custom commands
 \newcommand{\fatf}{\mathbf{F}} % for Vector field F
 \DeclareMathOperator{\definedas}{\stackrel{\Delta}{=}} % definitions
+% > derivatives
+\newcommand{\der}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
+\newcommand{\partialder}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\materialder}[2]{\frac{\mathbf{D} #1}{\mathbf{D} #2}}
 % > vector calculus operators
 \DeclareMathOperator{\gradient}{\nabla} % gradient operator
 \DeclareMathOperator{\divergence}{\nabla\cdot} % divergence operator
@@ -59,6 +63,9 @@ $$f:\mathbb{R}^n\rightarrow\mathbb{R}^n\ni n>1,n\in\mathbb{Z}$$
 		\vdots 					    \\
 	\end{matrix}\right]
 	\color{gray}\right\} \color{gray}n\text{ times}\color{black}
+\end{equation}
+\begin{equation}
+	\materialder{T}{t}=\partialder{}{t}+\vec{v}\cdot\nabla
 \end{equation}
 
 % > fluid dynamics
