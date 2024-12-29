@@ -6,6 +6,7 @@
 \usepackage{xcolor} % text coloring
 \usepackage{setspace} % spacing
 \usepackage{cite}
+\usepackage[nottoc,numbib]{tocbibind} % somehow makes the references appear in ToC
 
 % custom commands
 \newcommand{\fatf}{\mathbf{F}} % for Vector field F
@@ -31,7 +32,7 @@
 		\textbf{Mathematics AA HL}
 
 		\vspace{9cm}\color{darkgray}
-		Word Count: 150 % (maximum 4000)
+		Word Count: 86 % (maximum 4000)
 	\end{center}
 \end{titlepage}
 
@@ -69,10 +70,10 @@ An incompressible fluid is any fluid such that $\divergence\fatf=0$, which is to
 \begin{equation} % navier-stokes
 	\frac{\mathbf{D}f}{\mathbf{Dt}}=\iiint\limits_{V}(\frac{\mathbf{D}\rho}{\mathbf{Dt}}+\rho(\nabla\cdot u))dV
 \end{equation}
-Lorem ipsum \cite{e64} dolor sit amet \cite{n06}
+Lorem ipsum dolor sit amet \cite{peyret2012computational}
 
 % references
 \newpage
-\bibliography{sources}{}
-\bibliographystyle{plain}
+\bibliographystyle{apalike}
+\bibliography{sources}
 \end{document}
