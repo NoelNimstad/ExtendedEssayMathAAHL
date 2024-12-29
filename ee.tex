@@ -1,4 +1,4 @@
-\documentclass[a4paper]{article}
+\documentclass[a4paper, 12pt]{article}
 
 % packages
 \usepackage{amsmath}
@@ -9,7 +9,7 @@
 
 % custom commands
 \newcommand{\equationpadding}{\vspace{0.5cm}}
-\newcommand{\medium}{\large} % 12pt, as required by IB
+% \newcommand{\medium}{\large} % 12pt, as required by IB
 \newcommand{\fatf}{\mathbf{F}} % 12pt, as required by IB
 \DeclareMathOperator{\definedas}{\stackrel{\Delta}{=}} % definitions
 % > vector calculus operators
@@ -38,7 +38,6 @@
 \end{titlepage}
 
 \tableofcontents\newpage % table of contents
-\medium
 
 % INTRODUCTION
 \section{Introduction}
@@ -72,7 +71,6 @@ An incompressible fluid is any fluid such that $\divergence\fatf=0$, which is to
 \equationpadding\begin{equation} % navier-stokes
 	\frac{\mathbf{D}f}{\mathbf{Dt}}=\iiint\limits_{V}(\frac{\mathbf{D}\rho}{\mathbf{Dt}}+\rho(\nabla\cdot u))dV
 \end{equation}\equationpadding
-\medium
 Lorem ipsum dolor sit amet
 
 \end{document}
