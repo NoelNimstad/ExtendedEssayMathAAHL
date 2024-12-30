@@ -5,12 +5,16 @@
 \usepackage{amsfonts} % 〃    〃
 \usepackage{xcolor} % text coloring
 \usepackage{setspace} % spacing
-\usepackage{cite}
+\usepackage{graphicx} % image
+\usepackage{cite} % BibTex
 \usepackage[nottoc,numbib]{tocbibind} % somehow makes the references appear in ToC
+
+\newcommand{\researchquestion}{How can vector calculus be used to model and analyze incompressible fluid flow in two-dimensional spaces, and what insights can this provide about the vector fields of real-world fluid systems with circular obstacles?}
 
 % custom commands
 \newcommand{\fatf}{\mathbf{F}} % for Vector field F
 \newcommand{\definedas}{\stackrel{\Delta}{=}} % definitions
+\newcommand{\referto}[1]{\textsuperscript{\color{darkgray}\tiny[see \ref{#1}]}} % definitions
 % > derivatives
 \newcommand{\der}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}} % derivative
 \newcommand{\partialder}[2]{\frac{\partial #1}{\partial #2}} % partial derivative
@@ -24,19 +28,22 @@
 \doublespacing % double spacing
 \pagenumbering{arabic} % page numbering
 
+% theorems
+\newtheorem{greenstheorem}{Green's theorem}
+
 \begin{document}
 \begin{titlepage} % title page
 	\begin{center}
 		\vspace*{0.5cm}
 		\Large
-		\textbf{How can vector calculus be used to model and analyze incompressible fluid flow in two-dimensional spaces, and what insights can this provide about real-world fluid systems?}
+		\textbf{\researchquestion}
 
 		\vspace{1.5cm}
 		\large
 		\textbf{Mathematics AA HL}
 
-		\vspace{9cm}\color{darkgray}
-		Word Count: 86 % (maximum 4000)
+		\vfill{}\color{darkgray}
+		Word Count: 90 % (maximum 4000)
 	\end{center}
 \end{titlepage}
 
@@ -44,10 +51,15 @@
 
 % INTRODUCTION
 \section{Introduction}
+Vector calculus provides the foundation and tools for the analysis and modeling of several real-world phenomona, and is integral to understanding several important fields such as aero- \& hydrodynamics, as well as the modeling of weather \& climates. 
+
+Through the use of pure mathematics, this essay will investigate the flow of fluids in 2 dimensional spaces around circular obstacles.
 % > background
-\subsection{Scope}
-This essay will for simplicity's sake only cover fluid flow in $\mathbb{R}^2$ spaces; an alaysis of fluid flow in $\mathbb{R}^3$ spaces would be orders of magnitude more complex.
-Furthermore, only incompressible fluids (any fluid such that $\divergence\fatf=0$), such that there are no sinks nor wells, will be analyzed. Test
+\subsection{Aim \& scope}
+This essay will for simplicity's sake only cover fluid flow around circular obstacles in $\mathbb{R}^2$ spaces; an alaysis of fluid flow in $\mathbb{R}^3$ spaces would be much more complex.
+Furthermore, only incompressible fluids sans sinks and sources ($\fatf\ni\divergence\fatf=0$), will be analyzed.
+
+Most of the analysis will take place using Green's theorem\referto{sec:greenstheorem}.
 
 % > background
 \subsection{Background}
@@ -59,7 +71,7 @@ $$f:\mathbb{R}^n\rightarrow\mathbb{R}^n\ni n>1,n\in\mathbb{Z}$$
 	\left[\begin{matrix}
 		\partialder{}{x} \\
 		\partialder{}{y} \\
-		\partialder{}{z} \\
+		\partialder{}{z} \\ 
 		\vdots 	         \\
 	\end{matrix}\right]
 	\color{gray}\right\} \color{gray}n\text{ times}\color{black}
@@ -74,7 +86,12 @@ $$\vec{v_1}\otimes\vec{v_2}$$
 An incompressible fluid is any fluid such that $\divergence\fatf=0$, which is to say that the divergence of the fluid is 0.
 
 % > the navier-stokes equations
-\subsection{The Navier-Stokes equations}
+\subsection{Green's theorem}\label{sec:greenstheorem}
+\begin{greenstheorem}
+	The double integral over some reigon $R$ of the curl of a vector field $\fatf$ is equal to the line integral over some curve $C$ of $\fatf$
+	$$\int_C \mathbf{F} \cdot d\mathbf{r} = \iint_R \left( \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} \right) \, dA$$
+	$$\iint_R\curl\fatf\mathrm{d}A=\oint_C\fatf\cdot\mathrm{d}\mathbf{r}$$
+\end{greenstheorem}
 \begin{equation} % navier-stokes
 	\materialder{f}{\mathbf{t}}=\iiint\limits_{V}(\materialder{\rho}{\mathbf{t}}+\rho(\nabla\cdot u))dV
 \end{equation}
@@ -84,4 +101,17 @@ Lorem ipsum dolor sit amet \cite{peyret2012computational}
 \newpage
 \bibliographystyle{apalike}
 \bibliography{sources}
+\listoffigures
+
+% testing
+\newpage
+\begin{figure}
+	\includegraphics[scale=0.45]{out.png}
+	\centering
+	\caption{Vector field for $f(x,y)=\begin{pmatrix}\sin y\\\sin x\end{pmatrix}$}
+	\label{fig:Banana}
+\end{figure}
+$$\fatf(t):\mathbb{R}\rightarrow\mathbb{R}^2$$
+$$\leadsto\mathbf{P}(t, \vec{p})=\vec{p}+\hat{\imath}\iint_0^t\fatf_x\ \mathrm{d}t+\hat{\jmath}\iint_0^t\fatf_y\ \mathrm{d}t$$
+$$\mathbf{P}(t, \vec{p})=\vec{p}+\iint_0^t\hat{\imath}\fatf_x+\hat{\jmath}\fatf_y\ \mathrm{d}t$$
 \end{document}
