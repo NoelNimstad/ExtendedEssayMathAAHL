@@ -7,11 +7,14 @@
 \usepackage{setspace} % spacing
 \usepackage{graphicx} % image
 \usepackage{cite} % BibTex
-\usepackage[nottoc,numbib]{tocbibind} % somehow makes the references appear in ToC
+\usepackage[notlof,nottoc,numbib]{tocbibind} % somehow makes the references appear in ToC
 
 \newcommand{\researchquestion}{How can vector calculus be used to model and analyze incompressible fluid flow in two-dimensional spaces, and what insights can this provide about the vector fields of real-world fluid systems with circular obstacles?}
+\graphicspath{ {resources/} }
 
 % custom commands
+\newcommand{\ihat}{\hat{\imath}} % i hat
+\newcommand{\jhat}{\hat{\jmath}} % j hat
 \newcommand{\fatf}{\mathbf{F}} % for Vector field F
 \newcommand{\definedas}{\stackrel{\Delta}{=}} % definitions
 \newcommand{\referto}[1]{\textsuperscript{\color{darkgray}\tiny[see \ref{#1}]}} % definitions
@@ -101,12 +104,14 @@ Lorem ipsum dolor sit amet \cite{peyret2012computational}
 \newpage
 \bibliographystyle{apalike}
 \bibliography{sources}
-\listoffigures
+\stepcounter{section}
+\addcontentsline{toc}{section}{\protect\numberline{\thesection}List of Figures}
+\renewcommand{\listfigurename}{\thesection\hspace{20pt}List of Figures}\listoffigures
 
 % testing
 \newpage
 \begin{figure}
-	\includegraphics[scale=0.45]{out.png}
+	\includegraphics[scale=0.45]{sin.png}
 	\centering
 	\caption{Vector field for $f(x,y)=\begin{pmatrix}\sin y\\\sin x\end{pmatrix}$}
 	\label{fig:Banana}
@@ -114,4 +119,5 @@ Lorem ipsum dolor sit amet \cite{peyret2012computational}
 $$\fatf(t):\mathbb{R}\rightarrow\mathbb{R}^2$$
 $$\leadsto\mathbf{P}(t, \vec{p})=\vec{p}+\hat{\imath}\iint_0^t\fatf_x\ \mathrm{d}t+\hat{\jmath}\iint_0^t\fatf_y\ \mathrm{d}t$$
 $$\mathbf{P}(t, \vec{p})=\vec{p}+\iint_0^t\hat{\imath}\fatf_x+\hat{\jmath}\fatf_y\ \mathrm{d}t$$
+$$\jhat+\ihat$$
 \end{document}
