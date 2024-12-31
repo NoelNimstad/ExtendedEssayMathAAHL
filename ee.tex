@@ -47,7 +47,7 @@
 		\textbf{Mathematics AA HL}
 
 		\vfill{}\color{darkgray}
-		Word Count: 396 % (maximum 4000)
+		Word Count: 399 % (maximum 4000)
 	\end{center}
 \end{titlepage}
 
@@ -76,7 +76,7 @@ Defining this as the equation of greatest incline at point $x$, even though ther
 
 In multi-variable calculus a new tool called the partial derivative helps us differentiate multi-variable functions. It works identically to a regular derivative just that we treat all variables other than the one we are differentiating with respect to as constants.
 $$f(x,y)=x^2+y^2\implies\partialder{f}{x}=2x$$
-This finds the greatest change the equation of greatest change for $f$ in the direction differentiated by, so if we combine the partial derivatives in all directions $f$ takes as parameters into a vector, then we end up with the equation of steepest descent.
+This finds the greatest change the equation of greatest change for $f$ in the direction differentiated by, so if we combine the partial derivatives in all directions $f$ takes as parameters into a vector, then we end up with a vector pointing in the direction of steepest ascent.
 
 The gradient operator, denoted by the symbol $\nabla$ (pronounced nabla or grad), is thereby defined for some function $f:\mathbb{R}^n\rightarrow\mathbb{R}^m$ as:
 \begin{equation}
@@ -89,7 +89,7 @@ The gradient operator, denoted by the symbol $\nabla$ (pronounced nabla or grad)
 	\end{bmatrix}
 	\color{gray}\right\} \color{gray}n\text{ times}\color{black}
 \end{equation}
-Aplying this to our previous example $f(x,y)=x^2+y^2$, then we get:
+Aplying this to our previous example $f(x,y)=x^2+y^2$, we get:
 $$\nabla f=\begin{bmatrix}
 	\partialder{}{x}x^2+y^2\\
 	\partialder{}{y}x^2+y^2	
