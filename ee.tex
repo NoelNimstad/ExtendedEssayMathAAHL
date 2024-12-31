@@ -47,7 +47,7 @@
 		\textbf{Mathematics AA HL}
 
 		\vfill{}\color{darkgray}
-		Word Count: 399 % (maximum 4000)
+		Word Count: 398 % (maximum 4000)
 	\end{center}
 \end{titlepage}
 
@@ -72,13 +72,13 @@ Vector calculus is the mathematical study of applying multi-variable calculus to
 \subsubsection{The gradient operator}
 In one dimensional calculus, the gradient (slope) of a graph can be calculated at any point by differentiating the function and evaluating it at said point. 
 $$f(x)=x^2\implies\der{f}{x}=2x$$
-Defining this as the equation of greatest incline at point $x$, even though there in this case is only one true rate of the function since we are working in the space $\mathbb{R}^1$, will help us when extending this concept of greatest incline to $\mathbb{R}^n$ spaces.
+Defining this as the equation of greatest ascent at point $x$, even though there in this case is only one valid direction of ascent for the function since we are working in the space $\mathbb{R}^1$, will help us when extending this concept of greatest ascent to $\mathbb{R}^n$ spaces.
 
-In multi-variable calculus a new tool called the partial derivative helps us differentiate multi-variable functions. It works identically to a regular derivative just that we treat all variables other than the one we are differentiating with respect to as constants.
+In multi-variable calculus a new tool called the partial derivative helps us differentiate multi-variable functions. It works identically to a regular derivative but treats all variables other than the one being differentiated by as constants.
 $$f(x,y)=x^2+y^2\implies\partialder{f}{x}=2x$$
-This finds the greatest change the equation of greatest change for $f$ in the direction differentiated by, so if we combine the partial derivatives in all directions $f$ takes as parameters into a vector, then we end up with a vector pointing in the direction of steepest ascent.
+This also finds the equation of greatest ascent for $f$ in the direction differentiated by, so if we were to combine the partial derivatives in all directions $f$ takes as parameters into a vector, then we end up with a vector pointing in the direction of steepest ascent.
 
-The gradient operator, denoted by the symbol $\nabla$ (pronounced nabla or grad), is thereby defined for some function $f:\mathbb{R}^n\rightarrow\mathbb{R}^m$ as:
+The nabla (alt. gradient) operator, denoted by the symbol $\nabla$ (pronounced nabla or grad), is thereby defined for some function $f:\mathbb{R}^n\rightarrow\mathbb{R}^m$ as:
 \begin{equation}
 	\left.\nabla=
 	\begin{bmatrix}
