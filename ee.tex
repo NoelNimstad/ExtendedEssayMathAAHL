@@ -3,6 +3,7 @@
 % packages
 \usepackage{amsmath} % math symbols
 \usepackage{amsfonts} % 〃    〃
+\usepackage{amsthm} % math proofs
 \usepackage{xcolor} % text coloring
 \usepackage{setspace} % spacing
 \usepackage{graphicx} % image
@@ -46,7 +47,7 @@
 		\textbf{Mathematics AA HL}
 
 		\vfill{}\color{darkgray}
-		Word Count: 90 % (maximum 4000)
+		Word Count: 396 % (maximum 4000)
 	\end{center}
 \end{titlepage}
 
@@ -56,8 +57,8 @@
 \section{Introduction}
 Vector calculus provides the foundation and tools for the analysis and modeling of several real-world phenomona, and is integral to understanding several important fields such as aero- \& hydrodynamics, as well as the modeling of weather \& climates. 
 
-Through the use of pure mathematics, this essay will investigate the flow of fluids in 2 dimensional spaces around circular obstacles.
-% > background
+Through the use of pure mathematics, this essay will investigate the flow of fluids in 2 dimensional spaces around circular obstacles. Visual representations through mediums such as vector field plots (plotted through a custom program
+% > aim & scope
 \subsection{Aim \& scope}
 This essay will for simplicity's sake only cover fluid flow around circular obstacles in $\mathbb{R}^2$ spaces; an alaysis of fluid flow in $\mathbb{R}^3$ spaces would be much more complex.
 Furthermore, only incompressible fluids sans sinks and sources ($\fatf\ni\divergence\fatf=0$), will be analyzed.
@@ -68,17 +69,38 @@ Most of the analysis will take place using Green's theorem\referto{sec:greensthe
 \subsection{Background}
 Vector calculus is the mathematical study of applying multi-variable calculus to vector valued functions, often for the spaces $\mathbb{R}^2$ and $\mathbb{R}^3$.
 
-$$f:\mathbb{R}^n\rightarrow\mathbb{R}^n\ni n>1,n\in\mathbb{Z}$$
+\subsubsection{The gradient operator}
+In one dimensional calculus, the gradient (slope) of a graph can be calculated at any point by differentiating the function and evaluating it at said point. 
+$$f(x)=x^2\implies\der{f}{x}=2x$$
+Defining this as the equation of greatest incline at point $x$, even though there in this case is only one true rate of the function since we are working in the space $\mathbb{R}^1$, will help us when extending this concept of greatest incline to $\mathbb{R}^n$ spaces.
+
+In multi-variable calculus a new tool called the partial derivative helps us differentiate multi-variable functions. It works identically to a regular derivative just that we treat all variables other than the one we are differentiating with respect to as constants.
+$$f(x,y)=x^2+y^2\implies\partialder{f}{x}=2x$$
+This finds the greatest change the equation of greatest change for $f$ in the direction differentiated by, so if we combine the partial derivatives in all directions $f$ takes as parameters into a vector, then we end up with the equation of steepest descent.
+
+The gradient operator, denoted by the symbol $\nabla$ (pronounced nabla or grad), is thereby defined for some function $f:\mathbb{R}^n\rightarrow\mathbb{R}^m$ as:
 \begin{equation}
-	\left.\leadsto\nabla=
-	\left[\begin{matrix}
+	\left.\nabla=
+	\begin{bmatrix}
 		\partialder{}{x} \\
 		\partialder{}{y} \\
 		\partialder{}{z} \\ 
 		\vdots 	         \\
-	\end{matrix}\right]
+	\end{bmatrix}
 	\color{gray}\right\} \color{gray}n\text{ times}\color{black}
 \end{equation}
+Aplying this to our previous example $f(x,y)=x^2+y^2$, then we get:
+$$\nabla f=\begin{bmatrix}
+	\partialder{}{x}x^2+y^2\\
+	\partialder{}{y}x^2+y^2	
+\end{bmatrix}=\begin{bmatrix}
+	2x\\
+	2y
+\end{bmatrix}$$
+Meaning that at some point $(x,y)$, the direction of steepest incline will be $2(x,y)$. The nabla operator proves foundational to vector calculus and is the backbone of several important concepts.
+
+\subsubsection{Other}
+$$f:\mathbb{R}^n\rightarrow\mathbb{R}^n\ni n>1,n\in\mathbb{Z}$$
 \begin{equation}
 	\materialder{f}{t}\definedas\partialder{f}{t}+\vec{v}\cdot\nabla f
 \end{equation}
@@ -120,4 +142,16 @@ $$\fatf(t):\mathbb{R}\rightarrow\mathbb{R}^2$$
 $$\leadsto\mathbf{P}(t, \vec{p})=\vec{p}+\hat{\imath}\iint_0^t\fatf_x\ \mathrm{d}t+\hat{\jmath}\iint_0^t\fatf_y\ \mathrm{d}t$$
 $$\mathbf{P}(t, \vec{p})=\vec{p}+\iint_0^t\hat{\imath}\fatf_x+\hat{\jmath}\fatf_y\ \mathrm{d}t$$
 $$\jhat+\ihat$$
+\begin{align*}
+	A&=B\\
+	 &=C && \text{substitution}
+\end{align*}
+\begin{proof} Green's Theorem
+	\begin{align*}
+		B \definedas C \span \\
+		A&=B \\
+		 &=C \\
+	\end{align*}
+\end{proof}
+$$a\underbrace{a}_\text{banana}$$
 \end{document}
