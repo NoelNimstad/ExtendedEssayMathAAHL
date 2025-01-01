@@ -48,7 +48,7 @@
 		\textbf{Mathematics AA HL}
 
 		\vfill{}\color{darkgray}
-		Word Count: 509 % (maximum 4000)
+		Word Count: 535 % (maximum 4000)
 	\end{center}
 \end{titlepage}
 
@@ -117,6 +117,17 @@ Partial derivatives allow for the computation of derivatives in the $x$ and $y$,
 \begin{equation}
 	\nabla_{\vec{v}}f=\nabla f\cdot\vec{v}
 \end{equation}
+Nabla pointing in the direction of greatest ascent can be proven using the directional derivative.
+\begin{proof}
+	\begin{align*}
+		\nabla_{\vec{v}}f&=\nabla f\cdot\vec{v}\\
+		\max\nabla_{\vec{v}}f&\rightarrow\text{direction of greatest change}\\
+		\max\nabla_{\vec{v}}f&=\max\nabla f\cdot\vec{v}\\
+		&=\max\lVert\nabla f\rVert\lVert\vec{v}\rVert\cos{\theta}\\
+		&\leadsto\theta=0\\
+		&\implies\max\nabla_{\vec{v}}f\text{ points in the direction of }\nabla f
+	\end{align*}
+\end{proof}
 \subsubsection{Other}
 $$f:\mathbb{R}^n\rightarrow\mathbb{R}^n\ni n>1,n\in\mathbb{Z}$$
 \begin{equation}
