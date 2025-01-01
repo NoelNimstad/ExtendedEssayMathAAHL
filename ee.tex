@@ -47,7 +47,7 @@
 		\textbf{Mathematics AA HL}
 
 		\vfill{}\color{darkgray}
-		Word Count: 398 % (maximum 4000)
+		Word Count: 481 % (maximum 4000)
 	\end{center}
 \end{titlepage}
 
@@ -69,14 +69,28 @@ Most of the analysis will take place using Green's theorem\referto{sec:greensthe
 \subsection{Background}
 Vector calculus is the mathematical study of applying multi-variable calculus to vector valued functions, often for the spaces $\mathbb{R}^2$ and $\mathbb{R}^3$.
 
-\subsubsection{The nabla operator}
-In one dimensional calculus, the gradient (slope) of a graph can be calculated at any point by differentiating the function and evaluating it at said point. 
-$$f(x)=x^2\implies\der{f}{x}=2x$$
-Defining this as the equation of greatest ascent at point $x$, even though there in this case is only one valid direction of ascent for the function since we are working in the space $\mathbb{R}^1$, will help us when extending this concept of greatest ascent to $\mathbb{R}^n$ spaces.
+\subsubsection{Partial derivatives}
+One dimensional provides the tools for finding the slope of some function $f$ at some point through the derivative. For example, the equation of the slope of the function $f(x)=x^2$ at some point can be calculated using the formal definition of a deriative:
+\begin{equation}
+	\der{f}{x}=\underbrace{\lim_{h\rightarrow0}\frac{f(x+h)-f(x)}{h}}_\text{The formal definition of a derivative}\\
+\end{equation}
+\begin{align*}
+	f(x)=x^2\rightarrow\der{f}{x}&=\lim_{h\rightarrow0}\frac{(x+h)^2-(x)^2}{h}\\
+	&=\lim_{h\rightarrow0}\frac{x^2+2xh+h^2-x^2}{h}\\
+	&=\lim_{h\rightarrow0}\frac{2xh+h^2}{h}\\
+	&=\lim_{h\rightarrow0}2x+h=2x
+\end{align*}
+More conveniently, Lagrange's notation for the derivative is often used to avoid excessive writing.
+$$\der{f}{x}\equiv f'(x)$$
+For the purposes of this essay, the formal definition of a derivative will not be used to calculate each derivation, rather common patterns and rules (such as the power rule, product rule, etc.) will be used. 
 
-In multi-variable calculus a new tool called the partial derivative helps us differentiate multi-variable functions. It works identically to a regular derivative but treats all variables other than the one being differentiated by as constants.
+Multi-variable calculus introduces the partial derivative, which functions the same as a normal derivative but treats all variables except for the one being differentiated by as constants, allowing for the derivation of multi-variable functions.
 $$f(x,y)=x^2+y^2\implies\partialder{f}{x}=2x$$
-This also finds the equation of greatest ascent for $f$ in the direction differentiated by, so if we were to combine the partial derivatives in all directions $f$ takes as parameters into a vector, then we end up with a vector pointing in the direction of steepest ascent.
+
+However, the partial derivative only provides part of the picture, since it only takes into consideration one variable. Defining one single full picture "derivative" of a multi-variable function is not possible, since that will depend on the goal (e.g what direction you want to differentiate in).
+
+\subsubsection{The nabla operator}
+The nabla operator finds the direction of steepest ascent, i.e. it gives a vector pointing in what direction gives the greatest change in some function $f$.
 
 The nabla (alt. gradient) operator, denoted by the symbol $\nabla$ (pronounced nabla or grad), is thereby defined for some function $f:\mathbb{R}^n\rightarrow\mathbb{R}^m$ as:
 \begin{equation}
@@ -99,6 +113,8 @@ $$\nabla f=\begin{bmatrix}
 \end{bmatrix}$$
 Meaning that at some point $(x,y)$, the direction of steepest incline will be $2(x,y)$. The nabla operator proves foundational to vector calculus and is the backbone of several important concepts.
 
+\subsubsection{Directional derivatives}
+We now see how partial derivatives in 1-dimensional directions like $x$ and $y$, as well as the slope of greatest ascent, can be calculated, and by combining these concepts we can calculate the derivative of some function $f$ in any vector-based direction $\vec{v}$.
 \subsubsection{Other}
 $$f:\mathbb{R}^n\rightarrow\mathbb{R}^n\ni n>1,n\in\mathbb{Z}$$
 \begin{equation}
