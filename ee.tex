@@ -17,6 +17,7 @@
 \newcommand{\ihat}{\hat{\imath}} % i hat
 \newcommand{\jhat}{\hat{\jmath}} % j hat
 \newcommand{\fatf}{\mathbf{F}} % for Vector field F
+\newcommand{\justify}[1]{\text{\color{gray}(#1)}}
 \newcommand{\definedas}{\stackrel{\Delta}{=}} % definitions
 \newcommand{\referto}[1]{\textsuperscript{\color{darkgray}\tiny[see \ref{#1}]}} % definitions
 % > derivatives
@@ -70,7 +71,7 @@ Most of the analysis will take place using Green's theorem\referto{sec:greensthe
 Vector calculus is the mathematical study of applying multi-variable calculus to vector valued functions, often for the spaces $\mathbb{R}^2$ and $\mathbb{R}^3$.
 
 \subsubsection{Partial derivatives}
-One dimensional provides the tools for finding the slope of some function $f$ at some point through the derivative. For example, the equation of the slope of the function $f(x)=x^2$ at some point can be calculated using the formal definition of a deriative:
+One dimensional calculus provides the tools for finding the slope of some function $f$ at some point through the derivative. For example, the equation of the slope of the function $f(x)=x^2$ at some point can be calculated using the formal definition of a deriative:
 \begin{equation}
 	\der{f}{x}=\underbrace{\lim_{h\rightarrow0}\frac{f(x+h)-f(x)}{h}}_\text{The formal definition of a derivative}\\
 \end{equation}
@@ -85,9 +86,11 @@ $$\der{f}{x}\equiv f'(x)$$
 For the purposes of this essay, the formal definition of a derivative will not be used to calculate each derivation, rather common patterns and rules (such as the power rule, product rule, etc.) will be used. 
 
 Multi-variable calculus introduces the partial derivative, which functions the same as a normal derivative but treats all variables except for the one being differentiated by as constants, allowing for the derivation of multi-variable functions.
-$$f(x,y)=x^2+y^2\implies\partialder{f}{x}=2x$$
+\begin{align*}
+	f(x,y)=x^2+y^2\implies\partialder{f}{x}=2x && \justify{power rule}
+\end{align*}
 
-However, the partial derivative only provides part of the picture, since it only takes into consideration one variable. Defining one single full picture "derivative" of a multi-variable function is not possible, since that will depend on the goal (e.g what direction you want to differentiate in).
+However, the partial derivative only provides part of the picture, since it only takes into consideration one variable. Defining one single full picture "derivative" of a multi-variable function is not possible, since there are an infinite number of "slopes" at some point, and what you want the derivative to achieve will depend on your goal (e.g. what direction you want to differentiate in).
 
 \subsubsection{The nabla operator}
 The nabla operator finds the direction of steepest ascent, i.e. it gives a vector pointing in what direction gives the greatest change in some function $f$.
