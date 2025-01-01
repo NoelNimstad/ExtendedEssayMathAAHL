@@ -69,7 +69,7 @@ Most of the analysis will take place using Green's theorem\referto{sec:greensthe
 % > background
 \subsection{Background}
 \subsubsection{Partial derivatives}
-One dimensional calculus provides the tools for finding the slope of some function $f$ at some point through the derivative. For example, the equation of the slope of the function $f(x)=x^2$ at some point can be calculated using the formal definition of a deriative:
+One dimensional calculus provides the tools for finding the slope of some function $f$ with respect to some variable $x$ at some point through the derivative, often denoted by Leibniz's notation $\der{f}{x}$, representing the ratio between some small change in $f$ after some small change in $x$. For example, the equation of the slope of the function $f(x)=x^2$ at some point can be calculated using the formal definition of a deriative:
 \begin{equation}
 	\der{f}{x}=\underbrace{\lim_{h\rightarrow0}\frac{f(x+h)-f(x)}{h}}_\text{\hidewidth The formal definition of a derivative\hidewidth}\\
 \end{equation}
@@ -79,8 +79,8 @@ One dimensional calculus provides the tools for finding the slope of some functi
 	&=\lim_{h\rightarrow0}\frac{2xh+h^2}{h}\\
 	&=\lim_{h\rightarrow0}2x+h=2x
 \end{align*}
-More conveniently, Lagrange's notation for the derivative is often used to avoid excessive writing.
-$$\der{f}{x}\equiv f'(x)$$
+More conveniently, Lagrange's or Euler's notation for the derivative is often used to avoid excessive writing.
+$$\der{f}{x}\equiv f'(x)\equiv \mathrm{D}f$$
 For the purposes of this essay, the formal definition of a derivative will not be used to calculate each derivation, rather common patterns and rules (such as the power rule, product rule, etc.) will be used. 
 
 Multi-variable calculus introduces the partial derivative, which functions the same as a normal derivative but treats all variables except for the one being differentiated by as constants, allowing for the derivation of multi-variable functions.
