@@ -1,7 +1,7 @@
 \documentclass[a4paper, 12pt]{article} % 12pt, A4 page
 
 % packages
-\usepackage{amsmath} % math symbols
+\usepackage{amsmath,amssymb} % math symbols
 \usepackage{amsfonts} % 〃    〃
 \usepackage{amsthm} % math proofs
 \usepackage{xcolor} % text coloring
@@ -29,6 +29,8 @@
 \DeclareMathOperator{\divergence}{\nabla\cdot} % divergence operator
 \DeclareMathOperator{\curl}{\nabla\times} % divergence operator
 
+\renewcommand{\qedsymbol}{\hfill\ensuremath{\blacksquare}}
+
 % formatting
 \doublespacing % double spacing
 \pagenumbering{arabic} % page numbering
@@ -48,7 +50,7 @@
 		\textbf{Mathematics AA HL}
 
 		\vfill{}\color{darkgray}
-		Word Count: 535 % (maximum 4000)
+		Word Count: 556 % (maximum 4000)
 	\end{center}
 \end{titlepage}
 
@@ -101,7 +103,7 @@ The nabla operator, denoted $\nabla$ (pronounced nabla or del), is a vector fill
 	\end{bmatrix}
 	\color{gray}\right\} \color{gray}n\text{ times}\color{black}
 \end{equation}
-The nabla gives the vector pointing in the direction of greatest ascent. For example, aplying this to our previous example $f(x,y)=x^2+y^2$ results in:
+Nabla gives the vector pointing in the direction of greatest ascent\referto{p:nablagreatestchange}. For example, aplying this to our previous example $f(x,y)=x^2+y^2$ results in:
 $$\nabla f=\begin{bmatrix}
 	\partialder{}{x}x^2+y^2\\
 	\partialder{}{y}x^2+y^2	
@@ -110,7 +112,16 @@ $$\nabla f=\begin{bmatrix}
 	2y
 \end{bmatrix}$$
 Meaning that at some point $(x,y)$, the direction of steepest incline will be:$$2{\begin{bmatrix}x\\y\end{bmatrix}}$$
-The nabla operator proves foundational to several important concepts within vector calculus, as will be shown later.
+The gradient of a function is often visualized as a vector field, plotting the vector field of the previous example yields:
+
+\begin{figure}[!ht]
+	\includegraphics[scale=0.45]{x2y2.png}
+	\centering
+	\caption{Vector field for $f(x,y)=\begin{bmatrix}2x\\2y\end{bmatrix}$}
+	\label{fig:x2y2}
+\end{figure}
+
+The nabla operator proves foundational to several important concepts within vector calculus, as will be demonstrated.
 
 \subsubsection{Directional derivatives}
 Partial derivatives allow for the computation of derivatives in the $x$ and $y$, and this concept may be extended to the derivative in any direction $\vec{v}$. Since $\nabla f$ computes the rate of change in the $x$ and $y$ directions, dotting this vector with some directional vector $\vec{v}$ gives the directional derivative in the direction of $\vec{v}$, denoted as:
@@ -118,7 +129,7 @@ Partial derivatives allow for the computation of derivatives in the $x$ and $y$,
 	\nabla_{\vec{v}}f=\nabla f\cdot\vec{v}
 \end{equation}
 Nabla pointing in the direction of greatest ascent can be proven using the directional derivative.
-\begin{proof}
+\begin{proof}\label{p:nablagreatestchange}
 	\begin{align*}
 		\nabla_{\vec{v}}f&=\nabla f\cdot\vec{v}\\
 		\max\nabla_{\vec{v}}f&\rightarrow\text{direction of greatest change}\\
@@ -131,7 +142,7 @@ Nabla pointing in the direction of greatest ascent can be proven using the direc
 \subsubsection{Other}
 $$f:\mathbb{R}^n\rightarrow\mathbb{R}^n\ni n>1,n\in\mathbb{Z}$$
 \begin{equation}
-	\materialder{f}{t}\definedas\partialder{f}{t}+\underbrace{\vec{v}\cdot\nabla f}_{\text{Directional derivative }\nabla_{\vec{v}}f}
+	\materialder{f}{t}\definedas\partialder{f}{t}+\underbrace{\vec{v}\cdot\nabla f}_{\hidewidth\text{Directional derivative }\nabla_{\vec{v}}f\hidewidth}
 \end{equation}
 $$\vec{v_1}\otimes\vec{v_2}$$
 
@@ -161,12 +172,6 @@ Lorem ipsum dolor sit amet \cite{peyret2012computational}
 
 % testing
 \newpage
-\begin{figure}
-	\includegraphics[scale=0.45]{sin.png}
-	\centering
-	\caption{Vector field for $f(x,y)=\begin{pmatrix}\sin y\\\sin x\end{pmatrix}$}
-	\label{fig:Banana}
-\end{figure}
 $$\fatf(t):\mathbb{R}\rightarrow\mathbb{R}^2$$
 $$\leadsto\mathbf{P}(t, \vec{p})=\vec{p}+\hat{\imath}\iint_0^t\fatf_x\ \mathrm{d}t+\hat{\jmath}\iint_0^t\fatf_y\ \mathrm{d}t$$
 $$\mathbf{P}(t, \vec{p})=\vec{p}+\iint_0^t\hat{\imath}\fatf_x+\hat{\jmath}\fatf_y\ \mathrm{d}t$$
