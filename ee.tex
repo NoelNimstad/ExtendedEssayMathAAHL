@@ -10,13 +10,14 @@
 \usepackage{cite} % BibTex
 \usepackage[notlof,nottoc,numbib]{tocbibind} % somehow makes the references appear in ToC
 
-\newcommand{\researchquestion}{How can vector calculus be used to model and analyze incompressible fluid flow in two-dimensional spaces, and what insights can this provide about the vector fields of real-world fluid systems with circular obstacles?}
+\newcommand{\researchquestion}{How can vector calculus be applied to model and analyze incompressible fluid flow in two-dimensional spaces with circular obstacles, and what mathematical insights does this provide about real-world fluid systems?}
 \graphicspath{ {resources/} }
 
 % custom commands
 \newcommand{\ihat}{\hat{\imath}} % i hat
 \newcommand{\jhat}{\hat{\jmath}} % j hat
 \newcommand{\fatf}{\mathbf{F}} % for Vector field F
+\newcommand{\fatomega}{\boldsymbol{\omega}} % voriticty
 \newcommand{\justify}[1]{\text{\color{gray}(#1)}}
 \newcommand{\definedas}{\stackrel{\Delta}{=}} % definitions
 \newcommand{\referto}[1]{\textsuperscript{\color{darkgray}\tiny[see \ref{#1}]}} % definitions
@@ -69,8 +70,8 @@ Furthermore, only incompressible fluids sans sinks and sources ($\fatf\ni\diverg
 Most of the analysis will take place using Green's theorem\referto{sec:greenstheorem}.
 
 % > background
-\subsection{Background}
-\subsubsection{Partial derivatives}
+\section{Mathematical background}
+\subsection{The fundementals of vector calculus}
 One dimensional calculus provides the tools for finding the slope of some function $f$ with respect to some variable $x$ at some point through the derivative, often denoted by Leibniz's notation $\der{f}{x}$, representing the ratio between some small change in $f$ after some small change in $x$. For example, the equation of the slope of the function $f(x)=x^2$ at some point can be calculated using the formal definition of a deriative:
 \begin{equation}
 	\der{f}{x}=\underbrace{\lim_{h\rightarrow0}\frac{f(x+h)-f(x)}{h}}_\text{\hidewidth The formal definition of a derivative\hidewidth}\\
@@ -91,7 +92,7 @@ Multi-variable calculus introduces the partial derivative, which functions the s
 \end{align*}
 However, the partial derivative only provides part of the picture, since it only takes into consideration one variable. Defining one single full picture "derivative" of a multi-variable function is not possible, since there are an infinite number of "slopes" at some point, and what you want the derivative to achieve will depend on your goal (e.g. what direction you want to differentiate in).
 
-\subsubsection{The nabla operator}
+\subsubsection*{The nabla operator}
 The nabla operator, denoted $\nabla$ (pronounced nabla or del), is a vector filled with partial derivatives with respect to each variable some function $f$ takes. For example, consider some function $f:\mathbb{R}^n\rightarrow\mathbb{R}^m$, nabla would then be defined as:
 \begin{equation}
 	\left.\nabla=
@@ -123,7 +124,7 @@ The gradient of a function is often visualized as a vector field, plotting the v
 
 The nabla operator proves foundational to several important concepts within vector calculus, as will be demonstrated.
 
-\subsubsection{Directional derivatives}
+\subsubsection*{Directional derivatives}
 Partial derivatives allow for the computation of derivatives in the $x$ and $y$, and this concept may be extended to the derivative in any direction $\vec{v}$. Since $\nabla f$ computes the rate of change in the $x$ and $y$ directions, dotting this vector with some directional vector $\vec{v}$ gives the directional derivative in the direction of $\vec{v}$, denoted as:
 \begin{equation}
 	\nabla_{\vec{v}}f=\nabla f\cdot\vec{v}
@@ -139,7 +140,7 @@ Nabla pointing in the direction of greatest ascent can be proven using the direc
 		&\implies\max\nabla_{\vec{v}}f\text{ points in the direction of }\nabla f
 	\end{align*}
 \end{proof}
-\subsubsection{Other}
+\subsubsection*{Other}
 $$f:\mathbb{R}^n\rightarrow\mathbb{R}^n\ni n>1,n\in\mathbb{Z}$$
 \begin{equation}
 	\materialder{f}{t}\definedas\partialder{f}{t}+\underbrace{\vec{v}\cdot\nabla f}_{\hidewidth\text{Directional derivative }\nabla_{\vec{v}}f\hidewidth}
@@ -147,11 +148,13 @@ $$f:\mathbb{R}^n\rightarrow\mathbb{R}^n\ni n>1,n\in\mathbb{Z}$$
 $$\vec{v_1}\otimes\vec{v_2}$$
 
 % > fluid dynamics
-\subsection{Fluid dynamics}
+\subsection{Incompressible flow}
 An incompressible fluid is any fluid such that $\divergence\fatf=0$, which is to say that the divergence of the fluid is 0.
 
+\subsection{Complex analysis in 2D potential flow}
+
 % > the navier-stokes equations
-\subsection{Green's theorem}\label{sec:greenstheorem}
+\subsection*{Green's theorem}\label{sec:greenstheorem}
 \begin{greenstheorem}
 	The double integral over some reigon $R$ of the curl of a vector field $\fatf$ is equal to the line integral over some curve $C$ of $\fatf$
 	$$\int_C \mathbf{F} \cdot d\mathbf{r} = \iint_R \left( \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} \right) \, dA$$
@@ -161,6 +164,12 @@ An incompressible fluid is any fluid such that $\divergence\fatf=0$, which is to
 	\materialder{f}{\mathbf{t}}=\iiint\limits_{V}(\materialder{\rho}{\mathbf{t}}+\rho(\nabla\cdot u))dV
 \end{equation}
 Lorem ipsum dolor sit amet \cite{peyret2012computational}
+
+\section{Modeling flow around circular obstacles}
+\subsection{Ideal potential flow model}
+\subsection{Effect of circulation on flow patterns}
+\section{Real-world observations}
+\section{Conclusion}
 
 % references
 \newpage
@@ -187,5 +196,31 @@ $$\jhat+\ihat$$
 		 &=C \\
 	\end{align*}
 \end{proof}
-$$a\underbrace{a}_\text{banana}$$
+$$a\underbrace{a}_{\hidewidth\text{banana}\hidewidth}$$
+
+$$\fatomega=\curl\fatf=0$$
+$$\fatf(x, y) =
+\begin{cases}
+(0, 0), & \text{if } x^2 + y^2 \leq R^2, \\
+\left(
+U \left( 1 - \frac{R^2 (x^2 - y^2)}{(x^2 + y^2)^2} \right),
+U \left( -\frac{2 R^2 x y}{(x^2 + y^2)^2} \right)
+\right), & \text{if } x^2 + y^2 > R^2.
+\end{cases}$$
+
+\begin{align*}
+&\frac{\partial x}{\partial k}=\frac{\frac{\partial y}{\partial x}}{\frac{\partial y}{\partial k}}=\frac{6x+2k}{2x+1}\stackrel{\text{let}}{\equiv}z\\
+&\frac{\partial}{\partial x}6x+2k=6\\
+&\frac{\partial}{\partial x}2x+1=2\\
+\end{align*}
+\vspace{-2.5cm}\begin{align*}
+\implies\frac{\partial z}{\partial x}&=\frac{6(2x+1)-2(6x+2k)}{(2x+1)^2}\\
+&=\frac{12x+6-12x-4k}{(2x+1)^2}=\frac{6-4k}{(2x+1)^2}
+\end{align*}
+\vspace{-1.5cm}\begin{align*}
+\frac{\partial z}{\partial x}\stackrel{\text{set}}{=}0\\
+\implies6-4k=0\\
+\therefore k=\frac{3}{2}
+\end{align*}
+$x$\small$\int$\normalsize\hspace*{-4pt}$=y+3$
 \end{document}
