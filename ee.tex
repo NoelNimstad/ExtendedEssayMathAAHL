@@ -1,77 +1,112 @@
-\documentclass[a4paper, 12pt]{article} % 12pt, A4 page
+\documentclass[a4paper,12pt]{article}
+
+% --------------------------------------------------
+% Page setup
+% --------------------------------------------------
 \usepackage[left=2.25cm, right=2.25cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{setspace}       % line spacing
+\usepackage{graphicx}       % image support
+\graphicspath{{resources/}} % image folder
+\doublespacing              % double spacing
+\pagenumbering{arabic}      % page numbering
 
-% packages
-\usepackage{amsmath,amssymb} % math symbols
-\usepackage{amsfonts} % 〃    〃
-\usepackage{amsthm} % math proofs
-\usepackage{xcolor} % text coloring
-\usepackage{setspace} % spacing
-\usepackage{graphicx} % image
-\usepackage{cite} % BibTex
-\usepackage[notlof,nottoc,numbib]{tocbibind} % somehow makes the references appear in ToC
+% --------------------------------------------------
+% Math packages
+% --------------------------------------------------
+\usepackage{amsmath, amssymb, amsfonts, amsthm} % math symbols & environments
 
-\newcommand{\researchquestion}{How can vector calculus be applied to model and analyze incompressible fluid flow in two-dimensional spaces with circular obstacles, and what mathematical insights does this provide about real-world fluid systems?}
-\graphicspath{ {resources/} }
+% --------------------------------------------------
+% References & bibliography
+% --------------------------------------------------
+\usepackage{cite}                                  % BibTeX citation support
+\usepackage[notlof,nottoc,numbib]{tocbibind}       % include bibliography in ToC
 
-% custom commands
-\newcommand{\ihat}{\hat{\imath}} % i hat
-\newcommand{\jhat}{\hat{\jmath}} % j hat
-\newcommand{\fatf}{\mathbf{F}} % for Vector field F
-\newcommand{\fatomega}{\boldsymbol{\omega}} % voriticty
-\newcommand{\justify}[1]{\text{\color{gray}(#1)}}
-\newcommand{\definedas}{\stackrel{\Delta}{=}} % definitions
-\newcommand{\referto}[1]{\textsuperscript{\color{darkgray}\tiny[see \ref{#1}]}} % definitions
-\renewcommand{\theta}{\vartheta}
-% > derivatives
-\newcommand{\der}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}} % derivative
-\newcommand{\partialder}[2]{\frac{\partial #1}{\partial #2}} % partial derivative
-\newcommand{\materialder}[2]{\frac{\mathrm{D} #1}{\mathrm{D} #2}} % material derivative
-% > vector calculus operators
-\DeclareMathOperator{\gradient}{\nabla} % gradient operator
-\DeclareMathOperator{\divergence}{\nabla\cdot} % divergence operator
-\DeclareMathOperator{\curl}{\nabla\times} % divergence operator
+% --------------------------------------------------
+% Styling & utilities
+% --------------------------------------------------
+\usepackage{xcolor} % colored text
 
-\renewcommand{\qedsymbol}{\hfill\ensuremath{\blacksquare}}
+% --------------------------------------------------
+% Custom commands
+% --------------------------------------------------
 
-% formatting
-\doublespacing % double spacing
-\pagenumbering{arabic} % page numbering
+% Vectors and symbols
+\newcommand{\ihat}{\hat{\imath}}
+\newcommand{\jhat}{\hat{\jmath}}
+\newcommand{\fatf}{\mathbf{F}}         		% vector field F
+\newcommand{\fatomega}{\boldsymbol{\omega}} % vorticity
+\renewcommand{\theta}{\vartheta}      		% use vartheta for theta
 
-% theorems
-\newtheorem{greenstheorem}{Green's theorem}
+% Derivatives
+\newcommand{\der}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}           % total derivative
+\newcommand{\partialder}[2]{\frac{\partial #1}{\partial #2}}        % partial derivative
+\newcommand{\materialder}[2]{\frac{\mathrm{D} #1}{\mathrm{D} #2}}   % material derivative
+
+% Vector calculus operators
+\DeclareMathOperator{\gradient}{\nabla}
+\DeclareMathOperator{\divergence}{\nabla\cdot}
+\DeclareMathOperator{\curl}{\nabla\times}
+
+% Miscellaneous
+\newcommand{\justify}[1]{\text{\color{gray}(#1)}} % inline justification notes
+\newcommand{\definedas}{\stackrel{\Delta}{=}}     % definition symbol
+\newcommand{\referto}[1]{\textsuperscript{\color{darkgray}\tiny[see \ref{#1}]}}
+\newcommand{\needcitation}{\textsuperscript{\normalfont[Citation Needed]}}
+
+% Research question
+\newcommand{\researchquestion}
+{
+	How can vector calculus be applied to model and analyze 
+	incompressible fluid flow in two-dimensional spaces with 
+	circular obstacles, and what mathematical insights
+	does this provide about real-world fluid systems?
+}
+
+% --------------------------------------------------
+% Theorems
+% --------------------------------------------------
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
 
 \begin{document}
-\begin{titlepage} % title page
+
+% --------------------------------------------------
+% Title page
+% --------------------------------------------------
+\begin{titlepage}
 	\begin{center}
 		\vspace*{0.5cm}
-		\Large
-		\textbf{\researchquestion}
+		\Large\textbf{\researchquestion}
 
 		\vspace{1.5cm}
-		\large
-		\textbf{Mathematics AA HL}
+		\large\textbf{Mathematics AA HL}
 
-		\vfill{}\color{darkgray}
-		Word Count: 556 % (maximum 4000)
+		\vfill
+		\color{darkgray} Word Count: ****
 	\end{center}
 \end{titlepage}
 
-\tableofcontents\newpage % table of contents
+% --------------------------------------------------
+% Table of contents
+% --------------------------------------------------
+\tableofcontents\newpage
 
-% INTRODUCTION
+% --------------------------------------------------
+% Introduction
+% --------------------------------------------------
 \section{Introduction}
 Vector calculus provides the foundation and tools for the analysis and modeling of several real-world phenomona, and is integral to understanding several important fields such as aero- \& hydrodynamics, as well as the modeling of weather \& climates. 
 
 Through the use of pure mathematics, this essay will investigate the flow of fluids in 2 dimensional spaces around circular obstacles. Visual representations through mediums such as vector field plots (plotted through a custom program
-% > aim & scope
+% Aim & scope
 \subsection{Aim \& scope}
 This essay will for simplicity's sake only cover fluid flow around circular obstacles in $\mathbb{R}^2$ spaces; an alaysis of fluid flow in $\mathbb{R}^3$ spaces would be much more complex.
 Furthermore, only incompressible fluids sans sinks and sources ($\fatf\ni\divergence\fatf=0$), will be analyzed.
 
 Most of the analysis will take place using Green's theorem\referto{sec:greenstheorem}.
 
-% > background
+% Background
 \section{Mathematical background}
 \subsection{The fundementals of vector calculus}
 One dimensional calculus provides the tools for finding the slope of some function $f$ with respect to some variable $x$ at some point through the derivative, often denoted by Leibniz's notation $\der{f}{x}$, representing the ratio between some small change in $f$ after some small change in $x$. For example, the equation of the slope of the function $f(x)=x^2$ at some point can be calculated using the formal definition of a deriative:
@@ -157,11 +192,6 @@ An incompressible fluid is any fluid such that $\divergence\fatf=0$, which is to
 
 % > the navier-stokes equations
 \subsection*{Green's theorem}\label{sec:greenstheorem}
-\begin{greenstheorem}
-	The double integral over some reigon $R$ of the curl of a vector field $\fatf$ is equal to the line integral over some curve $C$ of $\fatf$
-	$$\int_C \mathbf{F} \cdot d\mathbf{r} = \iint_R \left( \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} \right) \, dA$$
-	$$\iint_R\curl\fatf\mathrm{d}A=\oint_C\fatf\cdot\mathrm{d}\mathbf{r}$$
-\end{greenstheorem}
 \begin{equation} % navier-stokes
 	\materialder{f}{\mathbf{t}}=\iiint\limits_{V}(\materialder{\rho}{\mathbf{t}}+\rho(\nabla\cdot u))dV
 \end{equation}
@@ -188,11 +218,15 @@ Lorem ipsum dolor sit amet \cite{peyret2012computational}
 A cylinder of radius $R$ is placed in two-dimensional, incompressible, inviscid flow which flows in the direction of $\ihat$.
 Far away from the cylinder the velocity field $\mathbf{V}$ can be described as: $\mathbf{V}=U\ihat$, where $U$ is some constant. Since the cylinder is impermissible, at the boundary $\mathbf{V}\cdot\hat{n}=0$ where the vector $\hat{n}$ is the unit vector normal to the surface. 
 
-Since $\nu=0$, the flow can be modeled using the Euler equations. If the Euler equations, apply, so does Kelvin's theorem, which states:
-\begin{equation}
-	\Gamma:t\mapsto\oint_C\mathbf{V}\cdot\mathrm{d}s,\ \materialder{\Gamma}{t}=0
-\end{equation}
-Meaning that the circulation of $\mathbf{V}$ is conserved. Consequently, if the vorticity $\boldsymbol{\omega}$ of $\mathbf{V}$ is $0$ initialy, it must remain $0$ everywhere. Therefore, $\curl\mathbf{V}=0$. Since the flow is irrotational, $\mathbf{V}$ can be expressed as $\mathbf{V}=\nabla\phi$, where $\phi$ is the velocity potential.
+Since in this model the viscocity $\nu=0$, the flow can be modeled using the Euler equations. If the Euler equations, apply, so does Kelvin's theorem:
+\begin{theorem}[Kelvin's circulation theorem]
+	The circulation around a closed material loop moving with an inviscid, barotropic fluid in the presence of conservative body forces remains constant over time.\needcitation
+	
+	If $\Gamma$ denotes the circulation around a material loop $C(t)$ moving with the fluid, then:
+	$$\materialder{\Gamma}{t}=0$$
+\end{theorem}
+
+Therefore, if the vorticity $\boldsymbol{\omega}$ of $\mathbf{V}$ is $0$ initialy, it must remain $0$ everywhere, thus $\curl\mathbf{V}=0$. Since the flow is irrotational, $\mathbf{V}$ can be expressed as $\mathbf{V}=\nabla\phi$, where $\phi$ is the velocity potential.
 
 Furthermore, if $\mathbf{V}$ is incompressible, that bieng that $\divergence\mathbf{V}=0$, then $\phi$ must satisfy Laplace's equation: $\Delta\phi=0$. Translating to polar coordinates:
 \newpage
