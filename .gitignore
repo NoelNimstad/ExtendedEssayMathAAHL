@@ -1,11 +1,10 @@
 .DS_Store
-ee.aux
-ee.fdb_latexmk
-ee.fls
-ee.log
-ee.synctex.gz
-ee.toc
-ee.bbl
-ee.blg
-ee 2.aux
-ee.lof
+*.fdb_latexmk
+*.fls
+*.log
+*.synctex.gz
+*.toc
+*.bbl
+*.blg
+*.aux
+*.lof
