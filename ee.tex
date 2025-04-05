@@ -4,11 +4,12 @@
 % Page setup
 % --------------------------------------------------
 \usepackage[left=2.25cm, right=2.25cm, top=2.5cm, bottom=2.5cm]{geometry}
-\usepackage{setspace}       % line spacing
-\usepackage{graphicx}       % image support
-\graphicspath{{resources/}} % image folder
-\doublespacing              % double spacing
-\pagenumbering{arabic}      % page numbering
+\usepackage{setspace}       		% line spacing
+\usepackage{graphicx}       		% image support
+\graphicspath{{resources/}} 		% image folder
+\doublespacing              		% double spacing
+\renewcommand{\arraystretch}{0.6}	% since the forced double spacing ruins everything
+\pagenumbering{arabic}      		% page numbering
 
 % --------------------------------------------------
 % Math packages
@@ -33,6 +34,9 @@
 % Vectors and symbols
 \newcommand{\ihat}{\hat{\imath}}
 \newcommand{\jhat}{\hat{\jmath}}
+\newcommand{\rhat}{\hat{r}}
+\newcommand{\nhat}{\hat{n}}
+\newcommand{\thetahat}{\hat{\theta}}
 \newcommand{\fatf}{\mathbf{F}}         		% vector field F
 \newcommand{\fatomega}{\boldsymbol{\omega}} % vorticity
 \renewcommand{\theta}{\vartheta}      		% use vartheta for theta
@@ -48,10 +52,12 @@
 \DeclareMathOperator{\curl}{\nabla\times}
 
 % Miscellaneous
-\newcommand{\justify}[1]{\text{\color{gray}(#1)}} % inline justification notes
-\newcommand{\definedas}{\stackrel{\Delta}{=}}     % definition symbol
+\newcommand{\justify}[1]{\text{\color{gray}(#1)}} 			% inline justification notes
+\newcommand{\definedas}{\stackrel{\Delta}{=}}     			% definition symbol
 \newcommand{\referto}[1]{\textsuperscript{\color{darkgray}\tiny[see \ref{#1}]}}
 \newcommand{\needcitation}{\textsuperscript{\normalfont[Citation Needed]}}
+\renewcommand{\qedsymbol}{\hfill\ensuremath{\blacksquare}}	% fix the QED symbol
+\newcommand{\vecpadding}{\vspace*{0.15cm}}					% for when fractions etc. get too close in a vector
 
 % Research question
 \newcommand{\researchquestion}
@@ -107,6 +113,18 @@ Furthermore, only incompressible fluids sans sinks and sources ($\fatf\ni\diverg
 Most of the analysis will take place using Green's theorem\referto{sec:greenstheorem}.
 
 % Background
+\subsection{Background}
+\subsubsection{Notation}
+In this paper, the gradient, divergence and curl operators will be denoted using their explicit $\nabla$ forms as follows:
+$$\begin{matrix}
+	\mathrm{grad}\ \fatf&\equiv&\nabla\fatf\\
+	\mathrm{div}\ \fatf&\equiv&\divergence\fatf\\
+	\mathrm{curl}\ \fatf&\equiv&\curl\fatf
+\end{matrix}$$
+The directional vector will also be denoted using $\nabla$ as: $\nabla_{\vec{v}}\fatf$ rather than $\partialder{\fatf}{\vec{v}}$.
+
+For the purposes of clarity, vectors in cartesian systems will be denoted $\begin{pmatrix}x\\y\end{pmatrix}$ whilst vectors in polar systems will be denoted as $\langle r,\theta\rangle$
+
 \section{Mathematical background}
 \subsection{The fundementals of vector calculus}
 One dimensional calculus provides the tools for finding the slope of some function $f$ with respect to some variable $x$ at some point through the derivative, often denoted by Leibniz's notation $\der{f}{x}$, representing the ratio between some small change in $f$ after some small change in $x$. For example, the equation of the slope of the function $f(x)=x^2$ at some point can be calculated using the formal definition of a deriative:
@@ -216,7 +234,11 @@ Lorem ipsum dolor sit amet \cite{peyret2012computational}
 \section{Research}
 \subsection{Potential flow around a circular cylinder}
 A cylinder of radius $R$ is placed in two-dimensional, incompressible, inviscid flow which flows in the direction of $\ihat$.
-Far away from the cylinder the velocity field $\mathbf{V}$ can be described as: $\mathbf{V}=U\ihat$, where $U$ is some constant. Since the cylinder is impermissible, at the boundary $\mathbf{V}\cdot\hat{n}=0$ where the vector $\hat{n}$ is the unit vector normal to the surface. 
+Far away from the cylinder the velocity field $\mathbf{V}$ can be described as: 
+\begin{equation}\label{equation:in-infinitum}
+	\mathbf{V}=U\ihat
+\end{equation}
+Where $U$ is some constant. Since the cylinder is impermissible, at the boundary $\mathbf{V}\cdot\nhat=0$ where the vector $\nhat$ is the unit vector normal to the surface. 
 
 Since in this model the viscocity $\nu=0$, the flow can be modeled using the Euler equations. If the Euler equations, apply, so does Kelvin's theorem:
 \begin{theorem}[Kelvin's circulation theorem]
@@ -228,11 +250,55 @@ Since in this model the viscocity $\nu=0$, the flow can be modeled using the Eul
 
 Therefore, if the vorticity $\boldsymbol{\omega}$ of $\mathbf{V}$ is $0$ initialy, it must remain $0$ everywhere, thus $\curl\mathbf{V}=0$. Since the flow is irrotational, $\mathbf{V}$ can be expressed as $\mathbf{V}=\nabla\phi$, where $\phi$ is the velocity potential.
 
-Furthermore, if $\mathbf{V}$ is incompressible, that bieng that $\divergence\mathbf{V}=0$, then $\phi$ must satisfy Laplace's equation: $\Delta\phi=0$. Translating to polar coordinates:
-\newpage
-\vspace*{-3cm}
+Furthermore, if $\mathbf{V}$ is incompressible, that bieng that $\divergence\mathbf{V}=0$, then $\phi$ must satisfy Laplace's equation: $\Delta\phi=0$.
+
+\subsection{Polar coordinate boundary conditions}
+\subsubsection{$\mathbf{V}=U\ihat$}
+In polar coordinates, the base vectors $\rhat$ and $\thetahat$ are defined as:
+\begin{align*}
+	\rhat&\definedas\ihat\cos\theta+\jhat\sin\theta\\
+	\thetahat&\definedas-\ihat\sin\theta+\jhat\cos\theta
+\end{align*}
+Solving for $\ihat$ and $\jhat$ gives:
+\begin{align}
+	\label{poihat:1}\ihat&=\frac{\rhat-\jhat\sin\theta}{\cos\theta}\\
+	\label{poihat:2}\jhat&=\frac{\thetahat+\ihat\sin\theta}{\cos\theta}
+\end{align}
+Substituting \ref{poihat:2} into \ref{poihat:1} and isolating $\ihat$ shows that
+\begin{align}
+	\notag\ihat&=\frac{\rhat-\frac{\thetahat+\ihat\sin\theta}{\cos\theta}\sin\theta}{\cos\theta}\\
+	\notag&=\frac{\rhat}{\cos\theta}-\frac{\thetahat\sin\theta+\ihat\sin^2\theta}{\cos^2\theta}\\
+	\notag&=\frac{\rhat}{\cos\theta}-\frac{\thetahat\sin\theta}{\cos^2\theta}-\frac{\ihat\sin^2\theta}{\cos^2\theta}\\
+	\notag\implies\ihat+\frac{\sin^2\theta}{\cos^2\theta}\ihat&=\frac{\rhat}{\cos\theta}-\frac{\thetahat\sin\theta}{\cos^2\theta}\\
+	\notag\ihat\left(1+\frac{\sin^2\theta}{\cos^2\theta}\right)&=\frac{\rhat}{\cos\theta}-\frac{\thetahat \sin\theta}{\cos^2\theta}\\
+	\notag\ihat\left(\frac{\sin^2\theta+\cos^2\theta}{\cos^2\theta}\right)&=\frac{\rhat}{\cos\theta}-\frac{\thetahat \sin\theta}{\cos^2\theta}\\
+	\notag\frac{\ihat}{\cos^2\theta}&=\frac{\rhat}{\cos\theta}-\frac{\thetahat \sin\theta}{\cos^2\theta}\\
+	\label{poihat:3}\ihat&=\rhat\cos\theta-\thetahat\sin\theta\qed\\
+	\notag&\equiv\langle\cos\theta\,,-\sin\theta\rangle
+\end{align}
+The condition stated in \ref{equation:in-infinitum} was that \textit{in infinitum}, $\mathbf{V}=U\ihat$\,. By substituting in \ref{poihat:3}, the statement becomes in polar coordinates:
+$$
+	r\rightarrow\infty\,,\quad\mathbf{V}=U\langle\cos\theta\,,-\sin\theta\rangle
+$$
+
+\subsubsection{$\mathbf{V}\cdot\nhat=0$}
+In polar coordinates, the base vector $\thetahat$ points in the direction of positive change of $\theta$. Consequently, for the angles $\theta\in(0\,,\pi)$, $\nhat=-\thetahat$ and when $\theta\in(\pi\,,2\pi)$, $\nhat=\thetahat$\,. Therefore, at the boundary of the cylinder when $r=R$,
+$$\begin{matrix}
+	\mathbf{V}\cdot-\thetahat=0&\text{when }&\theta\in(0\,,\pi)\\
+	\mathbf{V}\cdot\thetahat=0&\text{when }&\theta\in(\pi\,,2\pi)
+\end{matrix}$$
+Since both conditions are set to 0, $\mathbf{V}\cdot-\thetahat=\mathbf{V}\cdot\thetahat$, meaning the statement can be reduced to:
+$$\begin{matrix}
+	\mathbf{V}\cdot\thetahat=0&\text{when }&r=R
+\end{matrix}$$
+
+\subsubsection{$\Delta\phi=0$}
+In Cartesian coordinates, the Laplacian operator $\Delta$ is defined as $\nabla\cdot\nabla$, which for the scalar field $\phi$ becomes:
 \begin{gather}
-	\notag\Delta\phi=\frac{\partial^2\phi}{\partial x^2}+\frac{\partial^2\phi}{\partial y^2}\\
+	\notag\Delta\phi=\frac{\partial^2\phi}{\partial x^2}+\frac{\partial^2\phi}{\partial y^2}
+\end{gather}
+Translating $x$ and $y$ to polar coordinates and calculating their derivatives with respect to $r$ and $\theta$ gives:
+\begin{gather}
 	\notag x=r\cos\theta,\quad y=r\sin\theta\\
 	\label{polap:1}\partialder{x}{r}=\cos\theta,\quad\partialder{y}{r}=\sin\theta\\
 	\label{polap:2}\partialder{x}{\theta}=-r\sin\theta,\quad\partialder{y}{\theta}=r\cos\theta
@@ -293,4 +359,6 @@ Combining \ref{polap:5} and \ref{polap:9} yields:
 	\notag\implies\frac{\partial^2\phi}{\partial x^2}+\frac{\partial^2\phi}{\partial y^2}&=\frac{\partial^2\phi}{\partial r^2}+\frac{1}{r}\partialder{\phi}{r}+\frac{1}{r^2}\frac{\partial^2\phi}{\partial\theta^2}\\
 	\label{polap:final}\therefore\Delta\phi&=\frac{\partial^2\phi}{\partial r^2}+\frac{1}{r}\partialder{\phi}{r}+\frac{1}{r^2}\frac{\partial^2\phi}{\partial\theta^2}\qed
 \end{align}
+
+\subsection{Ad confluōrem}
 \end{document}
