@@ -273,26 +273,17 @@ Substituting \ref{poihat:2} into \ref{poihat:1} and isolating $\ihat$ shows that
 	\notag\ihat\left(1+\frac{\sin^2\theta}{\cos^2\theta}\right)&=\frac{\rhat}{\cos\theta}-\frac{\thetahat \sin\theta}{\cos^2\theta}\\
 	\notag\ihat\left(\frac{\sin^2\theta+\cos^2\theta}{\cos^2\theta}\right)&=\frac{\rhat}{\cos\theta}-\frac{\thetahat \sin\theta}{\cos^2\theta}\\
 	\notag\frac{\ihat}{\cos^2\theta}&=\frac{\rhat}{\cos\theta}-\frac{\thetahat \sin\theta}{\cos^2\theta}\\
-	\label{poihat:3}\ihat&=\rhat\cos\theta-\thetahat\sin\theta\qed\\
-	\notag&\equiv\langle\cos\theta\,,-\sin\theta\rangle
+	\label{poihat:3}\ihat&=\rhat\cos\theta-\thetahat\sin\theta\qed
 \end{align}
-The condition stated in \ref{equation:in-infinitum} was that \textit{in infinitum}, $\mathbf{V}=U\ihat$\,. By substituting in \ref{poihat:3}, the statement becomes in polar coordinates:
+The condition stated in \ref{equation:in-infinitum} was that \textit{in infinitum}, $\mathbf{V}=U\ihat$\,. By substituting in \ref{poihat:3}, the statement becomes in terms of $\rhat$ and $\thetahat$:
 $$
-	r\rightarrow\infty\,,\quad\mathbf{V}=U\langle\cos\theta\,,-\sin\theta\rangle
+	\text{as}\quad r\rightarrow\infty\,,\quad\mathbf{V}=U(\rhat\cos\theta-\thetahat\sin\theta)
 $$
 
-% NOTE
-% Should be r^ instead of θ^ since r^ points out from the center.
-% To be changed later!
 \subsubsection{$\mathbf{V}\cdot\nhat=0$}
-In polar coordinates, the base vector $\rhat$ points in the direction of positive change of $r$, that being outwards from the center. Consequently, for the angles $\theta\in(0\,,\pi)$, $\nhat=-\thetahat$ and when $\theta\in(\pi\,,2\pi)$, $\nhat=\thetahat$\,. Therefore, at the boundary of the cylinder when $r=R$,
+In polar coordinates, the base vector $\rhat$ points in the direction of positive change of $r$, that being outwards from the center. If the cylinder is assumed to be the center of the coordinate system, then $\rhat$ will always point normal to the surface of the cylinder. Therefore, at the boundary of the cylinder when $r=L$,
 $$\begin{matrix}
-	\mathbf{V}\cdot-\thetahat=0&\text{when }&\theta\in(0\,,\pi)\\
-	\mathbf{V}\cdot\thetahat=0&\text{when }&\theta\in(\pi\,,2\pi)
-\end{matrix}$$
-Since both conditions are set equal to 0, $\mathbf{V}\cdot-\thetahat=\mathbf{V}\cdot\thetahat$, meaning the statement can be reduced to:
-$$\begin{matrix}
-	\mathbf{V}\cdot\thetahat=0&\text{when }&r=R
+	\mathbf{V}\cdot\rhat=0
 \end{matrix}$$
 
 \subsubsection{$\Delta\phi=0$}
