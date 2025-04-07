@@ -121,9 +121,11 @@ $$\begin{matrix}
 	\mathrm{div}\ \fatf&\equiv&\divergence\fatf\\
 	\mathrm{curl}\ \fatf&\equiv&\curl\fatf
 \end{matrix}$$
-The directional vector will also be denoted using $\nabla$ as: $\nabla_{\vec{v}}\fatf$ rather than $\partialder{\fatf}{\vec{v}}$.
+The directional vector will also be denoted using $\nabla$ as $\nabla_{\vec{v}}\fatf$.
 
 For the purposes of clarity, vectors in cartesian systems will be denoted $\begin{pmatrix}x\\y\end{pmatrix}$ whilst vectors in polar systems will be denoted as $\langle r,\theta\rangle$
+
+To ensure point-uniqueness, all polar coordinates will be within the restrictions $r\geq0,\,\theta\in[0,2\pi)$.
 
 \section{Mathematical background}
 \subsection{The fundementals of vector calculus}
@@ -253,7 +255,7 @@ Therefore, if the vorticity $\boldsymbol{\omega}$ of $\mathbf{V}$ is $0$ initial
 Furthermore, if $\mathbf{V}$ is incompressible, that bieng that $\divergence\mathbf{V}=0$, then $\phi$ must satisfy Laplace's equation: $\Delta\phi=0$.
 
 \subsection{Polar coordinate boundary conditions}
-\subsubsection{$\mathbf{V}=U\ihat$}
+\subsubsection{$\mathbf{V}=U\ihat$}\label{sec:vuihat}
 In polar coordinates, the base vectors $\rhat$ and $\thetahat$ are defined as:
 \begin{align*}
 	\rhat&\definedas\ihat\cos\theta+\jhat\sin\theta\\
@@ -280,13 +282,13 @@ $$
 	\text{as}\quad r\rightarrow\infty\,,\quad\mathbf{V}=U(\rhat\cos\theta-\thetahat\sin\theta)
 $$
 
-\subsubsection{$\mathbf{V}\cdot\nhat=0$}
+\subsubsection{$\mathbf{V}\cdot\nhat=0$}\label{sec:vdotnhatzero}
 In polar coordinates, the base vector $\rhat$ points in the direction of positive change of $r$, that being outwards from the center. If the cylinder is assumed to be the center of the coordinate system, then $\rhat$ will always point normal to the surface of the cylinder. Therefore, at the boundary of the cylinder when $r=L$,
 $$\begin{matrix}
 	\mathbf{V}\cdot\rhat=0
 \end{matrix}$$
 
-\subsubsection{$\Delta\phi=0$}
+\subsubsection{$\Delta\phi=0$}\label{sec:deltaphizero}
 In Cartesian coordinates, the Laplacian operator $\Delta$ is defined as $\nabla\cdot\nabla$, which for the scalar field $\phi$ becomes:
 \begin{gather}
 	\notag\Delta\phi=\frac{\partial^2\phi}{\partial x^2}+\frac{\partial^2\phi}{\partial y^2}
@@ -355,4 +357,10 @@ Combining \ref{polap:5} and \ref{polap:9} yields:
 \end{align}
 
 \subsection{Ad confluōrem}
+Summarized, the conditions translated to polar form in sections \ref{sec:vuihat}, \ref{sec:vdotnhatzero} and \ref{sec:deltaphizero} are:
+$$\begin{matrix}
+	&\mathbf{V}=U(\rhat\cos\theta-\thetahat\sin\theta)\quad&\text{as}\quad&r\rightarrow\infty\vecpadding\\
+	&\mathbf{V}\cdot\rhat=0\quad&\text{when}\quad&r=L\vecpadding\\
+	&\dfrac{\partial^2\phi}{\partial r^2}+\dfrac{1}{r}\dfrac{\partial\phi}{\partial r}+\dfrac{1}{r^2}\dfrac{\partial^2\phi}{\partial\theta^2}=0
+\end{matrix}$$
 \end{document}
