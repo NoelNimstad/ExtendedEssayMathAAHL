@@ -57,12 +57,10 @@ $$\begin{matrix}
 \subsubsection{$\laplacian{\phi}=0$}\label{sec:deltaphizero}
 \begin{lemma}[Multivariable chain rule]
 Let $X(t,u)$ and $Y(t,u)$ be functions where $X,Y:\mathbb{R}^2\rightarrow\mathbb{R}$ such that $X,Y\in C^1(\mathbb{R}^2)$. Then define $Z(x,y)$ to be a function where $Z:\mathbb{R}^2\rightarrow\mathbb{R}$ and $Z\in C^1(\mathbb{R}^2)$. Then the partial derivatives of the composite function $z(t,u)=Z(X(t,u),Y(t,u))$ are given by:
-$$
-	\pdv{z}{t}=\pdv{Z}{x}\pdv{X}{t}+\pdv{Z}{y}\pdv{Y}{t},
-$$
-$$
-	\pdv{z}{u}=\pdv{Z}{x}\pdv{X}{u}+\pdv{Z}{y}\pdv{Y}{u}
-$$
+\begin{align*}
+	\pdv{z}{t}&=\pdv{Z}{x}\pdv{X}{t}+\pdv{Z}{y}\pdv{Y}{t}\\
+	\pdv{z}{u}&=\pdv{Z}{x}\pdv{X}{u}+\pdv{Z}{y}\pdv{Y}{u}
+\end{align*}
 \end{lemma}
 
 \begin{lemma}[Polar-Form Laplacian]
