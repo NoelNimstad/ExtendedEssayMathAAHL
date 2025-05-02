@@ -1,0 +1,94 @@
+\section{Mathematical background}
+\subsection{The fundementals of vector calculus}
+One dimensional calculus provides the tools for finding the slope of some function $f$ with respect to some variable $x$ at some point through the derivative, often denoted by Leibniz's notation $\der{f}{x}$, representing the ratio between some small change in $f$ after some small change in $x$. For example, the equation of the slope of the function $f(x)=x^2$ at some point can be calculated using the formal definition of a deriative:
+\begin{equation}
+	\der{f}{x}=\underbrace{\lim_{h\rightarrow0}\frac{f(x+h)-f(x)}{h}}_\text{\hidewidth The formal definition of a derivative\hidewidth}\\
+\end{equation}
+\begin{align*}
+	f(x)=x^2\rightarrow\der{f}{x}&=\lim_{h\rightarrow0}\frac{(x+h)^2-(x)^2}{h}\\
+	&=\lim_{h\rightarrow0}\frac{x^2+2xh+h^2-x^2}{h}\\
+	&=\lim_{h\rightarrow0}\frac{2xh+h^2}{h}\\
+	&=\lim_{h\rightarrow0}2x+h=2x
+\end{align*}
+More conveniently, Lagrange's or Euler's notation for the derivative is often used to avoid excessive writing.
+$$\der{f}{x}\equiv f'(x)\equiv \mathrm{D}f$$
+For the purposes of this essay, the formal definition of a derivative will not be used to calculate each derivation, rather common patterns and rules (such as the power rule, product rule, etc.) will be used. 
+
+Multi-variable calculus introduces the partial derivative, which functions the same as a normal derivative but treats all variables except for the one being differentiated by as constants, allowing for the derivation of multi-variable functions.
+\begin{align*}
+	f(x,y)=x^2+y^2\implies\partialder{f}{x}=2x && \justify{power rule}
+\end{align*}
+However, the partial derivative only provides part of the picture, since it only takes into consideration one variable. Defining one single full picture "derivative" of a multi-variable function is not possible, since there are an infinite number of "slopes" at some point, and what you want the derivative to achieve will depend on your goal (e.g. what direction you want to differentiate in).
+
+\subsubsection*{The nabla operator}
+The nabla operator, denoted $\nabla$ (pronounced nabla or del), is a vector filled with partial derivatives with respect to each variable some function $f$ takes. For example, consider some function $f:\mathbb{R}^n\rightarrow\mathbb{R}^m$, nabla would then be defined as:
+\begin{equation}
+	\left.\nabla=
+	\begin{bmatrix}
+		\partialder{}{x} \\
+		\partialder{}{y} \\
+		\partialder{}{z} \\ 
+		\vdots 	         \\
+	\end{bmatrix}
+	\color{gray}\right\} \color{gray}n\text{ times}\color{black}
+\end{equation}
+Nabla gives the vector pointing in the direction of greatest ascent\referto{p:nablagreatestchange}. For example, aplying this to our previous example $f(x,y)=x^2+y^2$ results in:
+$$\nabla f=\begin{bmatrix}
+	\partialder{}{x}x^2+y^2\\
+	\partialder{}{y}x^2+y^2	
+\end{bmatrix}=\begin{bmatrix}
+	2x\\
+	2y
+\end{bmatrix}$$
+Meaning that at some point $(x,y)$, the direction of steepest incline will be:$$2{\begin{bmatrix}x\\y\end{bmatrix}}$$
+The gradient of a function is often visualized as a vector field, plotting the vector field of the previous example yields:
+
+\begin{figure}[!ht]
+	\includegraphics[scale=0.45]{x2y2.png}
+	\centering
+	\caption{Vector field for $f(x,y)=\begin{bmatrix}2x\\2y\end{bmatrix}$}
+	\label{fig:x2y2}
+\end{figure}
+
+The nabla operator proves foundational to several important concepts within vector calculus, as will be demonstrated.
+
+\subsubsection*{Directional derivatives}
+Partial derivatives allow for the computation of derivatives in the $x$ and $y$, and this concept may be extended to the derivative in any direction $\vec{v}$. Since $\nabla f$ computes the rate of change in the $x$ and $y$ directions, dotting this vector with some directional vector $\vec{v}$ gives the directional derivative in the direction of $\vec{v}$, denoted as:
+\begin{equation}
+	\nabla_{\vec{v}}f=\nabla f\cdot\vec{v}
+\end{equation}
+Nabla pointing in the direction of greatest ascent can be proven using the directional derivative.
+\begin{proof}\label{p:nablagreatestchange}
+	\begin{align*}
+		\nabla_{\vec{v}}f&=\nabla f\cdot\vec{v}\\
+		\max\nabla_{\vec{v}}f&\rightarrow\text{direction of greatest change}\\
+		\max\nabla_{\vec{v}}f&=\max\nabla f\cdot\vec{v}\\
+		&=\max\lVert\nabla f\rVert\lVert\vec{v}\rVert\cos{\theta}\\
+		&\leadsto\theta=0\\
+		&\implies\max\nabla_{\vec{v}}f\text{ points in the direction of }\nabla f
+	\end{align*}
+\end{proof}
+\subsubsection*{Other}
+$$f:\mathbb{R}^n\rightarrow\mathbb{R}^n\ni n>1,n\in\mathbb{Z}$$
+\begin{equation}
+	\materialder{f}{t}\definedas\partialder{f}{t}+\underbrace{\vec{v}\cdot\nabla f}_{\hidewidth\text{Directional derivative }\nabla_{\vec{v}}f\hidewidth}
+\end{equation}
+$$\vec{v_1}\otimes\vec{v_2}$$
+
+% > fluid dynamics
+\subsection{Incompressible flow}
+An incompressible fluid is any fluid such that $\divergence\fatf=0$, which is to say that the divergence of the fluid is 0.
+
+\subsection{Complex analysis in 2D potential flow}
+
+% > the navier-stokes equations
+\subsection*{Green's theorem}\label{sec:greenstheorem}
+\begin{equation} % navier-stokes
+	\materialder{f}{\mathbf{t}}=\iiint\limits_{V}(\materialder{\rho}{\mathbf{t}}+\rho(\nabla\cdot u))dV
+\end{equation}
+Lorem ipsum dolor sit amet \cite{peyret2012computational}
+
+\section{Modeling flow around circular obstacles}
+\subsection{Ideal potential flow model}
+\subsection{Effect of circulation on flow patterns}
+\section{Real-world observations}

@@ -1,0 +1,25 @@
+\section{Introduction}
+Vector calculus provides the foundation and tools for the analysis and modeling of several real-world phenomona, and is integral to understanding several important fields such as aero- \& hydrodynamics, as well as the modeling of weather \& climates. 
+
+Through the use of pure mathematics, this essay will investigate the flow of fluids in 2 dimensional spaces around circular obstacles. Visual representations through mediums such as vector field plots (plotted through a custom program
+% Aim & scope
+\subsection{Aim \& scope}
+This essay will for simplicity's sake only cover fluid flow around circular obstacles in $\mathbb{R}^2$ spaces; an alaysis of fluid flow in $\mathbb{R}^3$ spaces would be much more complex.
+Furthermore, only incompressible fluids sans sinks and sources ($\fatf\ni\divergence\fatf=0$), will be analyzed.
+
+Most of the analysis will take place using Green's theorem\referto{sec:greenstheorem}.
+
+% Background
+\subsection{Background}
+\subsubsection{Notation}
+In this paper, the gradient, divergence and curl operators will be denoted using their explicit $\nabla$ forms as follows:
+$$\begin{matrix}
+	\mathrm{grad}\ \fatf&\equiv&\grad{\fatf}\\
+	\mathrm{div}\ \fatf&\equiv&\divergence\fatf\\
+	\mathrm{curl}\ \fatf&\equiv&\curl\fatf
+\end{matrix}$$
+The directional vector will also be denoted using $\nabla$ as $\nabla_{\vec{v}}\fatf$.
+
+For the purposes of clarity, vectors in cartesian systems will be denoted $\begin{pmatrix}x\\y\end{pmatrix}$ whilst vectors in polar systems will be denoted as $\langle r,\theta\rangle$
+
+To ensure point-uniqueness, all polar coordinates will be within the restrictions $r\geq0,\,\theta\in[0,2\pi)$.
