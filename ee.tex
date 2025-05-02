@@ -1,8 +1,6 @@
 \documentclass[a4paper,12pt]{article}
 
-% --------------------------------------------------
-% Page setup
-% --------------------------------------------------
+% > Page setup
 \usepackage[left=2.25cm, right=2.25cm, top=2.5cm, bottom=2.5cm]{geometry}
 \usepackage{setspace}       		% line spacing
 \usepackage{graphicx}       		% image support
@@ -11,25 +9,23 @@
 \renewcommand{\arraystretch}{0.6}	% since the forced double spacing ruins everything
 \pagenumbering{arabic}      		% page numbering
 
-% --------------------------------------------------
-% Math packages
-% --------------------------------------------------
+% > Math packages
+\usepackage{physics}							% well, it's a physics package but whatever
 \usepackage{amsmath, amssymb, amsfonts, amsthm} % math symbols & environments
 
-% --------------------------------------------------
-% References & bibliography
-% --------------------------------------------------
+% > References & bibliography
 \usepackage{cite}                                  % BibTeX citation support
 \usepackage[notlof,nottoc,numbib]{tocbibind}       % include bibliography in ToC
 
-% --------------------------------------------------
-% Styling & utilities
-% --------------------------------------------------
+% > Styling & utilities
 \usepackage{xcolor} % colored text
 
-% --------------------------------------------------
-% Custom commands
-% --------------------------------------------------
+% > Custom commands
+
+% fix ugly Nabla physics package operators
+\renewcommand\gradient[1]{\nabla#1}
+\renewcommand\divergence[1]{\nabla\vdot#1}
+\renewcommand\curl[1]{\nabla\cp#1}
 
 % Vectors and symbols
 \newcommand{\ihat}{\hat{\imath}}
@@ -46,18 +42,13 @@
 \newcommand{\partialder}[2]{\frac{\partial #1}{\partial #2}}        % partial derivative
 \newcommand{\materialder}[2]{\frac{\mathrm{D} #1}{\mathrm{D} #2}}   % material derivative
 
-% Vector calculus operators
-\DeclareMathOperator{\gradient}{\nabla}
-\DeclareMathOperator{\divergence}{\nabla\cdot}
-\DeclareMathOperator{\curl}{\nabla\times}
-
 % Miscellaneous
-\newcommand{\justify}[1]{\text{\color{gray}(#1)}} 			% inline justification notes
-\newcommand{\definedas}{\stackrel{\Delta}{=}}     			% definition symbol
-\newcommand{\referto}[1]{\textsuperscript{\color{darkgray}\tiny[see \ref{#1}]}}
-\newcommand{\needcitation}{\textsuperscript{\normalfont[Citation Needed]}}
-\renewcommand{\qedsymbol}{\hfill\ensuremath{\blacksquare}}	% fix the QED symbol
-\newcommand{\vecpadding}{\vspace*{0.15cm}}					% for when fractions etc. get too close in a vector
+\newcommand{\justify}[1]{\text{\color{gray}(#1)}} 								% inline justification notes
+\newcommand{\definedas}{\stackrel{\Delta}{=}}     								% "defined as" symbol
+\newcommand{\referto}[1]{\textsuperscript{\color{darkgray}\tiny[see \ref{#1}]}}	% citation command
+\newcommand{\needcitation}{\textsuperscript{\normalfont[Citation needed]}}		% temporarily mark where I need to cite
+\renewcommand{\qedsymbol}{\hfill\ensuremath{\blacksquare}}						% make the QED symbol great again
+\newcommand{\vecpadding}{\vspace*{0.15cm}}										% for when fractions et cetera get too close in a vector
 
 % Research question
 \newcommand{\researchquestion}
@@ -68,18 +59,14 @@
 	does this provide about real-world fluid systems?
 }
 
-% --------------------------------------------------
-% Theorems
-% --------------------------------------------------
+% > Theorems
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{corollary}{Corollary}[theorem]
 \newtheorem{lemma}[theorem]{Lemma}
 
 \begin{document}
 
-% --------------------------------------------------
-% Title page
-% --------------------------------------------------
+% > Title page
 \begin{titlepage}
 	\begin{center}
 		\vspace*{0.5cm}
@@ -93,14 +80,10 @@
 	\end{center}
 \end{titlepage}
 
-% --------------------------------------------------
-% Table of contents
-% --------------------------------------------------
+% > Table of contents
 \tableofcontents\newpage
 
-% --------------------------------------------------
-% Introduction
-% --------------------------------------------------
+% > Introduction
 \section{Introduction}
 Vector calculus provides the foundation and tools for the analysis and modeling of several real-world phenomona, and is integral to understanding several important fields such as aero- \& hydrodynamics, as well as the modeling of weather \& climates. 
 
@@ -117,7 +100,7 @@ Most of the analysis will take place using Green's theorem\referto{sec:greensthe
 \subsubsection{Notation}
 In this paper, the gradient, divergence and curl operators will be denoted using their explicit $\nabla$ forms as follows:
 $$\begin{matrix}
-	\mathrm{grad}\ \fatf&\equiv&\nabla\fatf\\
+	\mathrm{grad}\ \fatf&\equiv&\grad{\fatf}\\
 	\mathrm{div}\ \fatf&\equiv&\divergence\fatf\\
 	\mathrm{curl}\ \fatf&\equiv&\curl\fatf
 \end{matrix}$$
@@ -235,7 +218,7 @@ Lorem ipsum dolor sit amet \cite{peyret2012computational}
 \newpage
 \section{Research}
 \subsection{Potential flow around a circular cylinder}
-A cylinder of radius $R$ is placed in two-dimensional, incompressible, inviscid flow which flows in the direction of $\ihat$.
+A cylinder of radius $L$ is placed in two-dimensional, incompressible, inviscid flow which flows in the direction of $\ihat$.
 Far away from the cylinder the velocity field $\mathbf{V}$ can be described as: 
 \begin{equation}\label{equation:in-infinitum}
 	\mathbf{V}=U\ihat
@@ -250,7 +233,7 @@ Since in this model the viscocity $\nu=0$, the flow can be modeled using the Eul
 	$$\materialder{\Gamma}{t}=0$$
 \end{theorem}
 
-Therefore, if the vorticity $\boldsymbol{\omega}$ of $\mathbf{V}$ is $0$ initialy, it must remain $0$ everywhere, thus $\curl\mathbf{V}=0$. Since the flow is irrotational, $\mathbf{V}$ can be expressed as $\mathbf{V}=\nabla\phi$, where $\phi$ is the velocity potential.
+\textit{Id est}, if the vorticity of $\mathbf{V}$ is $0$ initialy, it must remain $0$ everywhere, thus $\curl\mathbf{V}=0$. Since the flow is irrotational, $\mathbf{V}$ can be expressed as $\mathbf{V}=\nabla\phi$, where $\phi$ is the velocity potential.
 
 Furthermore, if $\mathbf{V}$ is incompressible, that bieng that $\divergence\mathbf{V}=0$, then $\phi$ must satisfy Laplace's equation: $\Delta\phi=0$.
 
@@ -363,4 +346,9 @@ $$\begin{matrix}
 	&\mathbf{V}\cdot\rhat=0\quad&\text{when}\quad&r=L\vecpadding\\
 	&\dfrac{\partial^2\phi}{\partial r^2}+\dfrac{1}{r}\dfrac{\partial\phi}{\partial r}+\dfrac{1}{r^2}\dfrac{\partial^2\phi}{\partial\theta^2}=0
 \end{matrix}$$
+
+
+$$\qty(\dv{a}{b})$$
+$$\eval{x}_{a}^{b}$$
+$$\vb{F}$$
 \end{document}
