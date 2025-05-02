@@ -63,15 +63,17 @@ $$\begin{matrix}
 \end{lemma}
 \begin{proof}
 	In Cartesian coordinates, the Laplacian operator $\laplacian$ is defined as $\nabla\cdot\nabla$, which for the scalar field $\phi$ becomes:
-	\begin{gather}
-		\notag\laplacian{\phi}=\pdv[2]{\phi}{x}+\pdv[2]{\phi}{y}
-	\end{gather}
+	\begin{align*}
+		\notag\laplacian{\phi}&=\div\nabla\phi\\
+							  &=\begin{pmatrix}\pdv*{x}\\\pdv*{y}\end{pmatrix}\vdot\begin{pmatrix}\pdv*{\phi}{x}\\\pdv*{\phi}{y}\end{pmatrix}\\
+							  &=\pdv[2]{\phi}{x}+\pdv[2]{\phi}{y}
+	\end{align*}
 	Translating $x$ and $y$ to polar coordinates and calculating their derivatives with respect to $r$ and $\theta$ gives:
-	\begin{gather}
-		\notag x=r\cos\theta,\quad y=r\sin\theta\\
-		\label{polap:1}\pdv{x}{r}=\cos\theta,\quad\pdv{y}{r}=\sin\theta\\
-		\label{polap:2}\pdv{x}{\theta}=-r\sin\theta,\quad\pdv{y}{\theta}=r\cos\theta
-	\end{gather}
+	\begin{align}
+		\notag x=r\cos\theta&,\quad y=r\sin\theta\\
+		\label{polap:1}\pdv{x}{r}=\cos\theta&,\quad\pdv{y}{r}=\sin\theta\\
+		\label{polap:2}\pdv{x}{\theta}=-r\sin\theta&,\quad\pdv{y}{\theta}=r\cos\theta
+	\end{align}
 	Consequently, by the chain rule and substitution from \ref{polap:1}:
 	\begin{align}
 		\notag\pdv{\phi}{r}&=\pdv{\phi}{x}\pdv{x}{r}+\pdv{\phi}{y}\pdv{y}{r}\\
