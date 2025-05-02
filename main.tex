@@ -1,78 +1,13 @@
-\documentclass[a4paper,12pt]{article}
+\input{preamble.tex}
 
-% > Page setup
-\usepackage[left=2.25cm, right=2.25cm, top=2.5cm, bottom=2.5cm]{geometry}
-\usepackage{setspace}       		% line spacing
-\usepackage{graphicx}       		% image support
-\graphicspath{{resources/}} 		% image folder
-\doublespacing              		% double spacing
-\renewcommand{\arraystretch}{0.6}	% since the forced double spacing ruins everything
-\pagenumbering{arabic}      		% page numbering
-
-% > Math packages
-\usepackage{physics}							% well, it's a physics package but whatever
-\usepackage{amsmath, amssymb, amsfonts, amsthm} % math symbols & environments
-
-% > References & bibliography
-\usepackage{cite}                                  % BibTeX citation support
-\usepackage[notlof,nottoc,numbib]{tocbibind}       % include bibliography in ToC
-
-% > Styling & utilities
-\usepackage{xcolor} % colored text
-
-% > Custom commands
-
-% fix ugly Nabla physics package operators
-\renewcommand\gradient[1]{\nabla#1}
-\renewcommand\divergence[1]{\nabla\vdot#1}
-\renewcommand\curl[1]{\nabla\cp#1}
-
-% Vectors and symbols
-\newcommand{\ihat}{\hat{\imath}}
-\newcommand{\jhat}{\hat{\jmath}}
-\newcommand{\rhat}{\hat{r}}
-\newcommand{\nhat}{\hat{n}}
-\newcommand{\thetahat}{\hat{\theta}}
-\newcommand{\fatf}{\mathbf{F}}         		% vector field F
-\newcommand{\fatomega}{\boldsymbol{\omega}} % vorticity
-\renewcommand{\theta}{\vartheta}      		% use vartheta for theta
-
-% Derivatives
-\newcommand{\der}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}           % total derivative
-\newcommand{\partialder}[2]{\frac{\partial #1}{\partial #2}}        % partial derivative
-\newcommand{\materialder}[2]{\frac{\mathrm{D} #1}{\mathrm{D} #2}}   % material derivative
-
-% Miscellaneous
-\newcommand{\justify}[1]{\text{\color{gray}(#1)}} 								% inline justification notes
-\newcommand{\definedas}{\stackrel{\Delta}{=}}     								% "defined as" symbol
-\newcommand{\referto}[1]{\textsuperscript{\color{darkgray}\tiny[see \ref{#1}]}}	% citation command
-\newcommand{\needcitation}{\textsuperscript{\normalfont[Citation needed]}}		% temporarily mark where I need to cite
-\renewcommand{\qedsymbol}{\hfill\ensuremath{\blacksquare}}						% make the QED symbol great again
-\newcommand{\vecpadding}{\vspace*{0.15cm}}										% for when fractions et cetera get too close in a vector
-
-% Research question
-\newcommand{\researchquestion}
-{
-	How can vector calculus be applied to model and analyze 
-	incompressible fluid flow in two-dimensional spaces with 
-	circular obstacles, and what mathematical insights
-	does this provide about real-world fluid systems?
-}
-
-% > Theorems
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{corollary}{Corollary}[theorem]
-\newtheorem{lemma}[theorem]{Lemma}
-
-% > Document
+% For temporary compile time improvements
+\includeonly{documents/research.tex}
 
 \begin{document}
-
 \include{documents/front.tex}
 \include{documents/introduction}
 \include{documents/body.tex}
 \include{documents/conclusion}
 \include{documents/back.tex}
 \include{documents/research.tex}
-
 \end{document}
