@@ -60,6 +60,24 @@ $$\begin{matrix}
 	The derivative of composite functions corresponds to the product Jacobian of Jacobian matrices:
 	$$J_{f\circ g}=(J_f\circ g)J_g$$
 \end{lemma}
+\begin{proof}
+	The Jacobian of $J_{f\circ g}$ is defined as
+	$$
+		J_{f\circ g}=
+		\begin{bmatrix}
+			\nabla^\top(f\circ g)_1 \\
+			\nabla^\top(f\circ g)_2 \\
+			\vdots				   \\
+			\nabla^\top(f\circ g)_m
+		\end{bmatrix}
+	$$
+	for some function $f:\mathbb{R}^n\rightarrow\mathbb{R}^m$, where
+	$$
+		\row{i}J_{f\circ g}=\nabla^\top(f\circ g)_i=\begin{bmatrix}
+			\pdv{(f\circ g)_i}{x_1} & \pdv{(f\circ g)_i}{x_2} & \hdots & \pdv{(f\circ g)_i}{x_n}
+		\end{bmatrix}
+	$$
+\end{proof}
 
 \begin{lemma}[Multivariable chain rule]
 Let $X(t,u)$ and $Y(t,u)$ be functions where $X,Y:\mathbb{R}^2\rightarrow\mathbb{R}$ such that $X,Y\in C^1(\mathbb{R}^2)$. Then define $Z(x,y)$ to be a function where $Z:\mathbb{R}^2\rightarrow\mathbb{R}$ and $Z\in C^1(\mathbb{R}^2)$. Then the partial derivatives of the composite function $z(t,u)=Z(X(t,u),Y(t,u))$ are given by:
@@ -158,4 +176,4 @@ $$\begin{matrix}
 	&\dfrac{\partial^2\phi}{\partial r^2}+\dfrac{1}{r}\dfrac{\partial\phi}{\partial r}+\dfrac{1}{r^2}\dfrac{\partial^2\phi}{\partial\theta^2}=0
 \end{matrix}$$
 
-testing hello hello\cite{mat132-episode25}
+testing hello hello!\cite{mat132-episode25}
