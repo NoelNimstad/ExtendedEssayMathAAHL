@@ -67,16 +67,19 @@ $$\begin{matrix}
 		\begin{bmatrix}
 			\nabla^\top(f\circ g)_1 \\
 			\nabla^\top(f\circ g)_2 \\
-			\vdots				   \\
+			\vdots				    \\
 			\nabla^\top(f\circ g)_m
 		\end{bmatrix}
 	$$
-	for some function $f:\mathbb{R}^n\rightarrow\mathbb{R}^m$, where
-	$$
-		\row{i}J_{f\circ g}=\nabla^\top(f\circ g)_i=\begin{bmatrix}
+	for the composite function $(f\circ g):\mathbb{R}^n\rightarrow\mathbb{R}^m$, where
+	\begin{align*}		
+		\row{i}J_{f\circ g}=\nabla^\top(f\circ g)_i&=\begin{bmatrix}
 			\pdv{(f\circ g)_i}{x_1} & \pdv{(f\circ g)_i}{x_2} & \hdots & \pdv{(f\circ g)_i}{x_n}
+		\end{bmatrix}\\
+		\col{i}J_{f\circ g}&=\begin{bmatrix}
+			\pdv*{(f\circ g)_1}{x_i} \\ \pdv*{(f\circ g)_2}{x_i} \\ \vdots \\ \pdv*{(f\circ g)_m}{x_i}
 		\end{bmatrix}
-	$$
+	\end{align*}
 \end{proof}
 
 \begin{lemma}[Multivariable chain rule]
