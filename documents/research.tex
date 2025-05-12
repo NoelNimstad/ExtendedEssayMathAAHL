@@ -61,25 +61,18 @@ $$\begin{matrix}
 	$$J_{f\circ g}=(J_f\circ g)J_g$$
 \end{lemma}
 \begin{proof}
-	The Jacobian of $J_{f\circ g}$ is defined as
-	$$
-		J_{f\circ g}=
-		\begin{bmatrix}
-			\nabla^\top(f\circ g)_1 \\
-			\nabla^\top(f\circ g)_2 \\
-			\vdots				    \\
-			\nabla^\top(f\circ g)_m
-		\end{bmatrix}
-	$$
-	for the composite function $(f\circ g):\mathbb{R}^n\rightarrow\mathbb{R}^m$, where
-	\begin{align*}		
-		\row{i}J_{f\circ g}=\nabla^\top(f\circ g)_i&=\begin{bmatrix}
-			\pdv{(f\circ g)_i}{x_1} & \pdv{(f\circ g)_i}{x_2} & \hdots & \pdv{(f\circ g)_i}{x_n}
-		\end{bmatrix}\\
-		\col{i}J_{f\circ g}&=\begin{bmatrix}
-			\pdv*{(f\circ g)_1}{x_i} \\ \pdv*{(f\circ g)_2}{x_i} \\ \vdots \\ \pdv*{(f\circ g)_m}{x_i}
-		\end{bmatrix}
-	\end{align*}
+	Let $g:\mathbb{R}^n\rightarrow\mathbb{R}^p$ and $f:\mathbb{R}^p\rightarrow\mathbb{R}^m$, the Jacobian matrices must then be given by
+	\begin{gather*}
+		J_g\in\mathbb{R}^{m\times p},(J_f\circ g)\in\mathbb{R}^{p\times n}\\
+		\therefore(J_f\circ g)J_g\in\mathbb{R}^{n\times m}
+	\end{gather*}
+	The Jacobian of the composite $(f\circ g)$ must also have the dimensions $n\times m$.
+	\begin{gather*}
+		(J_{f\circ g})_{ij}=\pdv{(f\circ g)_j}{x_i}\\
+		(\mathbf{A}\mathbf{B})_{ij}=\sum_{k=1}^pa_{ik}b_{kj}\\
+		\implies\left((J_f\circ g)J_g\right)_{ij}=\sum_{k=1}^pa_{ik}b_{kj}\\
+		=\sum_{k=1}^p\eval{\pdv{f_k}{x_i}}_{x=g}\pdv{g_j}{x_k}\leadsto\sum_{k=1}^p\pdv{f}{g}\pdv{g}{x}
+	\end{gather*}
 \end{proof}
 
 \begin{lemma}[Multivariable chain rule]
