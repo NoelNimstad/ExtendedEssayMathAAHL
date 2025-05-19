@@ -61,18 +61,7 @@ $$\begin{matrix}
 	$$J_{f\circ g}=(J_f\circ g)J_g$$
 \end{lemma}
 \begin{proof}
-	Let $g:\mathbb{R}^n\rightarrow\mathbb{R}^p$ and $f:\mathbb{R}^p\rightarrow\mathbb{R}^m$, the Jacobian matrices must then be given by
-	\begin{gather*}
-		J_g\in\mathbb{R}^{m\times p},(J_f\circ g)\in\mathbb{R}^{p\times n}\\
-		\therefore(J_f\circ g)J_g\in\mathbb{R}^{n\times m}
-	\end{gather*}
-	The Jacobian of the composite $(f\circ g)$ must also have the dimensions $n\times m$.
-	\begin{gather*}
-		(J_{f\circ g})_{ij}=\pdv{(f\circ g)_j}{x_i}\\
-		(\mathbf{A}\mathbf{B})_{ij}=\sum_{k=1}^pa_{ik}b_{kj}\\
-		\implies\left((J_f\circ g)J_g\right)_{ij}=\sum_{k=1}^pa_{ik}b_{kj}\\
-		=\sum_{k=1}^p\eval{\pdv{f_k}{x_i}}_{x=g}\pdv{g_j}{x_k}\leadsto\sum_{k=1}^p\pdv{f}{g}\pdv{g}{x}
-	\end{gather*}
+	I finna fix it later frfr.
 \end{proof}
 
 \begin{lemma}[Multivariable chain rule]
@@ -83,7 +72,35 @@ Let $X(t,u)$ and $Y(t,u)$ be functions where $X,Y:\mathbb{R}^2\rightarrow\mathbb
 \end{align*}
 \end{lemma}
 \begin{proof}
-	To be proven...
+	Let $g:\mathbb{R}^n\rightarrow\mathbb{R}^p$ and $f:\mathbb{R}^p\rightarrow\mathbb{R}^m$, the dimensions of the Jacobian matrices must then be given as:
+	\begin{gather*}
+		J_g\in\mathbb{R}^{m\times p},\,(J_f\circ g)\in\mathbb{R}^{p\times n}\\
+		\therefore(J_f\circ g)J_g\in\mathbb{R}^{n\times m}
+	\end{gather*}
+	Let the parameters of $f$ be called $x_1,\,x_2,\,\hdots,\,x_n$ and the parameters of $g$ be called $y_1,\,y_2,\,\hdots,\,y_n$. The Jacobian of the the composite function $f\circ g$ is defined as:
+	\begin{gather*}
+		J_{f\circ g}=\begin{bmatrix}
+			\pdv{f}{y_1}&\pdv{f}{y_2}&\hdots&\pdv{f}{y_n}
+		\end{bmatrix}.
+	\end{gather*}
+	Because $f\circ g:\mathbb{R}^n\rightarrow\mathbb{R}^m$, $J_{f\circ g}\in\mathbb{R}^{n\times m}$. The element at position $(i,j)$ of some Jacobian $J_F$ is given by:
+	\begin{equation}
+		\label{chainrule:1}(J_F)_{ij}=\pdv{(f\circ g)_j}{x_i}\\
+	\end{equation}
+	% (\mathbf{A}\mathbf{B})_{ij}=\sum_{k=1}^pa_{ik}b_{kj}\\
+	By matrix multiplication, $((J_f\circ g)J_g)_{ij}$ can be computed as:
+	$$
+		\left((J_f\circ g)J_g\right)_{ij}=\sum_{k=1}^p(J_f\circ g)_{ik}(J_g)_{kj}
+	$$
+	Applying the form given in \ref{chainrule:1} gives:
+	\begin{align}
+		\notag\left((J_f\circ g)J_g\right)_{ij}&=\sum_{k=1}^p\eval{\pdv{f_k}{x_i}}_{x=g}\pdv{g_j}{y_k}\\
+		\leadsto\left((J_f\circ g)J_g\right)_{ij}&=\sum_{k=1}^p\pdv{f}{g}\pdv{g}{y_k}\qedhere
+	\end{align}
+	For the case given above with the composite function $z$,
+	\begin{align*}
+		J_z=
+	\end{align*}
 \end{proof}
 
 \begin{lemma}[Polar-Form Laplacian]
