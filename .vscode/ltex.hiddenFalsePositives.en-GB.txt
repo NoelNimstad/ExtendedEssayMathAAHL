@@ -1,0 +1,1 @@
+{"rule":"EN_CONTRACTION_SPELLING","sentence":"^\\QId est, if the vorticity of \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q is \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q initially, it must remain \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q everywhere, thus \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
