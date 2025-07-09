@@ -21,12 +21,29 @@ validation. The focus is on the mathematical derivation and analysis of the idea
 
 % Background
 \subsection{Background}
-\subsubsection{Definitions}
+\subsubsection{Glossary}
 \begin{defn} % steady flow
-    \definedterm{Steady flow} refers to flow in which the velocity at every point does not change over time \cite{CRACIUNOIU2001559}. Mathematically this can be expressed as: $\pdv{\vec{V}}{t}=0$.
+    \definedterm{Steady flow} refers to flow in which the velocity at every point does not change over time \cite{CRACIUNOIU2001559}.
 \end{defn}
 \begin{defn} % inviscid flow
-    \definedterm{Inviscid flow} refers to the flow of a fluid with 0 viscosity \cite{ANDERSON20031}.
+    \definedterm{Inviscid flow} is the flow of a fluid with 0 viscosity \cite{ANDERSON20031}.
+\end{defn}
+\begin{defn} % incompressible fluid
+    An \definedterm{incompressible fluid} is a fluid whose density at every point does not change over time \cite{AHMED2019331}. Consequently, this gives rise to the key identity $\div\fatf=0$.
+\end{defn}
+\begin{defn} % vector field
+    A \definedterm{vector field} is a function mapping points in space to vector quantities \cite{BREZINSKI20063}. In the case of fluid dynamics, vector fields often model quantities like fluid velocity.
+
+	\begin{figure*}[!ht]
+		\includegraphics[scale=0.45]{sin.png}
+		\centering
+		\caption{Vector field plotted for the function $f(x,y)=\begin{pmatrix}
+			\sin y\\\sin x
+		\end{pmatrix}$}
+	\end{figure*}
+\end{defn}
+\begin{defn} % velocity potential
+	The \definedterm{velocity potential} $\phi$ is a scalar quantity whose gradient is the velocity vector field of some fluid, mathematically $\mathbf{V}=\nabla\phi$. The quantity is defined for irrotational flow which is a property of the idealizations made in this essay\referto{theorem:kelvin}.
 \end{defn}
 
 \subsubsection{Notation}
