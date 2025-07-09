@@ -43,18 +43,20 @@ validation. The focus is on the mathematical derivation and analysis of the idea
 	\end{figure*}
 \end{defn}
 \begin{defn} % velocity potential
-	The \definedterm{velocity potential} $\phi$ is a scalar quantity whose gradient is the velocity vector field of some fluid, mathematically $\mathbf{V}=\nabla\phi$. The quantity is defined for irrotational flow which is a property of the idealizations made in this essay\referto{theorem:kelvin}.
+	The \definedterm{velocity potential} $\phi$ is a scalar quantity whose gradient is the velocity vector field of some fluid, mathematically $\mathbf{V}=\nabla\phi$. The quantity is defined for irrotational flow which is a resulting property of the idealizations made in this essay\referto{theorem:kelvin}.
 \end{defn}
 
 \subsubsection{Notation}
-In this paper, the gradient, divergence and curl operators will be denoted using their explicit $\nabla$ forms as follows:
-$$\begin{matrix}
-	\mathrm{grad}\ \fatf&\equiv&\grad{\fatf}\\
-	\mathrm{div}\ \fatf&\equiv&\divergence\fatf\\
-	\mathrm{curl}\ \fatf&\equiv&\curl\fatf
-\end{matrix}$$
-The directional vector will also be denoted using $\nabla$ as $\nabla_{\vec{v}}\fatf$.
-
-For the purposes of clarity, vectors in cartesian systems will be denoted $\begin{pmatrix}x\\y\end{pmatrix}$ whilst vectors in polar systems will be denoted as $\langle r,\theta\rangle$
-
-To ensure point-uniqueness within polar systems, all polar coordinates are restricted such as $r\geq0,\,\theta\in[0,2\pi)$.
+Vector calculus, like one-variable calculus, has no standardized notation. This essay will employ the following
+notation:
+\begin{itemize}
+	\item $\nabla$:
+	\begin{itemize}
+		\item $\gradient{F}$: The gradient of some scalar field $F$.
+		\item $\divergence{\fatf}$: The divergence of some vector field $\fatf$.
+		\item $\curl{\fatf}$: The curl of some vector field $\fatf$.
+	\end{itemize}
+	\item $\Delta$: The Laplacian operator
+	\item $\ihat\,\&\,\jhat$: Unit vectors in the positive $x$ and $y$ directions respectively.
+	\item $\rhat\,\&\,\thetahat$: Unit vectors in the positive $r$ and $\theta$ directions respectively.
+\end{itemize}
