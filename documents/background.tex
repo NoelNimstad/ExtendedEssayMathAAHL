@@ -1,0 +1,16 @@
+\section{Vector calculus}
+\subsection{The fundamentals of vector calculus}
+
+\begin{defn}
+	\definedterm{Partial derivatives} are an extension of single-variable derivatives in which all variables save
+	the one being differentiated by are treated as constants \cite{MORTIMER201389}. A formal definition of the
+	partial derivative of some function $f$ with respect to a parameter $x_n$ can be expressed as:
+	\begin{equation}
+		\pdv{f}{x_n}=\lim_{\delta\rightarrow0}\frac{f(x_1,x_2,\cdots,x_n+\delta,\cdots)-f(x_1,x_2,\cdots,x_n,\cdots)}{\delta}
+	\end{equation}
+	Partial derivatives allow for the analysis of how multi-variable functions such as scalar- or vector fields change
+	with respect to just one spatial dimension. For example, consider the function $f(x,y)=x^2y+\sin(x)\sin y$.
+	\begin{align*}
+		\pdv{f}{x}=2xy+\cos(x)\sin y&&\pdv{f}{y}=x^2+\sin(x)\cos y
+	\end{align*}
+\end{defn}

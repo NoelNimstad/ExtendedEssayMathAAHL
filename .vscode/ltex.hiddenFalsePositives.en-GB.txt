@@ -1,1 +1,6 @@
 {"rule":"EN_CONTRACTION_SPELLING","sentence":"^\\QId est, if the vorticity of \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q is \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q initially, it must remain \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q everywhere, thus \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q.\\E$"}
+{"rule":"OXFORD_SPELLING_Z_NOT_S","sentence":"^\\QThese idealisations allow for the derivation of some of fluid dynamic's key mathematical formulæ and provides a foundation for understanding less idealised fluids.\\E$"}
+{"rule":"OXFORD_SPELLING_Z_NOT_S","sentence":"^\\QThe scope of this essay will be limited to the theoretical modelling of fluid flow in a two-dimensional space as a vector field under idealised conditions forming steady, inviscid and incompressible fluid flow through the derivation of the velocity-potential.\\E$"}
+{"rule":"OXFORD_SPELLING_Z_NOT_S","sentence":"^\\QThe focus is on the mathematical derivation and analysis of the idealised model.\\E$"}
+{"rule":"OXFORD_SPELLING_Z_NOT_S","sentence":"^\\QTherefore, to gain insights into the governing principles of fluid flow, simplified and idealised models are used.\\E$"}
+{"rule":"OXFORD_SPELLING_Z_NOT_S","sentence":"^\\QThe quantity is defined for irrotational flow which is a resulting property of the idealisations made in this essaytheorem:kelvin.\\E$"}
