@@ -9,10 +9,99 @@
 		\pdv{f}{x_n}=\lim_{\delta\rightarrow0}\frac{f(x_1,x_2,\cdots,x_n+\delta,\cdots)-f(x_1,x_2,\cdots,x_n,\cdots)}{\delta}
 	\end{equation}
 	Partial derivatives allow for the analysis of how multi-variable functions such as scalar- or vector fields change
-	with respect to just one spatial dimension. For example, consider the function $f(x,y)=x^2y+\sin(x)\sin y$.
+	with respect to just one spatial dimension. For example, consider the function $f(x,y)=x^2y+\sin(x)\sin y$:
 	\begin{align*}
 		\pdv{f}{x}=2xy+\cos(x)\sin y&&\pdv{f}{y}=x^2+\sin(x)\cos y
 	\end{align*}
+	$n$-th order partial derivatives are denoted, similarly to normal calculus, as
+	$$
+	\pdv[n]{f}{x}=\lim_{\delta_1\rightarrow0}\lim_{\delta_2\rightarrow0}\hdots\lim_{\delta_n\rightarrow0}\frac{f(x_1,x_2,\cdots,x_n+\delta,\cdots)-f(x_1,x_2,\cdots,x_n,\cdots)}{\delta}
+	$$
+\end{defn}
+\begin{defn}
+	\definedterm{Mixed partial derivatives} are partial derivatives of a function taken with respect to multiple
+	variables \cite{GARRETT2015377}. This is denoted as
+	$$
+	\pdv{f}{x}{y}\equiv\pdv{x}\pdv{f}{y}
+	$$
+	where both $\alpha$ and $\beta$ are parameters of $f$.
+\end{defn}
+% \begin{lemma}[Clairaut's theorem]
+% 	The order of mixed partial derivatives has no effect on the outcome of the derivative.
+% 	\begin{proof}
+% 		Let $f:\alpha,\beta\mapsto\mathbb{R}^n,n\in\mathbb{N}$ be a function continuously differentiable over both $\alpha$ and $\beta$.
+% 		\begin{align*}
+% 			\pdv{f}{\alpha}&=\lim_{\delta_\alpha\rightarrow0}\frac{f(\alpha+\delta_\alpha,\beta)-f(\alpha,\beta)}{\delta_\alpha}\\
+% 			\pdv{f}{\alpha}{\beta}&=\lim_{\delta_\beta\rightarrow0}\lim_{\delta_\alpha\rightarrow0}\frac{\frac{f(\alpha+\delta_\alpha,\beta+\delta_\beta)-f(\alpha,\beta+\delta_\beta)}{\delta_\alpha}-\frac{f(\alpha+\delta_\alpha,\beta)-f(\alpha,\beta)}{\delta_\alpha}}{\delta_b}\\
+% 			&=\lim_{\delta_\beta\rightarrow0}\lim_{\delta_\alpha\rightarrow0}\frac{f(\alpha+\delta_\alpha,\beta+\delta_\beta)-f(\alpha,\beta+\delta_\beta)-[f(\alpha+\delta_\alpha,\beta)-f(\alpha,\beta)]}{\delta_\alpha\delta\beta}\\
+% 			&=\lim_{\delta_\beta\rightarrow0}\lim_{\delta_\alpha\rightarrow0}\frac{f(\alpha+\delta_\alpha,\beta+\delta_\beta)-f(\alpha+\delta_\alpha,\beta)-f(\alpha,\beta+\delta_\beta)+f(\alpha,\beta)}{\delta_\alpha\delta_\beta}
+% 		\end{align*}
+% 		This process is thus clearly reversible,
+% 		$$
+% 		\therefore\pdv{f}{\alpha}{\beta}\equiv\pdv{f}{\beta}{\alpha}
+% 		$$
+% 	\end{proof}
+% \end{lemma}
+\begin{lemma}[Clairaut's theorem]
+	The order of mixed partial derivatives has no effect on the outcome of the derivative.
+	\begin{proof}
+		Let a rectangular region be bound by the points $W\langle \alpha_0,\beta_0\rangle,X\langle \alpha_1,\beta_0\rangle,
+		Y\langle \alpha_1,\beta_1\rangle$ and $Z\langle \alpha_0,\beta_1\rangle$. Let $Q$ represent the difference in the
+		change of values at the regions of the function given at $f(\alpha,\beta_1)$ and $f(\alpha,\beta_2)$ on the
+		interval $[\alpha_0,\alpha_1]$.
+		$$
+		Q=[f(\alpha_1,\beta_1)-f(\alpha_0,\beta_1)]-[f(\alpha_1,\beta_0)-f(\alpha_0,\beta_0)]
+		$$
+		The mean value theorem (MVT) states that on both regions $\vec{WX}$ and $\vec{ZY}\,\exists\,\xi_0$ and $\xi_1\ni$
+		\begin{align*}
+			\eval{\pdv{f}{\alpha}}_{\xi_0}&=\frac{f(\alpha_1,\beta_0)-f(\alpha_0,\beta_0)}{\lVert\vec{XY}\rVert}=\frac{f(\alpha_1,\beta_0)-f(\alpha_0,\beta_0)}{\alpha_1-\alpha_0}\\
+			\eval{\pdv{f}{\alpha}}_{\xi_1}&=\frac{f(\alpha_1,\beta_1)-f(\alpha_0,\beta_1)}{\lVert\vec{ZY}\rVert}=\frac{f(\alpha_1,\beta_1)-f(\alpha_0,\beta_1)}{\alpha_1-\alpha_0}
+		\end{align*}
+		Thus $Q$ can be expressed as
+		\begin{align*}
+			Q&=\left(\eval{\pdv{f}{\alpha}}_{\xi_0}\left(\alpha_1-\alpha_0\right)\right)-\left(\eval{\pdv{f}{\alpha}}_{\xi_1}\left(\alpha_1-\alpha_0\right)\right)\\
+			&=\left(\eval{\pdv{f}{\alpha}}_{\xi_0}-\eval{\pdv{f}{\alpha}}_{\xi_1}\right)\left(\alpha_1-\alpha_0\right)
+		\end{align*}
+		Now let $R$ be the equivalent of $Q$ in the direction of $\beta$,
+		$$
+			R=[f(\alpha_1,\beta_1)-f(\alpha_1,\beta_0)]-[f(\alpha_0,\beta_1)-f(\alpha_0,\beta_0)]
+		$$
+		The MVT asserts that on the regions $\vec{ZW}$ and $\vec{ZY}\,\exists\,\zeta_0$ and $\zeta_1\ni$
+		\begin{align*}
+			\eval{\pdv{f}{\beta}}_{\zeta_0}&=\frac{f(\alpha_0,\beta_1)-f(\alpha_0,\beta_0)}{\lVert\vec{ZW}\rVert}=\frac{f(\alpha_0,\beta_1)-f(\alpha_0,\beta_0)}{\beta_1-\beta_0}\\
+			\eval{\pdv{f}{\beta}}_{\zeta_1}&=\frac{f(\alpha_1,\beta_1)-f(\alpha_1,\beta_0)}{\lVert\vec{ZY}\rVert}=\frac{f(\alpha_1,\beta_1)-f(\alpha_1,\beta_0)}{\beta_1-\beta_0}
+		\end{align*}
+		Thus $R$ can be expressed as
+		\begin{align*}
+			R&=\left(\eval{\pdv{f}{\beta}}_{\zeta_0}\left(\beta_1-\beta_0\right)\right)-\left(\eval{\pdv{f}{\beta}}_{\zeta_1}\left(\beta_1-\beta_0\right)\right)\\
+			&=\left(\eval{\pdv{f}{\beta}}_{\zeta_0}-\eval{\pdv{f}{\beta}}_{\zeta_1}\right)\left(\beta_1-\beta_0\right)
+		\end{align*}
+		Rearranging $Q$ and $R$,
+		\begin{align*}
+			Q&=[f(\alpha_1,\beta_1)-f(\alpha_0,\beta_1)]-[f(\alpha_1,\beta_0)-f(\alpha_0,\beta_0)]\\
+			&=f(\alpha_1,\beta_1)-f(\alpha_1,\beta_0)-f(\alpha_0,\beta_1)+f(\alpha_0,\beta_0)\\
+			&=[f(\alpha_1,\beta_1)-f(\alpha_1,\beta_0)]-[f(\alpha_0,\beta_1)-f(\alpha_0,\beta_0)]=R\\
+			\therefore Q&=R
+		\end{align*}
+		Thus
+		\begin{align*}
+			\left(\eval{\pdv{f}{\alpha}}_{\xi_0}-\eval{\pdv{f}{\alpha}}_{\xi_1}\right)\left(\alpha_1-\alpha_0\right)&=\left(\eval{\pdv{f}{\beta}}_{\zeta_0}-\eval{\pdv{f}{\beta}}_{\zeta_1}\right)\left(\beta_1-\beta_0\right)\\
+			\frac{\eval{\pdv*{f}{\alpha}}_{\xi_0}-\eval{\pdv*{f}{\alpha}}_{\xi_1}}{\beta_1-\beta_0}&=\frac{\eval{\pdv*{f}{\beta}}_{\zeta_0}-\eval{\pdv*{f}{\beta}}_{\zeta_1}}{\alpha_1-\alpha_0}
+		\end{align*}
+	\end{proof}
+\end{lemma}
+\begin{defn}
+	The \definedterm{nabla} operator $\nabla$ is a vector containing one partial derivative for each parameter of
+	the function applied to \cite{RAPP2017137}. For some function $f:\mathbb{R}^n\rightarrow\mathbb{R}$, $\nabla f$ would be given by:
+	$$
+	\nabla f=\begin{bmatrix}
+		\pdv*{f}{x_1}\\
+		\pdv*{f}{x_2}\\
+		\vdots\\
+		\pdv*{f}{x_n}
+	\end{bmatrix}
+	$$
+	The nabla of a function will be the vector which points in the direction of the greatest change for the function
+	at the point evaluated at.
 \end{defn}
 
-lorem ipsum dolor sit amet
