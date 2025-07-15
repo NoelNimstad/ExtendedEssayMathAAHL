@@ -26,40 +26,25 @@
 	$$
 	where both $\alpha$ and $\beta$ are parameters of $f$.
 \end{defn}
-% \begin{lemma}[Clairaut's theorem]
-% 	The order of mixed partial derivatives has no effect on the outcome of the derivative.
-% 	\begin{proof}
-% 		Let $f:\alpha,\beta\mapsto\mathbb{R}^n,n\in\mathbb{N}$ be a function continuously differentiable over both $\alpha$ and $\beta$.
-% 		\begin{align*}
-% 			\pdv{f}{\alpha}&=\lim_{\delta_\alpha\rightarrow0}\frac{f(\alpha+\delta_\alpha,\beta)-f(\alpha,\beta)}{\delta_\alpha}\\
-% 			\pdv{f}{\alpha}{\beta}&=\lim_{\delta_\beta\rightarrow0}\lim_{\delta_\alpha\rightarrow0}\frac{\frac{f(\alpha+\delta_\alpha,\beta+\delta_\beta)-f(\alpha,\beta+\delta_\beta)}{\delta_\alpha}-\frac{f(\alpha+\delta_\alpha,\beta)-f(\alpha,\beta)}{\delta_\alpha}}{\delta_b}\\
-% 			&=\lim_{\delta_\beta\rightarrow0}\lim_{\delta_\alpha\rightarrow0}\frac{f(\alpha+\delta_\alpha,\beta+\delta_\beta)-f(\alpha,\beta+\delta_\beta)-[f(\alpha+\delta_\alpha,\beta)-f(\alpha,\beta)]}{\delta_\alpha\delta\beta}\\
-% 			&=\lim_{\delta_\beta\rightarrow0}\lim_{\delta_\alpha\rightarrow0}\frac{f(\alpha+\delta_\alpha,\beta+\delta_\beta)-f(\alpha+\delta_\alpha,\beta)-f(\alpha,\beta+\delta_\beta)+f(\alpha,\beta)}{\delta_\alpha\delta_\beta}
-% 		\end{align*}
-% 		This process is thus clearly reversible,
-% 		$$
-% 		\therefore\pdv{f}{\alpha}{\beta}\equiv\pdv{f}{\beta}{\alpha}
-% 		$$
-% 	\end{proof}
-% \end{lemma}
 \begin{lemma}[Clairaut's theorem]
-	The order of mixed partial derivatives has no effect on the outcome of the derivative, id est
+	Let $f(\alpha,\beta)$ be a function of two parameters $\alpha$ and $\beta$. If the mixed partial derivatives $\pdv{f}{\alpha}{\beta}$
+	and $\pdv{f}{\beta}{\alpha}$ exist and are continuous in the open disk $\mathbb{D}_\delta(\point{\alpha_0}{\beta_0})$ centred at
+	$\point{\alpha_0}{\beta_0}$ with radius $\delta>0$, then
 	$$
-		\pdv{f}{\alpha}{\beta}=\pdv{f}{\beta}{\alpha}
+		\eval{\pdv{f}{\alpha}{\beta}}_{\point{\alpha_0}{\beta_0}}=\eval{\pdv{f}{\beta}{\alpha}}_{\point{\alpha_0}{\beta_0}}
 	$$
 	\begin{proof}
-		Let a rectangular region be bound by the points $W\langle \alpha_0,\beta_0\rangle,X\langle \alpha_1,\beta_0\rangle,
-		Y\langle \alpha_1,\beta_1\rangle$ and $Z\langle \alpha_0,\beta_1\rangle$. The function $f$ is continuous on the
-		intervals $[\alpha_0,\alpha_1]$ and $[\beta_0,\beta_1]$ and differentiable on the intervals $(\alpha_0,\alpha_1)$ and
-		$(\beta_0,\beta_1)$. Let $Q$ represent the difference in the change of values of $f$ at the regions of the function
-		given at $f(\alpha,\beta_1)$ and $f(\alpha,\beta_2)$ on the interval $[\alpha_0,\alpha_1]$.
+		Let $\point{\alpha_0}{\beta_0}$ be a point in the domain of $f$. Consider a rectangular region bound by the
+		points $W\point{\alpha_0}{\beta_0},X\point{\alpha_1}{\beta_0}, Y\point{\alpha_1}{\beta_1}$  and $Z\point{\alpha_0}{\beta_1}$. 
+		$\pdv{f}{\alpha}$ and $\pdv{f}{\beta}$ exist in a neighbourhood of this rectangle, and the mixed partial derivatives 
+		$\pdv{f}{\beta}{\alpha}$ and $\pdv{f}{\alpha}{\beta}$ exist and are continuous in this neighbourhood. Let $Q$ be such that
 		$$
 		Q=[f(\alpha_1,\beta_1)-f(\alpha_0,\beta_1)]-[f(\alpha_1,\beta_0)-f(\alpha_0,\beta_0)]
 		$$
-		The mean value theorem (MVT) states that on both regions $\vec{WX}$ and $\vec{ZY}\,\exists\,\xi_0$ and $\xi_1\ni$
+		According to the mean value theorem (MVT) $\exists\,\xi_0,\xi_1\in[\alpha_0,\alpha_1]\ni$
 		\begin{align*}
-			\eval{\pdv{f}{\alpha}}_{\point{\xi_0}{\beta_0}}&=\frac{f(\alpha_1,\beta_0)-f(\alpha_0,\beta_0)}{\lVert\vec{XY}\rVert}=\frac{f(\alpha_1,\beta_0)-f(\alpha_0,\beta_0)}{\alpha_1-\alpha_0}\\
-			\eval{\pdv{f}{\alpha}}_{\point{\xi_1}{\beta_1}}&=\frac{f(\alpha_1,\beta_1)-f(\alpha_0,\beta_1)}{\lVert\vec{ZY}\rVert}=\frac{f(\alpha_1,\beta_1)-f(\alpha_0,\beta_1)}{\alpha_1-\alpha_0}
+			\eval{\pdv{f}{\alpha}}_{\point{\xi_0}{\beta_0}}&=\frac{f(\alpha_1,\beta_0)-f(\alpha_0,\beta_0)}{\alpha_1-\alpha_0}\\
+			\eval{\pdv{f}{\alpha}}_{\point{\xi_1}{\beta_1}}&=\frac{f(\alpha_1,\beta_1)-f(\alpha_0,\beta_1)}{\alpha_1-\alpha_0}
 		\end{align*}
 		Thus $Q$ can be expressed as
 		\begin{align*}
@@ -70,10 +55,10 @@
 		$$
 			R=[f(\alpha_1,\beta_1)-f(\alpha_1,\beta_0)]-[f(\alpha_0,\beta_1)-f(\alpha_0,\beta_0)]
 		$$
-		The MVT asserts that on the regions $\vec{ZW}$ and $\vec{ZY}\,\exists\,\zeta_0$ and $\zeta_1\ni$
+		By the MVT $\exists\,\zeta_0,\zeta_1\in[\beta_0,\beta_1]\ni$
 		\begin{align*}
-			\eval{\pdv{f}{\beta}}_{\point{\alpha_0}{\zeta_0}}&=\frac{f(\alpha_0,\beta_1)-f(\alpha_0,\beta_0)}{\lVert\vec{ZW}\rVert}=\frac{f(\alpha_0,\beta_1)-f(\alpha_0,\beta_0)}{\beta_1-\beta_0}\\
-			\eval{\pdv{f}{\beta}}_{\point{\alpha_1}{\zeta_1}}&=\frac{f(\alpha_1,\beta_1)-f(\alpha_1,\beta_0)}{\lVert\vec{ZY}\rVert}=\frac{f(\alpha_1,\beta_1)-f(\alpha_1,\beta_0)}{\beta_1-\beta_0}
+			\eval{\pdv{f}{\beta}}_{\point{\alpha_0}{\zeta_0}}&=\frac{f(\alpha_0,\beta_1)-f(\alpha_0,\beta_0)}{\beta_1-\beta_0}\\
+			\eval{\pdv{f}{\beta}}_{\point{\alpha_1}{\zeta_1}}&=\frac{f(\alpha_1,\beta_1)-f(\alpha_1,\beta_0)}{\beta_1-\beta_0}
 		\end{align*}
 		Thus $R$ can be expressed as
 		\begin{align*}
@@ -109,7 +94,7 @@
 		Consequently, as $\alpha_1\rightarrow\alpha_0$ and $\beta_1\rightarrow\beta_0$, $\xi^\star\rightarrow\alpha_0,\beta^\star\rightarrow\beta_0,\alpha^\star\rightarrow\alpha_0$ 
 		and $\zeta^\star\rightarrow\beta_0$. Since the derivatives are continuos,
 		$$
-			\eval{\pdv{f}{\beta}{\alpha}}_{\point{\alpha_0}{\beta_0}}=\eval{\pdv{\alpha}{\beta}}_{\point{\alpha_0}{\beta_0}}
+			\eval{\pdv{f}{\beta}{\alpha}}_{\point{\alpha_0}{\beta_0}}=\eval{\pdv{f}{\alpha}{\beta}}_{\point{\alpha_0}{\beta_0}}
 		$$
 		Because $\point{\alpha_0}{\beta_0}$ is an arbitrary point in the domain $\pdv{f}{\beta}{\alpha}=\pdv{f}{\alpha}{\beta}$ at 
 		all points in the domain where the mixed partial derivatives are continuous.
