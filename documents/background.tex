@@ -76,7 +76,7 @@
 		Thus
 		\begin{align}
 			\notag\left(\eval{\pdv{f}{\alpha}}_{\point{\xi_0}{\beta_0}}-\eval{\pdv{f}{\alpha}}_{\point{\xi_1}{\beta_1}}\right)\left(\alpha_1-\alpha_0\right)&=\left(\eval{\pdv{f}{\beta}}_{\point{\alpha_0}{\zeta_0}}-\eval{\pdv{f}{\beta}}_{\point{\alpha_1}{\zeta_1}}\right)\left(\beta_1-\beta_0\right)\\
-			\label{proof:SYMMETRY}\leadsto\frac{\eval{\pdv*{f}{\alpha}}_{\point{\xi_0}{\beta_0}}-\eval{\pdv*{f}{\alpha}}_{\point{\xi_1}{\beta_1}}}{\beta_1-\beta_0}&=\frac{\eval{\pdv*{f}{\beta}}_{\point{\alpha_0}{\zeta_0}}-\eval{\pdv*{f}{\beta}}_{\point{\alpha_0}{\zeta_0}}}{\alpha_1-\alpha_0}
+			\label{proof:SYMMETRY}\leadsto\frac{\eval{\pdv*{f}{\alpha}}_{\point{\xi_0}{\beta_0}}-\eval{\pdv*{f}{\alpha}}_{\point{\xi_1}{\beta_1}}}{\beta_1-\beta_0}&=\frac{\eval{\pdv*{f}{\beta}}_{\point{\alpha_0}{\zeta_0}}-\eval{\pdv*{f}{\beta}}_{\point{\alpha_1}{\zeta_1}}}{\alpha_1-\alpha_0}
 		\end{align}
 		Applying the MVT again, there exists some $\xi^\star\in(\xi_0,\xi_1),\beta^\star\in(\beta_0,\beta_1)\ni$
 		\begin{align*}
@@ -113,6 +113,11 @@
 		\pdv*{f}{x_n}
 	\end{bmatrix}
 	$$
-	The nabla of a function will be the vector which points in the direction of the greatest change for the function
-	at the point evaluated at.
+\end{defn}
+\begin{defn}
+	The directional derivative in the direction of some vector $\vec{v}$ of the function $f$ which is differentiable in
+	the open disk $\mathbb{D}_\delta(\point{x_0}{y_0})$ centred at $\point{x_0}{y_0}$ with radius $\delta>0$ is defined as
+	$$
+		\eval{\nabla_{\vec{v}}f}_{\point{x_0}{y_0}}=\frac{\eval{\nabla f}_{\point{x_0}{y_0}}\cdot\vec{v}}{\lVert\vec{v}\rVert}
+	$$
 \end{defn}
