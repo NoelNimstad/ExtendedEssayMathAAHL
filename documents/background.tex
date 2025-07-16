@@ -22,7 +22,7 @@
 	\definedterm{Mixed partial derivatives} are partial derivatives of a function taken with respect to multiple
 	variables \cite{GARRETT2015377}. This is denoted as
 	$$
-	\pdv{f}{\alpha}{\beta}\equiv\pdv{\alpha}\pdv{f}{\beta}
+	\pdv{f}{\alpha}{\beta}\equiv\pdv{\beta}\pdv{f}{\alpha}
 	$$
 	where both $\alpha$ and $\beta$ are parameters of $f$.
 \end{defn}
@@ -33,6 +33,7 @@
 	$$
 		\eval{\pdv{f}{\alpha}{\beta}}_{\point{\alpha_0}{\beta_0}}=\eval{\pdv{f}{\beta}{\alpha}}_{\point{\alpha_0}{\beta_0}}
 	$$
+	\cite{GARRETT2015377}
 	\begin{proof}
 		Let $\point{\alpha_0}{\beta_0}$ be a point in the domain of $f$. Consider a rectangular region bound by the
 		points $W\point{\alpha_0}{\beta_0},X\point{\alpha_1}{\beta_0}, Y\point{\alpha_1}{\beta_1}$  and $Z\point{\alpha_0}{\beta_1}$. 
@@ -79,18 +80,18 @@
 		\end{align}
 		Applying the MVT again, there exists some $\xi^\star\in(\xi_0,\xi_1),\beta^\star\in(\beta_0,\beta_1)\ni$
 		\begin{align*}
-			\eval{\pdv{f}{\beta}{\alpha}}_{\point{\xi^\star}{\beta^\star}}&=\frac{\eval{\pdv*{f}{\alpha}}_{\point{\xi_1}{\beta_1}}-\eval{\pdv*{f}{\alpha}}_{\point{\xi_0}{\beta_0}}}{\beta_1-\beta_0}\\
-			\implies-\eval{\pdv{f}{\beta}{\alpha}}_{\point{\xi^\star}{\beta^\star}}&=\frac{\eval{\pdv*{f}{\alpha}}_{\point{\xi_0}{\beta_0}}-\eval{\pdv*{f}{\alpha}}_{\point{\xi_1}{\beta_1}}}{\beta_1-\beta_0}
+			\eval{\pdv{f}{\alpha}{\beta}}_{\point{\xi^\star}{\beta^\star}}&=\frac{\eval{\pdv*{f}{\alpha}}_{\point{\xi_1}{\beta_1}}-\eval{\pdv*{f}{\alpha}}_{\point{\xi_0}{\beta_0}}}{\beta_1-\beta_0}\\
+			\implies-\eval{\pdv{f}{\alpha}{\beta}}_{\point{\xi^\star}{\beta^\star}}&=\frac{\eval{\pdv*{f}{\alpha}}_{\point{\xi_0}{\beta_0}}-\eval{\pdv*{f}{\alpha}}_{\point{\xi_1}{\beta_1}}}{\beta_1-\beta_0}
 		\end{align*}
 		Similarly, there exists some $\alpha^\star\in(\alpha_0,\alpha_1),\zeta^\star\in(\zeta_0,\zeta_1)\ni$
 		\begin{align*}
-			\eval{\pdv{f}{\alpha}{\beta}}_{\point{\alpha^\star}{\zeta^\star}}&=\frac{\eval{\pdv*{f}{\beta}}_{\point{\alpha_1}{\zeta_1}}-\eval{\pdv*{f}{\beta}}_{\point{\alpha_0}{\zeta_0}}}{\alpha_1-\alpha_0}\\
-			\implies-\eval{\pdv{f}{\alpha}{\beta}}_{\point{\alpha^\star}{\zeta^\star}}&=\frac{\eval{\pdv*{f}{\beta}}_{\point{\alpha_0}{\zeta_0}}-\eval{\pdv*{f}{\beta}}_{\point{\alpha_1}{\zeta_1}}}{\alpha_1-\alpha_0}
+			\eval{\pdv{f}{\beta}{\alpha}}_{\point{\alpha^\star}{\zeta^\star}}&=\frac{\eval{\pdv*{f}{\beta}}_{\point{\alpha_1}{\zeta_1}}-\eval{\pdv*{f}{\beta}}_{\point{\alpha_0}{\zeta_0}}}{\alpha_1-\alpha_0}\\
+			\implies-\eval{\pdv{f}{\beta}{\alpha}}_{\point{\alpha^\star}{\zeta^\star}}&=\frac{\eval{\pdv*{f}{\beta}}_{\point{\alpha_0}{\zeta_0}}-\eval{\pdv*{f}{\beta}}_{\point{\alpha_1}{\zeta_1}}}{\alpha_1-\alpha_0}
 		\end{align*}
 		Substituting back into \eqref{proof:SYMMETRY},
 		\begin{align*}
-			-\eval{\pdv{f}{\beta}{\alpha}}_{\point{\xi^\star}{\beta^\star}}&=-\eval{\pdv{f}{\alpha}{\beta}}_{\point{\alpha^\star}{\zeta^\star}}\\
-			\implies\eval{\pdv{f}{\beta}{\alpha}}_{\point{\xi^\star}{\beta^\star}}&=\eval{\pdv{f}{\alpha}{\beta}}_{\point{\alpha^\star}{\zeta^\star}}
+			-\eval{\pdv{f}{\alpha}{\beta}}_{\point{\xi^\star}{\beta^\star}}&=-\eval{\pdv{f}{\beta}{\alpha}}_{\point{\alpha^\star}{\zeta^\star}}\\
+			\implies\eval{\pdv{f}{\alpha}{\beta}}_{\point{\xi^\star}{\beta^\star}}&=\eval{\pdv{f}{\beta}{\alpha}}_{\point{\alpha^\star}{\zeta^\star}}
 		\end{align*}
 		Consequently, as $\alpha_1\rightarrow\alpha_0$ and $\beta_1\rightarrow\beta_0$, $\xi^\star\rightarrow\alpha_0,\beta^\star\rightarrow\beta_0,\alpha^\star\rightarrow\alpha_0$ 
 		and $\zeta^\star\rightarrow\beta_0$. Since the derivatives are continuous,
@@ -115,4 +116,3 @@
 	The nabla of a function will be the vector which points in the direction of the greatest change for the function
 	at the point evaluated at.
 \end{defn}
-
