@@ -76,6 +76,68 @@ notation:
 	\item $\rhat\,\&\,\thetahat$: Unit vectors in the positive $r$ and $\theta$ directions respectively.
 \end{itemize}
 
+\subsection{The mean value theorem}
+\begin{lemma}[Rolle's theorem]\label{lemma:ROLLES}
+	If a function $f$ is continuous on the interval $[a,b]$ and differentiable on $(a,b)$, and $f(a)=f(b)$, then $\exists\,c\in(a,b)\ni f'(c)=0$.
+	\begin{proof}
+		If $\forall x\in(a,b), f(x)=f(a)=f(b)$, then trivially $f'(x)=0$. However, if 
+		$f(x)\neq f(a)\,\forall x\in(a,b)$, then the value of $f$ must increase or decrease somewhere
+		on the interval $(a,b)$. Consequently, there must exist a local extrema $\eta\in(a,b)$. Assume $\eta$ is a
+		local maxima. Then consider the interval $I=(\eta-\delta,\eta+\delta)$ for some $\delta>0\ni\forall X\in I,f(X)\leq f(\eta)$.
+
+		Let $h<0$ be a number sufficiently small such that $\eta-h\in I$. $f(\eta+h)\leq f(\eta)\implies f(\eta+h)-f(\eta)\leq0$.
+		$$
+			\frac{f(\eta+h)-f(\eta)}{h}\geq0\because\left\{\begin{matrix}
+				f(\eta+h)-f(\eta)&\leq0\\
+				h&\leq0
+			\end{matrix}\right.
+		$$
+		Taking the left-hand limit,
+		$$
+			\lim_{h\rightarrow0^-}\frac{f(\eta+h)-f(\eta)}{h}=f'(\eta)
+		$$
+		Now let $H>0$ be a number sufficiently small such that $\eta-H\in I$.
+		\begin{align*}
+			\frac{f(\eta+H)-f(\eta)}{H}&\leq0\because\left\{\begin{matrix}
+				f(\eta+H)-f(\eta)&\leq0\\
+				H&\geq0
+			\end{matrix}\right.\\
+			\lim_{H\rightarrow0^+}\frac{f(\eta+H)-f(\eta)}{H}&=f'(\eta)
+		\end{align*}
+		Thus,
+		\begin{align*}
+			0\geq\lim_{H\rightarrow0^+}\frac{f(\eta+H)-f(\eta)}{H}=&f'(\eta)=\lim_{h\rightarrow0^-}\frac{f(\eta+h)-f(\eta)}{h}\geq0\\
+			\therefore\,&f'(\eta)=0
+		\end{align*}
+		Since the same would apply for local minima, then for any extrema $c\in(a,b),f'(c)=0$
+	\end{proof}
+\end{lemma}
+\begin{lemma}[The mean value theorem]\label{lemma:MVT}
+	For any function $f$ continuous on the interval $[a,b]$ and differentiable on the interval $(a,b)$,
+	$\exists\,c\in(a,b)\ni$
+	\begin{equation}\label{equation:MVT}
+		f'(c)=\frac{f(b)-f(a)}{b-a}
+	\end{equation}
+	\begin{proof}
+		Let the vector $\vec{v}$ represent the vector from $\point{a}{f(a)}$ to $\point{b}{f(b)}$.
+		$$
+			\vec{v}=\begin{bmatrix}
+				b-a\\
+				f(b)-f(a)
+			\end{bmatrix}
+		$$
+		Then let the vector $\vec{\hat{n}}$ represent a vector normal to the curve of $f$ at any point $c\in(a,b)$.
+		The angle between the $x$-axis and $f'(c)$ is $\atan f'(c)$. Thus, $\vec{\hat{n}}$ can be expressed as:
+		$$
+			\vec{\hat{n}}=\begin{bmatrix}
+				-\sin\atan f'(c)\\
+				\cos\atan f'(c)
+			\end{bmatrix}
+		$$
+		If point $c$ satisfies \eqref{equation:MVT}, then $\vec{\hat{n}}\cdot\vec{v}=0$.
+	\end{proof}
+\end{lemma}
+
 % \begin{tikzpicture}
 % \begin{axis}[
 % title={$x \exp(-x^2-y^2)$},
