@@ -104,8 +104,16 @@
 \end{lemma}
 \begin{defn}
 	The \definedterm{nabla} operator $\nabla$ is a vector containing one partial derivative for each parameter of
-	the function applied to \cite{RAPP2017137}. For some function $f:\mathbb{R}^n\rightarrow\mathbb{R}$, $\nabla f$ would be given by:
+	the scalar valued function applied to \cite{RAPP2017137}. Thus applying the operator is taking the scalar multiple of the vector 
+	$\nabla$ and some function $f$. For some function $f:\mathbb{R}^n\rightarrow\mathbb{R}$, $\nabla$ and $\nabla f$
+	would be given by:
 	$$
+	\nabla=\begin{bmatrix}
+		\pdv*{x_1}\\
+		\pdv*{x_2}\\
+		\vdots\\
+		\pdv*{x_n}
+	\end{bmatrix},\quad
 	\nabla f=\begin{bmatrix}
 		\pdv*{f}{x_1}\\
 		\pdv*{f}{x_2}\\
@@ -123,8 +131,12 @@
 	\cite{GIANNAKIDIS2010129}
 \end{defn}
 
-\subsection{Divergence \& Curl}
+\subsection{Divergence \& curl}
 \begin{defn}
-	In the case of fluid dynamics, \definedterm{divergence} can be thought as the operator which calculates the rate of change
-	of \emph{fluid} at a certain point, if more is coming in rather than flowing out.
+	The \definedterm{divergence} of a vector field $\fatf$ is a scalar field denoted as $\divergence{\fatf}$, defined as the dot product
+	of the nabla operator ($\nabla$) and the vector field. For the function $\fatf:x,y\mapsto X(x,y)\ihat+Y(x,y)\jhat$, $\divergence{\fatf}$
+	would be given by:
+	$$
+		\divergence{\fatf}=\pdv{X}{x}+\pdv{Y}{y}
+	$$
 \end{defn}
