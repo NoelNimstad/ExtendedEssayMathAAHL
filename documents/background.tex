@@ -26,7 +26,7 @@
 	$$
 	where both $\alpha$ and $\beta$ are parameters of $f$.
 \end{defn}
-\begin{lemma}[Clairaut's theorem]
+\begin{lemma}[Clairaut's theorem]\label{lemma:CLAIRAUT}
 	Let $f(\alpha,\beta)$ be a function of two parameters $\alpha$ and $\beta$. If the mixed partial derivatives $\pdv{f}{\alpha}{\beta}$
 	and $\pdv{f}{\beta}{\alpha}$ exist and are continuous in the open disk $\disk{\alpha_0}{\beta_0}$ centred at
 	$\point{\alpha_0}{\beta_0}$ with radius $\delta>0$, then
@@ -139,4 +139,31 @@
 	$$
 		\divergence{\fatf}=\pdv{X}{x}+\pdv{Y}{y}
 	$$
+\end{defn}
+\begin{defn}
+	The \definedterm{curl} of a vector field $\fatf$ is a vector field denoted as $\curl{\fatf}$, defined as the cross product of the
+	nabla operator and the vector field. Typically, since the cross product is only defined for 3 dimensional spaces, 2 dimensional curl is defined
+	as a scalar field which for some function $\fatf:x,y\mapsto X(x,y)\ihat+Y(x,y)\jhat$ is derived from the coefficient of $\khat$ if the cross
+	product was done as if the $z$ term of both vectors was set to 0. Thus, for such a function $\fatf$:
+	\begin{align*}
+		\curl{\fatf}&=\begin{vmatrix}
+			\ihat&\jhat&\khat\\
+			\pdv*{x}&\pdv*{y}&0\\
+			X&Y&0
+		\end{vmatrix}\\
+		&=\begin{vmatrix}
+			\pdv*{y}&0\\
+			Y&0
+		\end{vmatrix}\ihat
+		-\begin{vmatrix}
+			\pdv*{x}&0\\
+			X&0
+		\end{vmatrix}\jhat
+		+\begin{vmatrix}
+			\pdv*{x}&\pdv*{y}\\
+			X&Y
+		\end{vmatrix}\khat\\
+		&=0\ihat-0\jhat+\left(\pdv{Y}{x}-\pdv{X}{y}\right)\khat=\left(\pdv{Y}{x}-\pdv{X}{y}\right)\khat\\
+		\leadsto\curl{\fatf}&=\pdv{Y}{x}-\pdv{X}{y}
+	\end{align*}
 \end{defn}
