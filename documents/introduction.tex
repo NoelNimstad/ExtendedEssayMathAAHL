@@ -32,30 +32,32 @@ validation. The focus is on the mathematical derivation and analysis of the idea
     An \definedterm{incompressible fluid} is a fluid whose density at every point does not change over time \cite{AHMED2019331}.
 \end{defn}
 \begin{defn} % scalar field
-	A \definedterm{scalar field} is a function mapping points in space to scalar quantities such as temperatures.
+	A \definedterm{scalar field} is a function mapping points in space to scalar quantities such as temperatures\referto{figure}{figure:SCALARFIELD}.
 
 	\begin{figure*}[!ht]
 		\includegraphics[scale=0.5]{scalar_field_example.pdf}
 		\centering
-		\caption{Scalar field plotted for the function $f(x,y)=\sin(x)\cos y$}
+		\caption{Scalar field plotted for the function $f:x,y\mapsto\sin(x)\cos y$}
+		\label{figure:SCALARFIELD}
 	\end{figure*}
 \end{defn}
 \begin{defn} % vector field
     A \definedterm{vector field} is a function mapping points in space to vector quantities \cite{BREZINSKI20063}. In
-	the case of fluid dynamics, vector fields often model quantities like fluid velocity.
+	the case of fluid dynamics, vector fields often model quantities like fluid velocity\referto{figure}{figure:VECTORFIELD}.
 
 	\begin{figure*}[!ht]
 		\includegraphics[scale=0.5]{vector_field_example.pdf}
 		\centering
-		\caption{Vector field plotted for the function $f(x,y)=\begin{pmatrix}
+		\caption{Vector field plotted for the function $\fatf:x,y\mapsto\begin{pmatrix}
 			\sin y\\\sin x
 		\end{pmatrix}$}
+		\label{figure:VECTORFIELD}
 	\end{figure*}
 \end{defn}
-\begin{defn} % velocity potential
+\begin{defn}\label{definition:VP} % velocity potential
 	The \definedterm{velocity potential} $\phi$ is a scalar field whose gradient is the velocity vector field of some
 	fluid, mathematically $\mathbf{V}=\nabla\phi$. The quantity is defined for irrotational flow which is a resulting
-	property of the idealisations made in this essay\referto{theorem:kelvin}.
+	property of the idealisations made in this essay\referto{section}{section:IRROTATIONAL}.
 \end{defn}
 
 \subsubsection{Notation}
@@ -76,14 +78,14 @@ notation:
 \end{itemize}
 
 \subsubsection{The mean value theorem}\label{section:MVT}
-To support the derivations made later in this essay, particularly in the proof of Clairaut's theorem\referto{lemma:CLAIRAUT}, fundamental
+To support the derivations made later in this essay, particularly in the proof of Clairaut's theorem\referto{lemma}{lemma:CLAIRAUT}, fundamental
 concepts and theorems from single-variable calculus are introduced here, including the Mean Value Theorem and the lemmas it builds upon.
 \begin{lemma}[The extreme value theorem]\label{lemma:MINMAX}
-	If a function $f$ is continuous on the finite interval $[a,b]$, then there exists $A,B\in[a,b]\ni f(A)\leq f(x)\leq f(B)\,\forall x\in[a,b]$.
+	If a function $f$ is continuous on the finite interval $[a,b]$, then there exists $A,B\in[a,b]$ such that $f(A)\leq f(x)\leq f(B)\,\forall x\in[a,b]$.
 	Thus, at the points $A$ and $B$, $f$ has an absolute minimum $m=f(A)$ and an absolute maximum $M=f(B)$.
 \end{lemma}
 \begin{lemma}[Rolle's theorem]\label{lemma:ROLLES}
-	If a function $f$ is continuous on the interval $[a,b]$ and differentiable on $(a,b)$, and $f(a)=f(b)$, then $\exists\,c\in(a,b)\ni f'(c)=0$.
+	If a function $f$ is continuous on the interval $[a,b]$ and differentiable on $(a,b)$, and $f(a)=f(b)$, then $\exists\,c\in(a,b)$ such that $f'(c)=0$.
 	\begin{proof}
 		Consider two cases:
 		
@@ -94,7 +96,7 @@ concepts and theorems from single-variable calculus are introduced here, includi
 		If $f$ is not constant over $[a,b]$ and $f(a)=f(b)$, then \lemmaref{lemma:MINMAX} asserts that there must exist an absolute maximum
 		or minimum that occur at some point $\eta\in(a,b)$. Since $f$ is differentiable over $(a,b)$, then any point $\eta$ where an absolute
 		extremum occurs must also be a local extremum. Consider the case where $\eta$ is a local maxima (the proof for the case of local minima
-		is analogous). Then let the interval $I=(\eta-\delta,\eta+\delta)$ for some $\delta>0\ni\forall X\in I,f(X)\leq f(\eta)$.
+		is analogous). Then let the interval $I=(\eta-\delta,\eta+\delta)$ for some $\delta>0$ such that $\forall X\in I,f(X)\leq f(\eta)$.
 
 		Let $h<0$ be a number sufficiently small such that $\eta+h\in I$. $f(\eta+h)\leq f(\eta)\implies f(\eta+h)-f(\eta)\leq0$. Thus,
 		$$
@@ -126,7 +128,7 @@ concepts and theorems from single-variable calculus are introduced here, includi
 \end{lemma}
 \begin{lemma}[The mean value theorem]\label{lemma:MVT}
 	For any function $f$ continuous on the interval $[a,b]$ and differentiable on the interval $(a,b)$,
-	$\exists\,c\in(a,b)\ni$
+	$\exists\,c\in(a,b)$ such that
 	\begin{equation}\label{equation:MVT}
 		f'(c)=\frac{f(b)-f(a)}{b-a}
 	\end{equation}

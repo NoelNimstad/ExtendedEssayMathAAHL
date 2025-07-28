@@ -4,3 +4,5 @@
 {"rule":"OXFORD_SPELLING_Z_NOT_S","sentence":"^\\QThe focus is on the mathematical derivation and analysis of the idealised model.\\E$"}
 {"rule":"OXFORD_SPELLING_Z_NOT_S","sentence":"^\\QTherefore, to gain insights into the governing principles of fluid flow, simplified and idealised models are used.\\E$"}
 {"rule":"OXFORD_SPELLING_Z_NOT_S","sentence":"^\\QThe quantity is defined for irrotational flow which is a resulting property of the idealisations made in this essaytheorem:kelvin.\\E$"}
+{"rule":"OXFORD_SPELLING_Z_NOT_S","sentence":"^\\QAs mentioned in definition \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, one resulting property of the idealisations made in this essay is irrotational flow.\\E$"}
+{"rule":"OXFORD_SPELLING_Z_NOT_S","sentence":"^\\QAs mentioned in definition \\E(?:Dummy|Ina|Jimmy-)[0-9]+\\Q, one resulting property of the idealisations (steady, inviscid and incompressible flow) made in this essay is irrotational flow.\\E$"}
