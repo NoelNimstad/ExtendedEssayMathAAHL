@@ -3,6 +3,7 @@
 \usepackage{setspace}       		% line spacing
 \usepackage{graphicx}       		% image support
 \usepackage{tikz, pgfplots}			% draw
+\usepackage{extarrows}
 \pgfplotsset{compat=1.18}
 \graphicspath{{resources/}} 		% image folder
 \doublespacing              		% double spacing
@@ -66,6 +67,9 @@
 \theoremstyle{definition}
 \newtheorem{defn}{Definition}[section]
 \newcommand{\definedterm}[1]{\textbf{\textit{#1}}}
+
+% For tikz plots
+\def\length{sqrt(1+(x-y)^2)}
 
 % Research question
 \newcommand{\researchquestion}
