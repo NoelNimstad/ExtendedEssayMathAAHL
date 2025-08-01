@@ -1,12 +1,12 @@
 \section{Potential flow}
-\subsection{Incompressible flow}
+\subsection{The continuity equation for incompressible flow}
 The idealised fluid in this essay is incompressible. This means that if $\rho$ represents the density of the fluid, then as per definition \ref{definition:INCOMPRESSIBLE}, $\rho$ must 
 remain constant over time at every point in the domain of the vector field representing the fluid flow. This means that for any arbitrary closed volume within the fluid, the net mass
 flow rate across its boundaries must be zero.
 
-Let the velocity vector field of the fluid $\mathbf{\fatf}$, be defined as $\fatf:x,y\mapsto X(x,y)\ihat+Y(x,y)\jhat$. Then consider an infinitesimal rectangular volume with vertices
-$W\point{\alpha_0}{\beta_0}$, $X\point{\alpha_1}{\beta_0}$, $Y\point{\alpha_1}{\beta_1}$ and $Z\point{\alpha_0}{\beta_1}$. Let $\bar{\beta}=\frac{\beta_0+\beta_1}{2}$ and $\bar{\alpha}=\frac{\alpha_0+\alpha_1}{2}$.
-Assume $\mathbf{V}$ is continuous and differentiable over this region.
+Let the velocity vector field of the fluid be $\mathbf{V}:x,y\mapsto X(x,y)\ihat+Y(x,y)\jhat$. To quantify the mass flow, consider an arbitrary infinitesimal rectangular volume within
+the fluid, with vertices $W(\alpha_0,\beta_0)$, $X(\alpha_1,\beta_0)$, $Y(\alpha_1,\beta_1)$, and $Z(\alpha_0,\beta_1)$, as depicted below. Let $\bar{\alpha}=\frac{\alpha_0+\alpha_1}{2}$
+and $\bar{\beta}=\frac{\beta_0+\beta_1}{2}$. Assume $\mathbf{V}$ is continuous and differentiable over this region.
 
 \begin{center}
     \begin{tikzpicture}[scale=1,X/.style = {circle, fill=black, inner sep=1.5pt,
@@ -31,51 +31,51 @@ Assume $\mathbf{V}$ is continuous and differentiable over this region.
     \end{tikzpicture}
 \end{center}
 
-Mass is equivalent to density times volume, or mathematically $m=\rho V$, and the derivative of volume with respect to time is
-equivalent to the velocity of the fluid elements times the area they flow through, mathematically $\dv{V}{t}=\vec{v}A$. Consequently, the mass flow rate ($\dv{m}{t}$) in to side $WZ$
-can be computed as:
+The mass flow rate ($\dot{m}$, mass per unit time) across a given surface is defined as the flux of mass, which is computed as the product of density, the velocity component normal to the
+surface, and the area of the surface. Thus along the $x$ axis (in the direction of $\ihat$) the mass flow rate into $WZ$ is given as,
 $$
-    \dv{m}{t}=\rho\dv{V}{t}=m\vec{v}A
+    \dot{m}_{\rightarrow WZ}=\rho X(\alpha_0,\bar{\beta})(\beta_1-\beta_0)
 $$
-Thus along the $x$ axis (in the direction of $\ihat$) the mass flow rate into $WZ$ is given as,
+and similarly the mass flow rate out of the opposite side $XY$ is given as:
 $$
-    \rho X(\alpha_0,\bar{\beta})(\beta_1-\beta_0)
-$$
-and similarly the mass flow rate out of $XY$ is given as:
-$$
-    \rho X(\alpha_1,\bar{\beta})(\beta_1-\beta_0)
+    \dot{m}_{XY\rightarrow}=\rho X(\alpha_1,\bar{\beta})(\beta_1-\beta_0)
 $$
 Thus, the net mass flow rate out of the rectangular region along the $x$ axis is:
-$$
-    \rho X(\alpha_1,\bar{\beta})(\beta_1-\beta_0)-\rho X(\alpha_0,\bar{\beta})(\beta_1-\beta_0)
-$$
+\begin{align*}
+    \dot{m}_{\ihat}&=\dot{m}_{XY\rightarrow}-\dot{m}_{\rightarrow WZ}\\
+    &=\rho X(\alpha_1,\bar{\beta})(\beta_1-\beta_0)-\rho X(\alpha_0,\bar{\beta})(\beta_1-\beta_0)
+\end{align*}
 Which, factoring out $\rho(\beta_1-\beta_0)$, leads to:
 $$
-    \rho(\beta_1-\beta_0)\left[X(\alpha_1,\bar{\beta})-X(\alpha_0,\bar{\beta})\right]
-$$
-This by the definition of a partial derivative (because $\alpha_1\rightarrow\alpha_0$) is equivalent to:
-$$
-    \rho(\beta_1-\beta_0)\eval{\pdv{X}{x}}_{\point{\alpha_0}{\bar{\beta}}}(\alpha_1-\alpha_0)
+    \dot{m}_{\ihat}=\rho(\beta_1-\beta_0)\left[X(\alpha_1,\bar{\beta})-X(\alpha_0,\bar{\beta})\right]
 $$
 Analogously, across the $y$ axis, the net mass flow rate out of the rectangular region between sides $WX$ and $ZY$ is given by the expression:
 $$
-    \rho(\alpha_1-\alpha_0)\eval{\pdv{Y}{y}}_{\point{\bar{\alpha}}{\beta_0}}(\beta_1-\beta_0)
+    \dot{m}_{\jhat}=\rho(\alpha_1-\alpha_0)\left[Y(\bar{\alpha},\beta_1)-Y(\bar{\alpha},\beta_0)\right]
 $$
-Therefore the net mass flow rate ($\dot{m}$) out of the rectangular region, which must be equal to 0 for the fluid to be incompressible, is given by:
+Therefore, the net mass flow rate out of the rectangular region, which must be equal to 0 for the fluid to incompressible, is given by:
 \begin{align*}
-    \dot{m}&=\rho(\beta_1-\beta_0)\eval{\pdv{X}{x}}_{\point{\alpha_0}{\bar{\beta}}}(\alpha_1-\alpha_0)+\rho(\alpha_1-\alpha_0)\eval{\pdv{Y}{y}}_{\point{\bar{\alpha}}{\beta_0}}(\beta_1-\beta_0)\\
-    &=\rho(\beta_1-\beta_0)(\alpha_1-\alpha_0)\left[\eval{\pdv{X}{x}}_{\point{\alpha_0}{\bar{\beta}}}+\eval{\pdv{Y}{y}}_{\point{\bar{\alpha}}{\beta_0}}\right]=0\\
-    \implies0&=\eval{\pdv{X}{x}}_{\point{\alpha_0}{\bar{\beta}}}+\eval{\pdv{Y}{y}}_{\point{\bar{\alpha}}{\beta_0}}
+    \dot{m}&=\dot{m}_{\ihat}+\dot{m}_{\jhat}\\
+    &=\rho(\beta_1-\beta_0)\left[X(\alpha_1,\bar{\beta})-X(\alpha_0,\bar{\beta})\right]+\rho(\alpha_1-\alpha_0)\left[Y(\bar{\alpha},\beta_1)-Y(\bar{\alpha},\beta_0)\right]=0
 \end{align*}
-Then as $\alpha_1\rightarrow\alpha_0$ and $\beta_1\rightarrow\beta_0$, $\bar{\alpha}\rightarrow\alpha_0$ and $\bar{\beta}\rightarrow\beta_0$, meaning
+Dividing through by $\rho$, $(\alpha_1-\alpha_0)$ and $(\beta_1-\beta_0)$:
+$$
+    \frac{X(\alpha_1,\bar{\beta})-X(\alpha_0,\bar{\beta})}{\alpha_1-\alpha_0}+\frac{Y(\bar{\alpha},\beta_1)-Y(\bar{\alpha},\beta_0)}{\beta_1-\beta_0}=0
+$$
+Now consider the limit as $\alpha_1\rightarrow\alpha_0$ and $\beta_1\rightarrow\beta_0$, the difference $\delta_\alpha=\alpha_1-\alpha_0\rightarrow0$ and $\delta_\beta=\beta_1-\beta_0\rightarrow0$.
 \begin{align*}
-    \eval{\pdv{X}{x}}_{\point{\alpha_0}{\beta_0}}+\eval{\pdv{Y}{y}}_{\point{\alpha_0}{\beta_0}}&=0\\
-    \therefore\eval{\divergence{\fatf}}_{\point{\alpha_0}{\beta_0}}&=0
+    \lim_{\delta_\alpha\rightarrow0}\frac{X(\alpha_0+\delta_\alpha,\bar{\beta})-X(\alpha_0,\bar{\beta})}{\delta_\alpha}&=\eval{\pdv{X}{x}}_{\point{\alpha_0}{\bar{\beta}}}\\
+    \lim_{\delta_\beta\rightarrow0}\frac{Y(\bar{\alpha},\beta_0+\delta_\beta)-Y(\bar{\alpha},\beta_0)}{\delta_\beta}&=\eval{\pdv{Y}{y}}_{\point{\bar{\alpha}}{\beta_0}}
 \end{align*}
-Consequently, as $\point{\alpha_0}{\beta_0}$ is any point in the domain of $\fatf$ where the function is differentiable, the statement can be generalised as:
+Furthermore, as $\alpha_1\rightarrow\alpha_0$ and $\beta_1\rightarrow\beta_0$, $\bar{\alpha}\rightarrow\alpha_0$ and $\bar{\beta}\rightarrow\beta_0$, consequently
 $$
-    \divergence{\fatf}=0
+    \dot{m}=\eval{\pdv{X}{x}}_{\point{\alpha_0}{\beta_0}}+\eval{\pdv{Y}{y}}_{\point{\alpha_0}{\beta_0}}=\eval{\divergence{\mathbf{V}}}_{\point{\alpha_0}{\beta_0}}=0
 $$
+Because $\point{\alpha_0}{\beta_0}$ is any point in the domain of $\mathbf{V}$ where the function is differentiable, the expression can be generalised as
+$$
+    \divergence{\mathbf{V}}=0
+$$
+This equation is known as the continuity equation for incompressible fluids \cite{PHAM2014405} and will underpin following derivations made in this essay.
 
 \subsection{Irrotational flow}\label{section:IRROTATIONAL}
 As mentioned in definition \ref{definition:VP}, one resulting property of the idealisations (steady, inviscid and incompressible flow)
