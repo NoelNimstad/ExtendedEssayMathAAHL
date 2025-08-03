@@ -1,4 +1,4 @@
-\section{Potential flow}
+\section{Governing equations for ideal fluid flow}
 \subsection{The continuity equation for incompressible flow}
 The idealised fluid in this essay is incompressible. This means that if $\rho$ represents the density of the fluid, then as per definition \ref{definition:INCOMPRESSIBLE}, $\rho$ must 
 remain constant over time at every point in the domain of the vector field representing the fluid flow. This means that for any arbitrary closed volume within the fluid, the net mass
@@ -113,24 +113,33 @@ the origin, where $\fatf$ is undefined), is irrotational\referto{figure}{figure:
     \label{figure:ZEROCURL}
 \end{figure*}
 
+% KELVINS THEOREM
+
+\newpage % temporary formatting solution
 \subsection{The velocity potential}
-The velocity potential $\phi$ of some vector field $\mathbf{V}$ is defined as a scalar field such that:
+As established in Section~\ref{section:IRROTATIONAL}, for an incompressible and inviscid fluid initially irrotational, the flow remains irrotational, meaning
+the velocity field $\vec{V}$ modelling the flow satisfies $\curl{\vec{V}}=0$. This condition leads to the existence of a scalar-valued function, known as the
+velocity potential, whose gradient is equal to the vector field. To demonstrate this, consider the identity $\curl{\gradient{\phi}}$, where $\phi$ is a
+function of $x$ and $y$ and is scalar valued. $\gradient{\phi}$ is defined as:
 $$
-    \gradient{\phi}=\mathbf{V}
-$$
-Such a velocity potential exists for all irrotational flow, like the flow modelled in this essay. To prove the existance of the velocity potential, consider the
-identity $\curl{\gradient{\varphi}}$, where $\varphi$ is a function of $x$ and $y$ and is scalar valued. $\gradient{\varphi}$ is defined as
-$$
-    \gradient{\varphi}=\begin{bmatrix}
-        \pdv*{\varphi}{x}\\
-        \pdv*{\varphi}{y}
+    \gradient{\phi}=\begin{bmatrix}
+        \pdv*{\phi}{x}\\
+        \pdv*{\phi}{y}
     \end{bmatrix}
 $$
 Taking the curl of this expression and applying Theorem~\ref{lemma:CLAIRAUT} (Clairaut's theorem) gives
 \begin{align*}
-    \curl{\gradient{\varphi}}&=\pdv{\varphi}{y}{x}-\pdv{\varphi}{x}{y}\\
-                             &=\pdv{\varphi}{y}{x}-\pdv{\varphi}{y}{x}=0
+    \curl{\gradient{\phi}}&=\pdv{\phi}{y}{x}-\pdv{\phi}{x}{y}\\
+                             &=\pdv{\phi}{y}{x}-\pdv{\phi}{y}{x}=0
 \end{align*}
+Thus, by the definition of irrotational flow,
+\begin{align*}
+    \curl{\vec{V}}&=0=\curl{\gradient{\phi}}\\
+    \therefore\vec{V}&=\gradient{\phi}
+\end{align*}
+Here, $\phi$ is known as the velocity potential of $\vec{V}$. The velocity potential makes derivations made in this essay easier due its scalar valued nature.
+
+\subsection{Laplace's equation}
 
 \section{Formulation of the problem}
-\section{Governing equations and boundary Conditions}
+\subsection{Boundary equations}
