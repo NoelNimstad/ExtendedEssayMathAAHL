@@ -1,5 +1,5 @@
 \section{Governing equations for ideal fluid flow}
-\subsection{The continuity equation for incompressible flow}
+\subsection{The continuity equation for incompressible flow}\label{section:CONTINUITY}
 The idealised fluid in this essay is incompressible. This means that if $\rho$ represents the density of the fluid, then as per definition \ref{definition:INCOMPRESSIBLE}, $\rho$ must 
 remain constant over time at every point in the domain of the vector field representing the fluid flow. This means that for any arbitrary closed volume within the fluid, the net mass
 flow rate across its boundaries must be zero.
@@ -116,7 +116,7 @@ the origin, where $\fatf$ is undefined), is irrotational\referto{figure}{figure:
 % KELVINS THEOREM
 
 \newpage % temporary formatting solution
-\subsection{The velocity potential}
+\subsection{The velocity potential}\label{section:POTENTIAL}
 As established in Section~\ref{section:IRROTATIONAL}, for an incompressible and inviscid fluid initially irrotational, the flow remains irrotational, meaning
 the velocity field $\vec{V}$ modelling the flow satisfies $\curl{\vec{V}}=0$. This condition leads to the existence of a scalar-valued function, known as the
 velocity potential, whose gradient is equal to the vector field. To demonstrate this, consider the identity $\curl{\gradient{\phi}}$, where $\phi$ is a
@@ -140,6 +140,101 @@ Thus, by the definition of irrotational flow,
 Here, $\phi$ is known as the velocity potential of $\vec{V}$. The velocity potential makes derivations made in this essay easier due its scalar valued nature.
 
 \subsection{Laplace's equation}
+\begin{defn}
+    The $\definedterm{laplacian}$ operator, denoted $\laplacian$, is defined for some scalar field $\phi$ as $\laplacian\phi=\divergence{\gradient{\phi}}$, which
+    when expanded gives:
+    \begin{align*}
+        \laplacian\phi&=\divergence{\begin{bmatrix}
+            \pdv*{\phi}{x}\\
+            \pdv*{\phi}{y}
+        \end{bmatrix}}\\
+        &=\pdv[2]{\phi}{x}+\pdv[2]{\phi}{y}
+    \end{align*}
+\end{defn}
+As discussed in Section~\ref{section:POTENTIAL}, the vector field representing this essay's idealised fluid can be expressed through the gradient of a velocity potential
+$\phi$. The fluid must also satisfy the continuity equation, as established in Section~\ref{section:CONTINUITY}, thus
+\begin{align*}
+    \divergence{\nabla\phi}&=0\\
+    \implies\laplacian\phi&=0
+\end{align*}
+This equation is known as Laplace's equation \cite{LEWIS2022131}. As will become evident in Section~\ref{section:BOUNDARY}, it is helpful to define this equation in polar coordinates.
+
+\begin{lemma}[The polar form of the Laplacian]
+    For the scalar field $\phi$, the Laplacian is defined in polar coordinates as
+    $$\laplacian\phi=\pdv[2]{\phi}{r}+\frac{1}{r}\pdv{\phi}{r}+\frac{1}{r^2}\pdv[2]{\phi}{\theta}$$
+
+    \begin{proof}
+        The Cartesian coordinates $x$ and $y$ are defined in terms of the polar coordinates $r$ and $\theta$ as
+        \begin{align*}
+            x&=r\cos\theta\\
+            y&=r\sin\theta
+        \end{align*}
+        Consequently the partial derivatives for $x$ and $y$ in terms of $r$ and $\theta$ become
+        \begin{align*}
+            \pdv{x}{r}=\cos\theta\quad&\quad\pdv{x}{\theta}=-r\sin\theta\\
+            \pdv{y}{r}=\sin\theta\quad&\quad\pdv{y}{\theta}=r\cos\theta
+        \end{align*} 
+        Therefore, using the chain rule, the partial derivatives of $\phi$ in terms of $r$ become
+        \begin{align}
+            \notag\pdv{\phi}{r}&=\pdv{\phi}{x}\pdv{x}{r}+\pdv{\phi}{y}\pdv{y}{r}\\
+            \label{equation:polar-laplacian:1}&=\pdv{\phi}{x}\cos\theta+\pdv{\phi}{y}\sin\theta
+        \end{align}
+        And in terms of $\theta$,
+        \begin{align}
+            \notag\pdv{\phi}{\theta}&=\pdv{\phi}{x}\pdv{x}{\theta}+\pdv{\phi}{y}\pdv{y}{\theta}\\
+            \notag&=-\pdv{\phi}{x}r\sin\theta+\pdv{\phi}{y}r\cos\theta\\
+            \label{equation:polar-laplacian:2}&=r\left(\pdv{\phi}{y}\cos\theta-\pdv{\phi}{x}\sin\theta\right)
+        \end{align}
+        Taking the second order partial derivatives with respect to $r$ and using Theorem~\ref{lemma:CLAIRAUT} (Clairaut's theorem), which will henceforth be taken for granted, gives
+        \begin{align*}
+            \pdv[2]{\phi}{r}&=\pdv{r}\pdv{\phi}{x}\cos\theta+\pdv{r}\pdv{\phi}{y}\sin\theta\\
+            &=\pdv{x}\pdv{\phi}{r}\cos\theta+\pdv{y}\pdv{\phi}{r}\sin\theta
+        \end{align*}
+        Substituting back from \eqref{equation:polar-laplacian:1},
+        \begin{align*}
+            \pdv[2]{\phi}{r}&=\pdv{x}\left(\pdv{\phi}{x}\cos\theta+\pdv{\phi}{y}\sin\theta\right)\cos\theta+\pdv{y}\left(\pdv{\phi}{x}\cos\theta+\pdv{\phi}{y}\sin\theta\right)\sin\theta\\
+            &=\pdv[2]{\phi}{x}\cos^2\theta+\pdv{\phi}{y}{x}\left(\sin\theta\right)\cos\theta+\pdv{\phi}{x}{y}\left(\cos\theta\right)\sin\theta+\pdv[2]{\phi}{y}\sin^2\theta\\
+            &=\pdv[2]{\phi}{x}\cos^2\theta+\pdv[2]{\phi}{y}\sin^2\theta+\left(\pdv{\phi}{y}{x}+\pdv{\phi}{x}{y}\right)\cos\theta\sin\theta\\
+            &=\pdv[2]{\phi}{x}\cos^2\theta+\pdv[2]{\phi}{y}\sin^2\theta+2\pdv{\phi}{y}{x}\cos\theta\sin\theta
+        \end{align*}
+        Applying the same process for the second partial derivative with respect to $\theta$ leads to
+        \begin{align*}
+            \pdv[2]{\phi}{\theta}&=\pdv{\theta}\left(\pdv{\phi}{y}\cos\theta-\pdv{\phi}{x}\sin\theta\right)r\\
+            &=\pdv{\theta}\left(\pdv{\phi}{y}r\cos\theta\right)-\pdv{\theta}\left(\pdv{\phi}{x}r\sin\theta\right)
+        \end{align*}
+        $\pdv*{\phi}{x}$, $\pdv*{\phi}{y}$, $\cos\theta$ and $\sin\theta$ are functions of $\theta$, so the product rule is applied leading to:
+        \begin{align}
+            \notag\pdv[2]{\phi}{\theta}&=\left(\left[\pdv{\theta}\pdv{\phi}{y}\right]r\cos\theta+\pdv{\phi}{y}\left[\pdv{\theta}r\cos\theta\right]\right)-\left(\left[\pdv{\theta}\pdv{\phi}{x}\right]r\sin\theta+\pdv{\phi}{x}\left[\pdv{\theta}r\sin\theta\right]\right)\\
+            \notag&=\left(\pdv{\phi}{y}{\theta}r\cos\theta-\pdv{\phi}{y}r\sin\theta\right)-\left(\pdv{\phi}{x}{\theta}r\sin\theta+\pdv{\phi}{x}r\cos\theta\right)\\
+            \notag&=r\left(\pdv{y}\pdv{\phi}{\theta}r\cos\theta-\pdv{x}\pdv{\phi}{\theta}r\sin\theta\right)-r\left(\pdv{\phi}{x}\cos\theta+\pdv{\phi}{y}\sin\theta\right)\\
+            \label{equation:polar-laplacian:3}&=\underbrace{r^2\left(\pdv{y}\pdv{\phi}{\theta}\cos\theta-\pdv{x}\pdv{\phi}{\theta}\sin\theta\right)}_{\Phi}-r\left(\pdv{\phi}{x}\cos\theta+\pdv{\phi}{y}\sin\theta\right)
+        \end{align}
+        Substituting \eqref{equation:polar-laplacian:2} into $\Phi$,
+        \begin{align*}
+            \Phi&=r^2\left(\pdv{y}\left(\pdv{\phi}{y}\cos\theta-\pdv{\phi}{x}\sin\theta\right)\cos\theta-\pdv{x}\left(\pdv{\phi}{y}\cos\theta-\pdv{\phi}{x}\sin\theta\right)\sin\theta\right)\\
+            &=r^2\left(\left(\pdv[2]{\phi}{y}\cos\theta-\pdv{\phi}{x}{y}\sin\theta\right)\cos\theta-\left(\pdv{\phi}{y}{x}\cos\theta-\pdv[2]{\phi}{x}\sin\theta\right)\sin\theta\right)\\
+            &=r^2\left(\pdv[2]{\phi}{y}\cos^2\theta-\pdv{\phi}{x}{y}\cos\theta\sin\theta-\pdv{\phi}{x}{y}\cos\theta\sin\theta+\pdv[2]{\phi}{x}\sin^2\theta\right)\\
+            &=r^2\left(\pdv[2]{\phi}{y}\cos^2\theta+\pdv[2]{\phi}{x}\sin^2\theta-2\pdv{\phi}{y}{x}\cos\theta\sin\theta\right)
+        \end{align*}
+        Substituting $\Phi$ back into \eqref{equation:polar-laplacian:3},
+        $$
+            \pdv[2]{\phi}{\theta}=r^2\left(\pdv[2]{\phi}{y}\cos^2\theta+\pdv[2]{\phi}{x}\sin^2\theta-2\pdv{\phi}{y}{x}\cos\theta\sin\theta\right)-r\left(\pdv{\phi}{x}\cos\theta+\pdv{\phi}{y}\sin\theta\right)
+        $$
+        Substituting in \eqref{equation:polar-laplacian:1} leads to
+        $$
+            \pdv[2]{\phi}{\theta}=r^2\left(\pdv[2]{\phi}{y}\cos^2\theta+\pdv[2]{\phi}{x}\sin^2\theta-2\pdv{\phi}{y}{x}\cos\theta\sin\theta\right)-r\pdv{\phi}{r}
+        $$
+        Taking the sum of $\pdv*[2]{\phi}{r}$ and $(r^{-2})\pdv*[2]{\phi}{\theta}$ gives,
+        \begin{align*}
+            \pdv[2]{\phi}{r}+\frac{1}{r^2}\pdv[2]{\phi}{\theta}&=\left(\pdv[2]{\phi}{x}\cos^2\theta+\pdv[2]{\phi}{y}\sin^2\theta+2\pdv{\phi}{y}{x}\cos\theta\sin\theta\right)\\
+            &+\left(\pdv[2]{\phi}{y}\cos^2\theta+\pdv[2]{\phi}{x}\sin^2\theta-2\pdv{\phi}{y}{x}\cos\theta\sin\theta-\frac{1}{r}\pdv{\phi}{r}\right)\\
+            &=\pdv[2]{\phi}{x}\cos^2\theta+\pdv[2]{\phi}{x}\sin^2\theta+\pdv[2]{\phi}{y}\cos^2\theta+\pdv[2]{\phi}{y}\sin^2\theta-\frac{1}{r}\pdv{\phi}{r}\\
+            &=\pdv[2]{\phi}{x}+\pdv[2]{\phi}{y}-\frac{1}{r}\pdv{\phi}{r}\\
+            \therefore\pdv[2]{\phi}{r}+\frac{1}{r}\pdv{\phi}{r}+\frac{1}{r^2}\pdv[2]{\phi}{\theta}&=\pdv[2]{\phi}{x}+\pdv[2]{\phi}{y}\\
+            \therefore\laplacian\phi&=\pdv[2]{\phi}{r}+\frac{1}{r}\pdv{\phi}{r}+\frac{1}{r^2}\pdv[2]{\phi}{\theta}
+        \end{align*}
+    \end{proof}
+\end{lemma}
 
 \section{Formulation of the problem}
-\subsection{Boundary equations}
+\subsection{Boundary equations}\label{section:BOUNDARY}
