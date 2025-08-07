@@ -180,7 +180,7 @@ The Jacobian matrix, and its determinant, has many uses within vector calculus, 
         $$
         where $\epsilon(\vec{h})$ is an error term such that it vanishes faster than the magnitude of $\vec{h}$:
         \begin{equation}
-            \label{equation:ERROR}\lim_{\vec{h}\rightarrow\vec{0}}\frac{\lVert\epsilon(\vec{h})\rVert}{\lVert\vec{h}\rVert}=\vec{0}
+            \label{equation:ERROR}\lim_{\vec{h}\rightarrow\vec{0}}\frac{\lVert\epsilon(\vec{h})\rVert}{\lVert\vec{h}\rVert}=0
         \end{equation}
         Consider the function $\vec{Z}:\vec{t}\mapsto(\fatf\circ \vec{G})(\vec{t})$, where $\vec{G}:\mathbb{R}^l\rightarrow\mathbb{R}^m$ and $\fatf:\mathbb{R}^m\rightarrow\mathbb{R}^n$. For
         some small change in $\vec{t}$, called $\delta_\vec{t}$, the change in the inner function $\vec{G}$ can be expressed using its differentiability at $\vec{t}$
@@ -205,10 +205,50 @@ The Jacobian matrix, and its determinant, has many uses within vector calculus, 
         $$
             \frac{\delta_\vec{Z}}{\lVert\delta_\vec{t}\rVert}=\jacobian_\fatf(\vec{u})\jacobian_\vec{G}(\vec{t})\overbrace{\frac{\delta_\vec{t}}{\lVert\delta_\vec{t}\rVert}}^{\text{\makebox[0pt]{Henceforth $\hat{\delta_\vec{t}}$}}}+\jacobian_\fatf(\vec{u})\frac{\epsilon_\vec{G}(\delta_\vec{t})}{\lVert\delta_\vec{t}\rVert}+\frac{\epsilon_\fatf(\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t}))}{\lVert\delta_\vec{t}\rVert}
         $$
-        As $\delta_\vec{t}\rightarrow\vec{0}$, the error terms $\epsilon_\fatf$ and $\epsilon_\vec{G}$ by definition also approach $\vec{0}$, thus
+        Considering value of the error terms as $\delta_\vec{t}\rightarrow\vec{0}$,
+        $$
+            \lim_{\delta_\vec{t}\rightarrow\vec{0}}\jacobian_\fatf(\vec{u})\frac{\epsilon_\vec{G}(\delta_\vec{t})}{\lVert\delta_\vec{t}\rVert}+\frac{\epsilon_\fatf(\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t}))}{\lVert\delta_\vec{t}\rVert}
+        $$
+        For any matrix $\vec{M}$ and vector $\vec{v}$, the magnitude of their product $\lVert\vec{M}\vec{v}\rVert\leq\lVert\vec{M}\rVert\lVert\vec{v}\rVert$, thus for the first term,
+        \begin{align*}
+            \lim_{\delta_\vec{t}\rightarrow\vec{0}}\lVert\jacobian_\fatf(\vec{u})\frac{\epsilon_\vec{G}(\delta_\vec{t})}{\lVert\delta_\vec{t}\rVert}\rVert&\leq\lim_{\delta_\vec{t}\rightarrow\vec{0}}\lVert\jacobian_\fatf(\vec{u})\rVert\lVert\frac{\epsilon_\vec{G}(\delta_\vec{t})}{\lVert\delta_\vec{t}\rVert}\rVert\\
+            &=\lim_{\delta_\vec{t}\rightarrow\vec{0}}\lVert\jacobian_\fatf(\vec{u})\rVert\frac{\lVert\epsilon_\vec{G}(\delta_\vec{t})\rVert}{\lVert\delta_\vec{t}\rVert}
+        \end{align*}
+        By the definition of the definition of the error term $\lim_{\delta_\vec{t}\rightarrow\vec{0}}\frac{\lVert\epsilon_\vec{G}(\delta_\vec{t})\rVert}{\lVert\delta_\vec{t}\rVert}=0$, therefore
+        \begin{align*}
+            \lim_{\delta_\vec{t}\rightarrow\vec{0}}\lVert\jacobian_\fatf(\vec{u})\frac{\epsilon_\vec{G}(\delta_\vec{t})}{\lVert\delta_\vec{t}\rVert}\rVert&\leq\lim_{\delta_\vec{t}\rightarrow\vec{0}}\lVert\jacobian_\fatf(\vec{u})\rVert\frac{\lVert\epsilon_\vec{G}(\delta_\vec{t})\rVert}{\lVert\delta_\vec{t}\rVert}\\
+            \implies\lim_{\delta_\vec{t}\rightarrow\vec{0}}\lVert\jacobian_\fatf(\vec{u})\frac{\epsilon_\vec{G}(\delta_\vec{t})}{\lVert\delta_\vec{t}\rVert}\rVert&\leq0\\
+            \therefore\lim_{\delta_\vec{t}\rightarrow\vec{0}}\lVert\jacobian_\fatf(\vec{u})\frac{\epsilon_\vec{G}(\delta_\vec{t})}{\lVert\delta_\vec{t}\rVert}\rVert&=0\implies\lim_{\delta_\vec{t}\rightarrow\vec{0}}\jacobian_\fatf(\vec{u})\frac{\epsilon_\vec{G}(\delta_\vec{t})}{\lVert\delta_\vec{t}\rVert}=\vec{0}
+        \end{align*}
+        For the second error term, consider the value of the input of $\epsilon_\fatf$ as $\delta_\vec{t}\rightarrow\vec{0}$
+        $$
+            \lim_{\delta_\vec{t}\rightarrow\vec{0}}\underbrace{\jacobian_\vec{G}(\vec{t})\delta_\vec{t}}_{\text{Term }\alpha}+\underbrace{\epsilon_\vec{G}(\delta_\vec{t})}_{\text{Term }\beta}
+        $$
+        For term $\alpha$, apply the same logic as for the previous error term
+        \begin{align*}
+            \lim_{\delta_\vec{t}\rightarrow\vec{0}}\lVert\jacobian_\vec{G}(\vec{t})\delta_\vec{t}\rVert&\leq\lim_{\delta_\vec{t}\rightarrow\vec{0}}\lVert\jacobian_\vec{G}(\vec{t})\rVert\lVert\delta_\vec{t}\rVert=0\\
+            \therefore\lim_{\delta_\vec{t}\rightarrow\vec{0}}\jacobian_\vec{G}(\vec{t})\delta_\vec{t}&=\vec{0}
+        \end{align*}
+        For term $\beta$, by definition,
+        \begin{align*}
+            \lim_{\delta_\vec{t}\rightarrow\vec{0}}\lVert\epsilon_\vec{G}(\delta_\vec{t})\rVert&=0\\
+            \therefore\lim_{\delta_\vec{t}\rightarrow\vec{0}}\epsilon_\vec{G}(\delta_\vec{t})=\vec{0}
+        \end{align*}
+        Rearranging the whole error term,
+        \begin{align*}
+            \lim_{\delta_\vec{t}\rightarrow\vec{0}}\frac{\epsilon_\fatf(\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t}))}{\lVert\delta_\vec{t}\rVert}&=\lim_{\delta_\vec{t}\rightarrow\vec{0}}\frac{\epsilon_\fatf(\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t}))}{\lVert\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t})\rVert}\frac{\lVert\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t})\rVert}{\lVert\delta_\vec{t}\rVert}\\
+            &=\lim_{\delta_\vec{t}\rightarrow\vec{0}}\frac{\epsilon_\fatf(\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t}))}{\lVert\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t})\rVert}\lim_{\delta_\vec{t}\rightarrow\vec{0}}\frac{\lVert\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t})\rVert}{\lVert\delta_\vec{t}\rVert}\\
+            &=\vec{0}\lim_{\delta_\vec{t}\rightarrow\vec{0}}\frac{\lVert\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t})\rVert}{\lVert\delta_\vec{t}\rVert}\\
+            \lim_{\delta_\vec{t}\rightarrow\vec{0}}\frac{\lVert\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t})\rVert}{\lVert\delta_\vec{t}\rVert}&\leq\lim_{\delta_\vec{t}\rightarrow\vec{0}}\frac{\lVert\jacobian_\vec{G}(\vec{t})\delta_\vec{t}\rVert}{\lVert\delta_\vec{t}\rVert}+\frac{\lVert\epsilon_\vec{G}(\delta_\vec{t})\rVert}{\lVert\delta_\vec{t}\rVert}\\
+            &=\lim_{\delta_\vec{t}\rightarrow\vec{0}}\frac{\lVert\jacobian_\vec{G}(\vec{t})\delta_\vec{t}\rVert}{\lVert\delta_\vec{t}\rVert}+\vec{0}\leq\lim_{\delta_\vec{t}\rightarrow\vec{0}}\frac{\lVert\jacobian_\vec{G}(\vec{t})\rVert\lVert\delta_\vec{t}\rVert}{\lVert\delta_\vec{t}\rVert}+\vec{0}\\
+            &=\lVert\jacobian_\vec{G}(\vec{t})\rVert\\
+            \therefore\lim_{\delta_\vec{t}\rightarrow\vec{0}}\frac{\epsilon_\fatf(\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t}))}{\lVert\delta_\vec{t}\rVert}&\leq\vec{0}\lVert\jacobian_\vec{G}(\vec{t})\rVert=\vec{0}\\
+            \therefore\lim_{\delta_\vec{t}\rightarrow\vec{0}}\frac{\epsilon_\fatf(\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t}))}{\lVert\delta_\vec{t}\rVert}&=\vec{0}
+        \end{align*}
+        Thus, both of the error terms approach $\vec{0}$, meaning that
         \begin{align}
             \notag\lim_{\delta_\vec{t}\rightarrow\vec{0}}\frac{\delta_\vec{Z}}{\lVert\delta_\vec{t}\rVert}&=\lim_{\delta_\vec{t}\rightarrow0}\jacobian_\fatf(\vec{u})\jacobian_\vec{G}(\vec{t})\hat{\delta_\vec{t}}+\jacobian_\fatf(\vec{u})\frac{\epsilon_\vec{G}(\delta_\vec{t})}{\lVert\delta_\vec{t}\rVert}+\frac{\epsilon_\fatf(\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t}))}{\lVert\delta_\vec{t}\rVert}\\
-            \notag&=\lim_{\delta_t\rightarrow0}\jacobian_\fatf(\vec{u})\jacobian_\vec{G}(\vec{t})\hat{\delta_\vec{t}}\\
+            \notag&=\lim_{\delta_t\rightarrow0}\jacobian_\fatf(\vec{u})\jacobian_\vec{G}(\vec{t})\hat{\delta_\vec{t}}+\vec{0}+\vec{0}\\
             \label{equation:jacobian-chain-rule:3}&=\jacobian_\fatf(\vec{G}(\vec{t}))\jacobian_\vec{G}(\vec{t})\hat{\delta_\vec{t}}=\left[\jacobian_\fatf\circ\vec{G}(\vec{t})\right]\jacobian_\vec{G}(\vec{t})\hat{\delta_\vec{t}}
         \end{align}
         Using the definition of differentiability again for $\vec{Z}$ at $\vec{t}$,
