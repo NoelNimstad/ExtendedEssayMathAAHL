@@ -139,6 +139,105 @@ Thus, by the definition of irrotational flow,
 \end{align*}
 Here, $\phi$ is known as the velocity potential of $\vec{V}$. The velocity potential makes derivations made in this essay easier due its scalar valued nature.
 
+\subsection{The multivariable chain rule}
+\subsubsection{The Jacobian matrix}
+\begin{defn}
+    The \definedterm{Jacobian matrix} of some function $\fatf$, denoted $\jacobian_\fatf$, is defined as the matrix containing all the first order partial derivatives
+    of the function. For the function
+    $$\fatf:x_1,x_2,\cdots,x_n\mapsto\begin{bmatrix}
+        f_1(x_1,x_2,\cdots,x_n)\\
+        f_2(x_1,x_2,\cdots,x_n)\\
+        \vdots\\
+        f_m(x_1,x_2,\cdots,x_n)
+    \end{bmatrix}$$
+    the Jacobian of $\fatf$ would be given as
+    $$
+        \jacobian_\fatf=\begin{bmatrix}
+            \nabla^\top f_1\\
+            \nabla^\top f_2\\
+            \vdots\\
+            \nabla^\top f_m
+        \end{bmatrix}=\begin{bmatrix}
+            \pdv*{f_1}{x_1} & \pdv*{f_1}{x_2} & \cdots & \pdv*{f_1}{x_n}\\
+            \pdv*{f_2}{x_1} & \pdv*{f_2}{x_2} & \cdots & \pdv*{f_2}{x_n}\\
+            \vdots & \vdots & \ddots & \vdots \\
+            \pdv*{f_m}{x_1} & \pdv*{f_m}{x_2} & \cdots & \pdv*{f_m}{x_n}\\
+        \end{bmatrix}\in\mathbb{R}^{n\times m}
+    $$
+\end{defn}
+The Jacobian matrix, and its determinant, has many uses within vector calculus, but for the purposes of this essay, the Jacobian chain rule is a fundamental result which allows for the calculation of the derivatives of a composite functions. The following result and proof underpins the proof for the more generalised version in Section~\ref{section:MVCR}.
+\begin{lemma}[The Jacobian chain rule]
+    Let the function $\fatf:\mathbb{R}^m\rightarrow\mathbb{R}^n$ and the function $\vec{G}:\mathbb{R}^l\rightarrow\mathbb{R}^m$. The Jacobian of the composite
+    $\fatf\circ\vec{G}$ evaluated at some point $\vec{p}$ can be expressed as
+    $$
+        \jacobian_{\fatf\circ\vec{G}}(\vec{p})=\left[\jacobian_\fatf\circ\vec{G}(\vec{p})\right]\jacobian_\vec{G}(\vec{p})
+    $$
+    \begin{proof}
+        A function $\fatf:\mathbb{R}^m\rightarrow\mathbb{R}^n$ is considered differentiable at some point $\vec{a}$ if there exists a linear map such (represented by its
+        Jacobian matrix $\jacobian_\fatf(\vec{a})$)that for an infinitesimal vector $\vec{h}$
+        $$
+            \fatf(\vec{a}+\vec{h})-\fatf(\vec{a})=\jacobian_\fatf(\vec{a})\vec{h}+\epsilon(\vec{h})
+        $$
+        where $\epsilon(\vec{h})$ is an error term such that it vanishes faster than the magnitude of $\vec{h}$:
+        \begin{equation}
+            \label{equation:ERROR}\lim_{\vec{h}\rightarrow\vec{0}}\frac{\lVert\epsilon(\vec{h})\rVert}{\lVert\vec{h}\rVert}=\vec{0}
+        \end{equation}
+        Consider the function $\vec{Z}:\vec{t}\mapsto(\fatf\circ \vec{G})(\vec{t})$, where $\vec{G}:\mathbb{R}^l\rightarrow\mathbb{R}^m$ and $\fatf:\mathbb{R}^m\rightarrow\mathbb{R}^n$. For
+        some small change in $\vec{t}$, called $\delta_\vec{t}$, the change in the inner function $\vec{G}$ can be expressed using its differentiability at $\vec{t}$
+        \begin{equation}
+            \label{equation:jacobian-chain-rule:1}\delta_\vec{G}=\vec{G}(\vec{t}+\delta_\vec{t})-\vec{G}(t)=\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t})
+        \end{equation}
+        The error term $\epsilon_\vec{G}(\delta_t)$ satisfies \eqref{equation:ERROR}. Then consider the change of the outer function $\fatf$, also expressed using its differentiability
+        at the point $\vec{u}=\vec{G}(\vec{t})$,
+        $$
+            \delta_\fatf=\fatf(\vec{u}+\delta_\vec{G})-\fatf(\vec{u})=\jacobian_\fatf(\vec{u})\delta_\vec{G}+\epsilon_\fatf(\delta_\vec{G})
+        $$
+        Which, since $\vec{Z}=(\fatf\circ\vec{G})(\vec{t})$, means that
+        \begin{equation}
+            \label{equation:jacobian-chain-rule:2}\delta_\vec{Z}=\delta_\fatf=\fatf(\vec{u}+\delta_\vec{G})-\fatf(\vec{u})=\jacobian_\fatf(\vec{u})\delta_\vec{G}+\epsilon_\fatf(\delta_\vec{G})
+        \end{equation}
+        Let the error term $\epsilon_\fatf(\delta_\vec{G})$ also satisfy \eqref{equation:ERROR}. Then, substituting \eqref{equation:jacobian-chain-rule:1} into \eqref{equation:jacobian-chain-rule:2},
+        \begin{align*}
+            \delta_\vec{Z}&=\jacobian_\fatf(\vec{u})\left[\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t})\right]+\epsilon_\fatf(\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t}))\\
+            &=\jacobian_\fatf(\vec{u})\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\jacobian_\fatf(\vec{u})\epsilon_\vec{G}(\delta_\vec{t})+\epsilon_\fatf(\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t}))
+        \end{align*}
+        Dividing through by $\lVert\delta_\vec{t}\rVert$,
+        $$
+            \frac{\delta_\vec{Z}}{\lVert\delta_\vec{t}\rVert}=\jacobian_\fatf(\vec{u})\jacobian_\vec{G}(\vec{t})\overbrace{\frac{\delta_\vec{t}}{\lVert\delta_\vec{t}\rVert}}^{\text{\makebox[0pt]{Henceforth $\hat{\delta_\vec{t}}$}}}+\jacobian_\fatf(\vec{u})\frac{\epsilon_\vec{G}(\delta_\vec{t})}{\lVert\delta_\vec{t}\rVert}+\frac{\epsilon_\fatf(\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t}))}{\lVert\delta_\vec{t}\rVert}
+        $$
+        As $\delta_\vec{t}\rightarrow\vec{0}$, the error terms $\epsilon_\fatf$ and $\epsilon_\vec{G}$ by definition also approach $\vec{0}$, thus
+        \begin{align}
+            \notag\lim_{\delta_\vec{t}\rightarrow\vec{0}}\frac{\delta_\vec{Z}}{\lVert\delta_\vec{t}\rVert}&=\lim_{\delta_\vec{t}\rightarrow0}\jacobian_\fatf(\vec{u})\jacobian_\vec{G}(\vec{t})\hat{\delta_\vec{t}}+\jacobian_\fatf(\vec{u})\frac{\epsilon_\vec{G}(\delta_\vec{t})}{\lVert\delta_\vec{t}\rVert}+\frac{\epsilon_\fatf(\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t}))}{\lVert\delta_\vec{t}\rVert}\\
+            \notag&=\lim_{\delta_t\rightarrow0}\jacobian_\fatf(\vec{u})\jacobian_\vec{G}(\vec{t})\hat{\delta_\vec{t}}\\
+            \label{equation:jacobian-chain-rule:3}&=\jacobian_\fatf(\vec{G}(\vec{t}))\jacobian_\vec{G}(\vec{t})\hat{\delta_\vec{t}}=\left[\jacobian_\fatf\circ\vec{G}(\vec{t})\right]\jacobian_\vec{G}(\vec{t})\hat{\delta_\vec{t}}
+        \end{align}
+        Using the definition of differentiability again for $\vec{Z}$ at $\vec{t}$,
+        \begin{align}
+            \notag\delta_\vec{Z}&=\vec{Z}(\vec{t}+\delta_\vec{t})-\vec{Z}(\vec{t})=\jacobian_\vec{Z}(\vec{t})\delta_\vec{t}+\epsilon_\vec{Z}(\delta_{\vec{t}})\\
+            \label{equation:jacobian-chain-rule:4}\implies\lim_{\delta_\vec{t}\rightarrow\vec{0}}\frac{\delta_\vec{Z}}{\lVert\delta_\vec{t}\rVert}&=\jacobian_\vec{Z}(\vec{t})\hat{\delta_\vec{t}}
+        \end{align}
+        Therefore, substituting \eqref{equation:jacobian-chain-rule:4} into \eqref{equation:jacobian-chain-rule:3},
+        \begin{align*}
+            \jacobian_\vec{Z}(\vec{t})\hat{\delta_\vec{t}}&=\left[\jacobian_\fatf\circ\vec{G}(\vec{t})\right]\jacobian_\vec{G}(\vec{t})\hat{\delta_\vec{t}}\\
+            \therefore\jacobian_{\fatf\circ\vec{G}}(\vec{t})\hat{\delta_\vec{t}}&=\left[\jacobian_\fatf\circ\vec{G}(\vec{t})\right]\jacobian_\vec{G}(\vec{t})\hat{\delta_\vec{t}}
+        \end{align*}
+        Now let $\vec{A}=\jacobian_{\fatf\circ\vec{G}}(\vec{t})$ and $\vec{B}=\left[\jacobian_\fatf\circ\vec{G}(\vec{t})\right]\jacobian_\vec{G}(\vec{t})$,
+        \begin{align*}
+            \vec{A}\hat{\delta_\vec{t}}=\vec{B}\hat{\delta_\vec{t}}\implies\vec{0}&=\vec{A}\hat{\delta_\vec{t}}-\vec{B}\hat{\delta_\vec{t}}\\
+            &=\left(\vec{A}-\vec{B}\right)\hat{\delta_\vec{t}}
+        \end{align*}
+        Beacuse $\lVert\hat{\delta_\vec{t}}\rVert=1$,
+        \begin{align*}
+            \vec{A}-\vec{B}&=\vec{0}\\
+            \implies\vec{A}&=\vec{B}\\
+            \therefore\jacobian_{\fatf\circ\vec{G}}(\vec{t})&=\left[\jacobian_\fatf\circ\vec{G}(\vec{t})\right]\jacobian_\vec{G}(\vec{t})
+        \end{align*}
+    \end{proof}
+\end{lemma} 
+
+\subsubsection{The multivariable chain rule}\label{section:MVCR}
+The multivariable chain rule is an extension of the single variable chain rule to functions of multiple variables.
+
 \subsection{Laplace's equation}
 \subsubsection{Definition of the Laplacian}
 \begin{defn}
