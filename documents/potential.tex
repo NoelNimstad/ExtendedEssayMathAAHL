@@ -32,7 +32,7 @@ and $\bar{\beta}=\frac{\beta_0+\beta_1}{2}$. Assume $\mathbf{V}$ is continuous a
 \end{center}
 
 The mass flow rate ($\dot{m}$, mass per unit time) across a given surface is defined as the flux of mass, which is computed as the product of density, the velocity component normal to the
-surface, and the area of the surface. Thus along the $x$ axis (in the direction of $\ihat$) the mass flow rate into $WZ$ is given as,
+surface, and the area of the surface. Thus, along the $x$ axis (in the direction of $\ihat$) the mass flow rate into $WZ$ is given as,
 $$
     \dot{m}_{\rightarrow WZ}=\rho X(\alpha_0,\bar{\beta})(\beta_1-\beta_0)
 $$
@@ -113,14 +113,26 @@ the origin, where $\fatf$ is undefined), is irrotational\referto{figure}{figure:
     \label{figure:ZEROCURL}
 \end{figure*}
 
-% KELVINS THEOREM
+\subsubsection{Kelvin's circulation theorem}\label{section:KELVIN}
+Kelvin's circulation theorem is crucial in the modelling of ideal fluids. While a full proof of the theorem is outside the scope of this essay for the purposes
+of keeping focused, it provides the guarantee of irrotational flow which underpins the rest of this essay.
+
+The theorem states that for an ideal (crucially inviscid) fluid, the circulation around a closed loop moving with the fluid remains constant over time. Therefore,
+implying that if a fluid begins its flow irrotational, it remains irrotational. Irrotational flow enables the use of a velocity potential\referto{Section}{section:POTENTIAL},
+greatly simplifying the further analysis of the fluid flow.
+\begin{theorem}[Kelvin's circulation theorem]\label{lemma:KELVIN}
+    The rate of change of the circulation of an ideal and inviscid fluid with respect to time around a closed contour moving with the flow of the fluid is zero. Mathematically,
+    $$
+        \overbrace{\pdv{\Gamma}{t}+\vec{V}\cdot\nabla\Gamma}^{\text{Commonly denoted as }\mdv{\Gamma}{t}}=0
+    $$
+\end{theorem}
 
 \newpage % temporary formatting solution
 \subsection{The velocity potential}\label{section:POTENTIAL}
-As established in Section~\ref{section:IRROTATIONAL}, for an incompressible and inviscid fluid initially irrotational, the flow remains irrotational, meaning
-the velocity field $\vec{V}$ modelling the flow satisfies $\curl{\vec{V}}=0$. This condition leads to the existence of a scalar-valued function, known as the
-velocity potential, whose gradient is equal to the vector field. To demonstrate this, consider the identity $\curl{\gradient{\phi}}$, where $\phi$ is a
-function of $x$ and $y$ and is scalar valued. $\gradient{\phi}$ is defined as:
+As established in Section~\ref{section:KELVIN} through Theorem~\ref{lemma:KELVIN} (Kelvin's circulation theorem), for an incompressible and inviscid fluid initially irrotational,
+the flow remains irrotational, meaning the velocity field $\vec{V}$ modelling the flow satisfies $\curl{\vec{V}}=0$. This condition leads to the existence of a scalar-valued function,
+known as the velocity potential, whose gradient is equal to the vector field. To demonstrate this, consider the identity $\curl{\gradient{\phi}}$, where $\phi$ is a function of $x$
+and $y$ and is scalar valued. $\gradient{\phi}$ is defined as:
 $$
     \gradient{\phi}=\begin{bmatrix}
         \pdv*{\phi}{x}\\

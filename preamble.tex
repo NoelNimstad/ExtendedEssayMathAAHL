@@ -43,14 +43,12 @@
 \newcommand{\jacobian}{\mathbf{J}}
 
 % Derivatives
-\newcommand{\der}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}           % total derivative
-\newcommand{\partialder}[2]{\frac{\partial #1}{\partial #2}}        % partial derivative
-\newcommand{\materialder}[2]{\frac{\mathrm{D} #1}{\mathrm{D} #2}}   % material derivative
+\newcommand{\mdv}[2]{\frac{\mathrm{D} #1}{\mathrm{D} #2}}   % material derivative
 
 % Miscellaneous
 \newcommand{\justify}[1]{\text{\color{gray}(#1)}} 								% inline justification notes
 \newcommand{\definedas}{\stackrel{\Delta}{=}}     								% "defined as" symbol
-\newcommand{\referto}[2]{\textsuperscript{[see #1 \ref{#2}]}}						% refer to command
+\newcommand{\referto}[2]{\textsuperscript{[see~#1~\ref{#2}]}}						% refer to command
 \newcommand{\needcitation}{\textsuperscript{\normalfont[Citation needed]}}		% temporarily mark where I need to cite
 \renewcommand{\qedsymbol}{\hfill\ensuremath{\blacksquare}}						% make the QED symbol great again
 \newcommand{\vecpadding}{\vspace*{0.15cm}}										% for when fractions et cetera get too close in a vector

@@ -24,9 +24,10 @@
 	$$
 	\pdv{f}{\alpha}{\beta}\equiv\pdv{\beta}\pdv{f}{\alpha}
 	$$
-	where both $\alpha$ and $\beta$ are parameters of $f$.
+	where both $\alpha$ and $\beta$ are parameters of $f$. The order of mixed partial derivatives, provided that both of the first order partial
+	derivatives are continuous, does not matter, as guaranteed by Theorem~$\ref{lemma:CLAIRAUT}$ (Clairaut's theorem).
 \end{defn}
-\begin{lemma}[Clairaut's theorem]\label{lemma:CLAIRAUT}
+\begin{theorem}[Clairaut's theorem]\label{lemma:CLAIRAUT}
 	Let $f(\alpha,\beta)$ be a function of two parameters $\alpha$ and $\beta$. If the mixed partial derivatives $\pdv{f}{\alpha}{\beta}$
 	and $\pdv{f}{\beta}{\alpha}$ exist and are continuous in the open disk $\disk{\alpha_0}{\beta_0}$ centred at
 	$\point{\alpha_0}{\beta_0}$ with radius $\delta>0$, then
@@ -101,35 +102,26 @@
 		Because $\point{\alpha_0}{\beta_0}$ is an arbitrary point in the domain, $\pdv{f}{\beta}{\alpha}=\pdv{f}{\alpha}{\beta}$ at 
 		all points in the domain where the mixed partial derivatives are continuous.
 	\end{proof}
-\end{lemma}
+\end{theorem}
 \begin{defn}
-	The \definedterm{nabla} or \definedterm{gradient} operator $\nabla$ is a vector containing one partial derivative for each
-	parameter of the scalar valued function applied to \cite{RAPP2017137}. Thus applying the operator is taking the product of
-	the vector $\nabla$ and a scalar valued function $f$. For some function $f:\mathbb{R}^n\rightarrow\mathbb{R}$, $\nabla$ and $\nabla f$
-	would be given by:
+	The \definedterm{nabla} or \definedterm{gradient} operator $\nabla$ is a vector containing the partial derivatives of a scalar valued function with
+	respect to each of its parameters \cite{RAPP2017137}. Thus applying the operator is taking the product of the vector $\nabla$ and a scalar valued
+	function $f$. For some function $f:\mathbb{R}^n\rightarrow\mathbb{R}$, $\nabla$ and $\nabla f$ would be given by:
 	$$
-	\nabla=\begin{bmatrix}
-		\pdv*{x_1}\\
-		\pdv*{x_2}\\
-		\vdots\\
-		\pdv*{x_n}
-	\end{bmatrix},\quad
-	\nabla f=\begin{bmatrix}
-		\pdv*{f}{x_1}\\
-		\pdv*{f}{x_2}\\
-		\vdots\\
-		\pdv*{f}{x_n}
-	\end{bmatrix}
+		\nabla=\begin{bmatrix}
+			\pdv*{x_1}\\
+			\pdv*{x_2}\\
+			\vdots\\
+			\pdv*{x_n}
+		\end{bmatrix},\quad
+		\nabla f=\begin{bmatrix}
+			\pdv*{f}{x_1}\\
+			\pdv*{f}{x_2}\\
+			\vdots\\
+			\pdv*{f}{x_n}
+		\end{bmatrix}
 	$$
 \end{defn}
-% \begin{defn}
-% 	The directional derivative in the direction of some vector $\vec{v}$ of the function $f$ which is differentiable in
-% 	the open disk $\disk{x_0}{y_0}$ centred at $\point{x_0}{y_0}$ with radius $\delta>0$ is defined as
-% 	$$
-% 		\eval{\nabla_{\vec{v}}f\,}_{\point{x_0}{y_0}}=\frac{\eval{\nabla f}_{\point{x_0}{y_0}}\cdot\vec{v}}{\lVert\vec{v}\rVert}
-% 	$$
-% 	\cite{GIANNAKIDIS2010129}
-% \end{defn}
 
 \subsection{Divergence \& curl}
 \begin{defn}
