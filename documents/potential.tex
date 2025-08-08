@@ -277,7 +277,7 @@ The Jacobian matrix, and its determinant, has many uses within vector calculus, 
 
 \subsubsection{The multivariable chain rule}\label{section:MVCR}
 The more generalised form of the multivariable chain rule can now be proven using the Jacobian matrix version of the chain rule proved in Lemma~\ref{lemma:JACOBIAN-CHAIN}.
-\begin{lemma}[The multivariable chain rule]
+\begin{lemma}[The multivariable chain rule]\label{lemma:CHAIN}
     Let $X:\mathbb{R}^2\rightarrow\mathbb{R}$ and $Y:\mathbb{R}^2\rightarrow\mathbb{R}$ be functions of some parameters $\alpha,\beta$. Then let $Z:\mathbb{R}^2\rightarrow\mathbb{R}$
     be a function of the parameters $x$ and $y$. The partial derivatives of the composite function $z:\alpha,\beta\mapsto Z(X(\alpha,\beta),Y(\alpha,\beta))$ are given by:
     \begin{align*}
@@ -361,12 +361,12 @@ This equation is known as Laplace's equation \cite{LEWIS2022131}. As will become
             \pdv{x}{r}=\cos\theta\quad&\quad\pdv{x}{\theta}=-r\sin\theta\\
             \pdv{y}{r}=\sin\theta\quad&\quad\pdv{y}{\theta}=r\cos\theta
         \end{align*} 
-        Therefore, using the chain rule, the partial derivatives of $\phi$ in terms of $r$ become
+        Therefore, using the chain rule derived in Lemma~\ref{lemma:CHAIN}, the partial derivative of $\phi$ in terms of $r$ becomes:
         \begin{align}
             \notag\pdv{\phi}{r}&=\pdv{\phi}{x}\pdv{x}{r}+\pdv{\phi}{y}\pdv{y}{r}\\
             \label{equation:polar-laplacian:1}&=\pdv{\phi}{x}\cos\theta+\pdv{\phi}{y}\sin\theta
         \end{align}
-        And in terms of $\theta$,
+        And in terms of $\theta$ (applying the chain rule again),
         \begin{align}
             \notag\pdv{\phi}{\theta}&=\pdv{\phi}{x}\pdv{x}{\theta}+\pdv{\phi}{y}\pdv{y}{\theta}\\
             \notag&=-\pdv{\phi}{x}r\sin\theta+\pdv{\phi}{y}r\cos\theta\\
