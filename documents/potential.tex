@@ -162,11 +162,11 @@ Here, $\phi$ is known as the velocity potential of $\vec{V}$. The velocity poten
             \pdv*{f_2}{x_1} & \pdv*{f_2}{x_2} & \cdots & \pdv*{f_2}{x_n}\\
             \vdots & \vdots & \ddots & \vdots \\
             \pdv*{f_m}{x_1} & \pdv*{f_m}{x_2} & \cdots & \pdv*{f_m}{x_n}\\
-        \end{bmatrix}\in\mathbb{R}^{n\times m}
+        \end{bmatrix}\in\mathbb{R}^{m\times n}
     $$
 \end{defn}
 The Jacobian matrix, and its determinant, has many uses within vector calculus, but for the purposes of this essay, the Jacobian chain rule is a fundamental result which allows for the calculation of the derivatives of a composite functions. The following result and proof underpins the proof for the more generalised version in Section~\ref{section:MVCR}.
-\begin{lemma}[The Jacobian chain rule]
+\begin{lemma}[The Jacobian chain rule]\label{lemma:JACOBIAN-CHAIN}
     Let the function $\fatf:\mathbb{R}^m\rightarrow\mathbb{R}^n$ and the function $\vec{G}:\mathbb{R}^l\rightarrow\mathbb{R}^m$. The Jacobian of the composite
     $\fatf\circ\vec{G}$ evaluated at some point $\vec{p}$ can be expressed as
     $$
@@ -180,7 +180,7 @@ The Jacobian matrix, and its determinant, has many uses within vector calculus, 
         $$
         where $\epsilon(\vec{h})$ is an error term such that it vanishes faster than the magnitude of $\vec{h}$:
         \begin{equation}
-            \label{equation:ERROR}\lim_{\vec{h}\rightarrow\vec{0}}\frac{\lVert\epsilon(\vec{h})\rVert}{\lVert\vec{h}\rVert}=0
+            \label{equation:ERROR}\lim_{\vec{h}\rightarrow\vec{0}}\frac{\lVert\epsilon(\vec{h})\rVert}{\lVert\vec{h}\rVert}=\vec{0}
         \end{equation}
         Consider the function $\vec{Z}:\vec{t}\mapsto(\fatf\circ \vec{G})(\vec{t})$, where $\vec{G}:\mathbb{R}^l\rightarrow\mathbb{R}^m$ and $\fatf:\mathbb{R}^m\rightarrow\mathbb{R}^n$. For
         some small change in $\vec{t}$, called $\delta_\vec{t}$, the change in the inner function $\vec{G}$ can be expressed using its differentiability at $\vec{t}$
@@ -205,7 +205,7 @@ The Jacobian matrix, and its determinant, has many uses within vector calculus, 
         $$
             \frac{\delta_\vec{Z}}{\lVert\delta_\vec{t}\rVert}=\jacobian_\fatf(\vec{u})\jacobian_\vec{G}(\vec{t})\overbrace{\frac{\delta_\vec{t}}{\lVert\delta_\vec{t}\rVert}}^{\text{\makebox[0pt]{Henceforth $\hat{\delta_\vec{t}}$}}}+\jacobian_\fatf(\vec{u})\frac{\epsilon_\vec{G}(\delta_\vec{t})}{\lVert\delta_\vec{t}\rVert}+\frac{\epsilon_\fatf(\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t}))}{\lVert\delta_\vec{t}\rVert}
         $$
-        Considering value of the error terms as $\delta_\vec{t}\rightarrow\vec{0}$,
+        Considering the value of the error terms as $\delta_\vec{t}\rightarrow\vec{0}$,
         $$
             \lim_{\delta_\vec{t}\rightarrow\vec{0}}\jacobian_\fatf(\vec{u})\frac{\epsilon_\vec{G}(\delta_\vec{t})}{\lVert\delta_\vec{t}\rVert}+\frac{\epsilon_\fatf(\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t}))}{\lVert\delta_\vec{t}\rVert}
         $$
@@ -220,21 +220,21 @@ The Jacobian matrix, and its determinant, has many uses within vector calculus, 
             \implies\lim_{\delta_\vec{t}\rightarrow\vec{0}}\lVert\jacobian_\fatf(\vec{u})\frac{\epsilon_\vec{G}(\delta_\vec{t})}{\lVert\delta_\vec{t}\rVert}\rVert&\leq0\\
             \therefore\lim_{\delta_\vec{t}\rightarrow\vec{0}}\lVert\jacobian_\fatf(\vec{u})\frac{\epsilon_\vec{G}(\delta_\vec{t})}{\lVert\delta_\vec{t}\rVert}\rVert&=0\implies\lim_{\delta_\vec{t}\rightarrow\vec{0}}\jacobian_\fatf(\vec{u})\frac{\epsilon_\vec{G}(\delta_\vec{t})}{\lVert\delta_\vec{t}\rVert}=\vec{0}
         \end{align*}
-        For the second error term, consider the value of the input of $\epsilon_\fatf$ as $\delta_\vec{t}\rightarrow\vec{0}$
-        $$
-            \lim_{\delta_\vec{t}\rightarrow\vec{0}}\underbrace{\jacobian_\vec{G}(\vec{t})\delta_\vec{t}}_{\text{Term }\alpha}+\underbrace{\epsilon_\vec{G}(\delta_\vec{t})}_{\text{Term }\beta}
-        $$
-        For term $\alpha$, apply the same logic as for the previous error term
-        \begin{align*}
-            \lim_{\delta_\vec{t}\rightarrow\vec{0}}\lVert\jacobian_\vec{G}(\vec{t})\delta_\vec{t}\rVert&\leq\lim_{\delta_\vec{t}\rightarrow\vec{0}}\lVert\jacobian_\vec{G}(\vec{t})\rVert\lVert\delta_\vec{t}\rVert=0\\
-            \therefore\lim_{\delta_\vec{t}\rightarrow\vec{0}}\jacobian_\vec{G}(\vec{t})\delta_\vec{t}&=\vec{0}
-        \end{align*}
-        For term $\beta$, by definition,
-        \begin{align*}
-            \lim_{\delta_\vec{t}\rightarrow\vec{0}}\lVert\epsilon_\vec{G}(\delta_\vec{t})\rVert&=0\\
-            \therefore\lim_{\delta_\vec{t}\rightarrow\vec{0}}\epsilon_\vec{G}(\delta_\vec{t})=\vec{0}
-        \end{align*}
-        Rearranging the whole error term,
+        % For the second error term, consider the value of the input of $\epsilon_\fatf$ as $\delta_\vec{t}\rightarrow\vec{0}$
+        % $$
+        %     \lim_{\delta_\vec{t}\rightarrow\vec{0}}\underbrace{\jacobian_\vec{G}(\vec{t})\delta_\vec{t}}_{\text{Term }\alpha}+\underbrace{\epsilon_\vec{G}(\delta_\vec{t})}_{\text{Term }\beta}
+        % $$
+        % For term $\alpha$, apply the same logic as for the previous error term
+        % \begin{align*}
+        %     \lim_{\delta_\vec{t}\rightarrow\vec{0}}\lVert\jacobian_\vec{G}(\vec{t})\delta_\vec{t}\rVert&\leq\lim_{\delta_\vec{t}\rightarrow\vec{0}}\lVert\jacobian_\vec{G}(\vec{t})\rVert\lVert\delta_\vec{t}\rVert=0\\
+        %     \therefore\lim_{\delta_\vec{t}\rightarrow\vec{0}}\jacobian_\vec{G}(\vec{t})\delta_\vec{t}&=\vec{0}
+        % \end{align*}
+        % For term $\beta$, by definition,
+        % \begin{align*}
+        %     \lim_{\delta_\vec{t}\rightarrow\vec{0}}\lVert\epsilon_\vec{G}(\delta_\vec{t})\rVert&=0\\
+        %     \therefore\lim_{\delta_\vec{t}\rightarrow\vec{0}}\epsilon_\vec{G}(\delta_\vec{t})=\vec{0}
+        % \end{align*}
+        The second error term can be shown to also be equal to $\vec{0}$ through rearrangment,
         \begin{align*}
             \lim_{\delta_\vec{t}\rightarrow\vec{0}}\frac{\epsilon_\fatf(\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t}))}{\lVert\delta_\vec{t}\rVert}&=\lim_{\delta_\vec{t}\rightarrow\vec{0}}\frac{\epsilon_\fatf(\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t}))}{\lVert\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t})\rVert}\frac{\lVert\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t})\rVert}{\lVert\delta_\vec{t}\rVert}\\
             &=\lim_{\delta_\vec{t}\rightarrow\vec{0}}\frac{\epsilon_\fatf(\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t}))}{\lVert\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t})\rVert}\lim_{\delta_\vec{t}\rightarrow\vec{0}}\frac{\lVert\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t})\rVert}{\lVert\delta_\vec{t}\rVert}\\
@@ -242,7 +242,7 @@ The Jacobian matrix, and its determinant, has many uses within vector calculus, 
             \lim_{\delta_\vec{t}\rightarrow\vec{0}}\frac{\lVert\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t})\rVert}{\lVert\delta_\vec{t}\rVert}&\leq\lim_{\delta_\vec{t}\rightarrow\vec{0}}\frac{\lVert\jacobian_\vec{G}(\vec{t})\delta_\vec{t}\rVert}{\lVert\delta_\vec{t}\rVert}+\frac{\lVert\epsilon_\vec{G}(\delta_\vec{t})\rVert}{\lVert\delta_\vec{t}\rVert}\\
             &=\lim_{\delta_\vec{t}\rightarrow\vec{0}}\frac{\lVert\jacobian_\vec{G}(\vec{t})\delta_\vec{t}\rVert}{\lVert\delta_\vec{t}\rVert}+\vec{0}\leq\lim_{\delta_\vec{t}\rightarrow\vec{0}}\frac{\lVert\jacobian_\vec{G}(\vec{t})\rVert\lVert\delta_\vec{t}\rVert}{\lVert\delta_\vec{t}\rVert}+\vec{0}\\
             &=\lVert\jacobian_\vec{G}(\vec{t})\rVert\\
-            \therefore\lim_{\delta_\vec{t}\rightarrow\vec{0}}\frac{\epsilon_\fatf(\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t}))}{\lVert\delta_\vec{t}\rVert}&\leq\vec{0}\lVert\jacobian_\vec{G}(\vec{t})\rVert=\vec{0}\\
+            \therefore\lim_{\delta_\vec{t}\rightarrow\vec{0}}\frac{\epsilon_\fatf(\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t}))}{\lVert\delta_\vec{t}\rVert}&\leq\vec{0}\lVert\jacobian_\vec{G}(\vec{t})\rVert=\vec{0}\,\forall\lVert\jacobian_\vec{G}(\vec{t})\rVert\\
             \therefore\lim_{\delta_\vec{t}\rightarrow\vec{0}}\frac{\epsilon_\fatf(\jacobian_\vec{G}(\vec{t})\delta_\vec{t}+\epsilon_\vec{G}(\delta_\vec{t}))}{\lVert\delta_\vec{t}\rVert}&=\vec{0}
         \end{align*}
         Thus, both of the error terms approach $\vec{0}$, meaning that
@@ -266,7 +266,7 @@ The Jacobian matrix, and its determinant, has many uses within vector calculus, 
             \vec{A}\hat{\delta_\vec{t}}=\vec{B}\hat{\delta_\vec{t}}\implies\vec{0}&=\vec{A}\hat{\delta_\vec{t}}-\vec{B}\hat{\delta_\vec{t}}\\
             &=\left(\vec{A}-\vec{B}\right)\hat{\delta_\vec{t}}
         \end{align*}
-        Beacuse $\lVert\hat{\delta_\vec{t}}\rVert=1$,
+        Since this equality holds for non-zero vectors $\hat{\delta_\vec{t}}$, the matrix mapping the unit vector $\hat{\delta_\vec{t}}$ must be the zero matrix, consequently,
         \begin{align*}
             \vec{A}-\vec{B}&=\vec{0}\\
             \implies\vec{A}&=\vec{B}\\
@@ -276,7 +276,52 @@ The Jacobian matrix, and its determinant, has many uses within vector calculus, 
 \end{lemma} 
 
 \subsubsection{The multivariable chain rule}\label{section:MVCR}
-The multivariable chain rule is an extension of the single variable chain rule to functions of multiple variables.
+The more generalised form of the multivariable chain rule can now be proven using the Jacobian matrix version of the chain rule proved in Lemma~\ref{lemma:JACOBIAN-CHAIN}.
+\begin{lemma}[The multivariable chain rule]
+    Let $X:\mathbb{R}^2\rightarrow\mathbb{R}$ and $Y:\mathbb{R}^2\rightarrow\mathbb{R}$ be functions of some parameters $\alpha,\beta$. Then let $Z:\mathbb{R}^2\rightarrow\mathbb{R}$
+    be a function of the parameters $x$ and $y$. The partial derivatives of the composite function $z:\alpha,\beta\mapsto Z(X(\alpha,\beta),Y(\alpha,\beta))$ are given by:
+    \begin{align*}
+        \pdv{z}{\alpha}&=\pdv{Z}{x}\pdv{X}{\alpha}+\pdv{Z}{y}\pdv{Y}{\alpha}\\
+        \pdv{z}{\beta}&=\pdv{Z}{x}\pdv{X}{\beta}+\pdv{Z}{y}\pdv{Y}{\beta}
+    \end{align*}
+    \begin{proof}
+        Let $\vec{G}:\mathbb{R}^l\rightarrow\mathbb{R}^m$ and $\fatf:\mathbb{R}^m\rightarrow\mathbb{R}^n$. Suppose the output functions and parameters of $\fatf$ are called $f_1,f_2,\cdots,f_n$
+        and $x_1,x_2,\cdots,x_m$ respectively, and the output functions and parameters of $\vec{G}$ are called $g_1,g_2,\cdots,g_m$ and $y_1,y_2,\cdots,y_l$ respectively. The Jacobian matrix of
+        the composite function $\fatf\circ\vec{G}$ is defined as:
+        $$
+            \jacobian_{\fatf\circ\vec{G}}=\begin{bmatrix}
+                \pdv*{(f_1\circ\vec{G})}{y_1} & \pdv*{(f_1\circ\vec{G})}{y_2} & \cdots & \pdv*{(f_1\circ\vec{G})}{y_l}\\
+                \pdv*{(f_2\circ\vec{G})}{y_1} & \pdv*{(f_2\circ\vec{G})}{y_2} & \cdots & \pdv*{(f_2\circ\vec{G})}{y_l}\\
+                \vdots & \vdots & \ddots & \vdots \\
+                \pdv*{(f_n\circ\vec{G})}{y_1} & \pdv*{(f_n\circ\vec{G})}{y_2} & \cdots & \pdv*{(f_n\circ\vec{G})}{y_l}\\
+            \end{bmatrix}
+        $$
+        Thus the element at indices $i,j$ of the Jacobian matrix $\jacobian_{\fatf\circ\vec{G}}$ is given by:
+        $$
+            (\jacobian_{\fatf\circ\vec{G}})_{ij}=\pdv{(f_i\circ\vec{G})}{y_j}\\
+        $$
+        For the product of two matrices $\vec{C}=\vec{A}\vec{B}$, where $\vec{A}\in\mathbb{R}^{n\times m}$ and $\vec{B}\in\mathbb{R}^{m\times l}$, the element at indices $i,j$ is computed as: 
+        $$
+            \vec{C}_{ij}=\sum_{k=1}^{m}\vec{A}_{ik}\vec{B}_ {kj}
+        $$
+        Thus, for the product of the two Jacobian matrices $\jacobian_\fatf\circ\vec{G}$ and $\jacobian_\vec{G}$,
+        \begin{align*}
+            \left((\jacobian_\fatf\circ\vec{G})\jacobian_\vec{G}\right)_{ij}&=\sum_{k=1}^{m}(\jacobian_\fatf\circ\vec{G})_{ik}(\jacobian_\vec{G})_{kj}\\
+            &=\sum_{k=1}^{m}\eval{\pdv{f_i}{x_k}}_\vec{G}\pdv{g_k}{y_j}
+        \end{align*}
+        As shown in Lemma~\ref{lemma:JACOBIAN-CHAIN}, $\jacobian_{\fatf\circ\vec{G}}=(\jacobian_\fatf\circ\vec{G})\jacobian_\vec{G}$, therefore,
+        \begin{align}
+            \notag\left(\jacobian_{\fatf\circ\vec{G}}\right)_{ij}&=\left[(\jacobian_\fatf\circ\vec{G})\jacobian_\vec{G}\right]_{ij}\\
+            \label{equation:chain-rule:1}\implies\pdv{(f_i\circ\vec{G})}{y_j}&=\sum_{k=1}^{m}\eval{\pdv{f_i}{x_k}}_\vec{G}\pdv{g_k}{y_j}
+        \end{align}
+        Considering again the functions $X:\mathbb{R}^2\rightarrow\mathbb{R}$ and $Y:\mathbb{R}^2\rightarrow\mathbb{R}$ of parameters $\alpha,\beta$ and $Z:\mathbb{R}^2\rightarrow\mathbb{R}$ of parameters $x$ and $y$.
+        Applying the form derived in \eqref{equation:chain-rule:1} to the composite function $z:\alpha,\beta\mapsto Z(X(\alpha,\beta),Y(\alpha,\beta))$ leads to
+        \begin{align*}
+            \pdv{z}{\alpha}&=\sum_{k=1}^{2}\pdv{Z}{x_k}\pdv{g_k}{\alpha}=\pdv{Z}{x}\pdv{X}{\alpha}+\pdv{Z}{y}\pdv{Y}{\alpha}\\
+            \pdv{z}{\beta}&=\sum_{k=1}^{2}\pdv{Z}{x_k}\pdv{g_k}{\beta}=\pdv{Z}{x}\pdv{X}{\beta}+\pdv{Z}{y}\pdv{Y}{\beta}
+        \end{align*}
+    \end{proof}
+\end{lemma}
 
 \subsection{Laplace's equation}
 \subsubsection{Definition of the Laplacian}

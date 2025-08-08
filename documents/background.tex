@@ -2,11 +2,11 @@
 \subsection{The fundamentals of vector calculus}
 
 \begin{defn}
-	\definedterm{Partial derivatives} are an extension of single-variable derivatives in which all variables save
-	the one being differentiated by are treated as constants \cite{MORTIMER201389}. A formal definition of the
-	partial derivative of some function $f$ with respect to a parameter $x_n$ can be expressed as:
+	\definedterm{Partial derivatives} are a multivariable extension of single-variable derivatives in which all
+	variables save the one being differentiated by are treated as constants \cite{MORTIMER201389}. A formal definition
+	of the partial derivative of some function $f$ with respect to a parameter $x_n$ can be expressed as:
 	\begin{equation}
-		\pdv{f}{x_n}=\lim_{\delta\rightarrow0}\frac{f(x_1,x_2,\cdots,x_n+\delta,\cdots)-f(x_1,x_2,\cdots,x_n,\cdots)}{\delta}
+		\pdv{f}{x_n}=\lim_{\delta_x\rightarrow0}\frac{f(x_1,x_2,\cdots,x_n+\delta_x,\cdots)-f(x_1,x_2,\cdots,x_n,\cdots)}{\delta_x}
 	\end{equation}
 	Partial derivatives allow for the analysis of how multi-variable functions such as scalar- or vector fields change
 	with respect to just one spatial dimension. For example, consider the function $f(x,y)=x^2y+\sin(x)\sin y$:
@@ -42,7 +42,7 @@
 		$$
 		Q=[f(\alpha_1,\beta_1)-f(\alpha_0,\beta_1)]-[f(\alpha_1,\beta_0)-f(\alpha_0,\beta_0)]
 		$$
-		According to \lemmaref{lemma:MVT}, the mean value theorem (MVT), $\exists\,\xi_0,\xi_1\in[\alpha_0,\alpha_1]$ such that
+		According to Theorem~\ref{lemma:MVT}, the mean value theorem (MVT), $\exists\,\xi_0,\xi_1\in[\alpha_0,\alpha_1]$ such that
 		\begin{align*}
 			\eval{\pdv{f}{\alpha}}_{\point{\xi_0}{\beta_0}}&=\frac{f(\alpha_1,\beta_0)-f(\alpha_0,\beta_0)}{\alpha_1-\alpha_0}\\
 			\eval{\pdv{f}{\alpha}}_{\point{\xi_1}{\beta_1}}&=\frac{f(\alpha_1,\beta_1)-f(\alpha_0,\beta_1)}{\alpha_1-\alpha_0}
@@ -103,9 +103,9 @@
 	\end{proof}
 \end{lemma}
 \begin{defn}
-	The \definedterm{nabla} operator $\nabla$ is a vector containing one partial derivative for each parameter of
-	the scalar valued function applied to \cite{RAPP2017137}. Thus applying the operator is taking the scalar multiple of the vector 
-	$\nabla$ and some function $f$. For some function $f:\mathbb{R}^n\rightarrow\mathbb{R}$, $\nabla$ and $\nabla f$
+	The \definedterm{nabla} or \definedterm{gradient} operator $\nabla$ is a vector containing one partial derivative for each
+	parameter of the scalar valued function applied to \cite{RAPP2017137}. Thus applying the operator is taking the product of
+	the vector $\nabla$ and a scalar valued function $f$. For some function $f:\mathbb{R}^n\rightarrow\mathbb{R}$, $\nabla$ and $\nabla f$
 	would be given by:
 	$$
 	\nabla=\begin{bmatrix}
@@ -122,14 +122,14 @@
 	\end{bmatrix}
 	$$
 \end{defn}
-\begin{defn}
-	The directional derivative in the direction of some vector $\vec{v}$ of the function $f$ which is differentiable in
-	the open disk $\disk{x_0}{y_0}$ centred at $\point{x_0}{y_0}$ with radius $\delta>0$ is defined as
-	$$
-		\eval{\nabla_{\vec{v}}f\,}_{\point{x_0}{y_0}}=\frac{\eval{\nabla f}_{\point{x_0}{y_0}}\cdot\vec{v}}{\lVert\vec{v}\rVert}
-	$$
-	\cite{GIANNAKIDIS2010129}
-\end{defn}
+% \begin{defn}
+% 	The directional derivative in the direction of some vector $\vec{v}$ of the function $f$ which is differentiable in
+% 	the open disk $\disk{x_0}{y_0}$ centred at $\point{x_0}{y_0}$ with radius $\delta>0$ is defined as
+% 	$$
+% 		\eval{\nabla_{\vec{v}}f\,}_{\point{x_0}{y_0}}=\frac{\eval{\nabla f}_{\point{x_0}{y_0}}\cdot\vec{v}}{\lVert\vec{v}\rVert}
+% 	$$
+% 	\cite{GIANNAKIDIS2010129}
+% \end{defn}
 
 \subsection{Divergence \& curl}
 \begin{defn}
