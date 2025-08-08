@@ -329,7 +329,8 @@ The more generalised form of the multivariable chain rule can now be proven usin
     The $\definedterm{laplacian}$ operator, denoted $\laplacian$, is defined for some scalar field $\phi$ as $\laplacian\phi=\divergence{\gradient{\phi}}$, which
     when expanded gives:
     \begin{align*}
-        \laplacian\phi&=\divergence{\begin{bmatrix}
+        \laplacian\phi&=\divergence{\gradient{\phi}}\\
+        &=\divergence{\begin{bmatrix}
             \pdv*{\phi}{x}\\
             \pdv*{\phi}{y}
         \end{bmatrix}}\\
