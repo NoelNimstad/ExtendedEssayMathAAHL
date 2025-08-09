@@ -437,4 +437,61 @@ This equation is known as Laplace's equation \cite{LEWIS2022131}. As will become
 \end{lemma}
 
 \section{Formulation of the problem}
+Let the velocity field of the fluid be denoted as $\vec{V}$. The 2 dimensional solid cylinder is placed at the origin $\point{0}{0}$ and has a radius $L$. Due to the circular nature of the cylinder,
+it is helpful to define the problem in polar coordinates.
+
 \subsection{Boundary equations}\label{section:BOUNDARY}
+\subsubsection{Fluid behaviour infinitely far away from the cylinder}
+As a consequence of the flow being steady, infinitely far away from the cylinder, the fluid particles are moving at constant velocity along the $x$ axis. Let the speed of the undisturbed fluid
+be denoted $U$.
+$$
+    \vec{V}:x,y\mapsto U\ihat\quad(\text{as $x,y\rightarrow\infty$})
+$$
+To translate this condition to polar coordinates, let the unit vectors in the direction of positive change for $r$ and $\theta$ be called $\rhat$ and $\thetahat$ respectively\referto{Figure}{figure:POLAR}.
+\begin{figure}[!ht]
+    \begin{center}        
+        \begin{tikzpicture}
+            \begin{polaraxis}[
+                no marks, samples=1000, xmin=0, xmax=180, ymin=-4, ymax=4,
+                xtick={22.5, 45, 67.5, 90, 112.5, 135, 157.5}, xticklabels={},
+                ytick={-3, -2, -1, 0, 1, 2, 3},
+                major tick length=0pt,
+                legend style={at={(0.9,0.9)}, font=\footnotesize},
+                yticklabel style={anchor=north}]
+                \coordinate (P) at (45, 2);
+        
+                \draw[->, thick, thin] (0, 0) -- (P);
+                \draw[->, color=red, thick] (P) -- node[right, pos=1.1, anchor=west] { $\hat{r}$ } (45, 3);
+        
+                \draw[->, color=blue, thick] (P) -- node[above, pos=0.9, anchor=south east] { $\hat{\theta}$ } (71.57, 2.2360679775);
+        
+                \addplot[black, densely dotted, domain=0:360] {2};
+            \end{polaraxis}
+        \end{tikzpicture}
+    \end{center}
+    \caption{The polar coordinate unit vectors}
+    \label{figure:POLAR}
+\end{figure}
+In terms of cartesian coordinates, the unit vectors would be defined as
+\begin{align*}
+    \rhat&=\ihat\cos\theta+\jhat\sin\theta\\
+    \thetahat&=-\ihat\sin\theta+\jhat\cos\theta
+\end{align*}
+Solving for $\ihat$ and $\jhat$:
+\begin{align}
+    \label{equation:polar-i-hat:1}\ihat&=\frac{\rhat-\jhat\sin\theta}{\cos\theta}\\
+    \label{equation:polar-i-hat:2}\jhat&=\frac{\thetahat+\ihat\sin\theta}{\cos\theta}\\
+\end{align}
+Substituting \eqref{equation:polar-i-hat:2} into \eqref{equation:polar-i-hat:1},
+\begin{align*}
+    \ihat&=\frac{\rhat-\left(\frac{\thetahat+\ihat\sin\theta}{\cos\theta}\right)\sin\theta}{\cos\theta}\\
+    &=\frac{\rhat}{\cos\theta}-\frac{\thetahat\sin\theta+\ihat\sin^2\theta}{\cos^2\theta}\\
+    \implies\ihat+\frac{\ihat\sin^2\theta}{\cos^2\theta}&=\frac{\rhat}{\cos\theta}-\frac{\thetahat\sin\theta}{\cos^2\theta}\\
+    \implies\frac{\ihat\cos^2\theta+\ihat\sin^2\theta}{\cos^2\theta}&=\frac{\rhat\cos\theta-\thetahat\sin\theta}{\cos^2\theta}\\
+    \implies\ihat\cos^2\theta+\ihat\sin^2\theta&=\rhat\cos\theta-\thetahat\sin\theta\\
+    \therefore\ihat&=\rhat\cos\theta-\thetahat\sin\theta
+\end{align*}
+Thus, in polar coordinates the equation of the vector field infinitely far away from the cylinder is given by the equation
+$$
+    \vec{V}:x,y\mapsto U(\rhat\cos\theta-\thetahat\sin\theta)
+$$
