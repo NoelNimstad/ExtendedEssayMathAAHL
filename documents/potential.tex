@@ -104,7 +104,7 @@ Thus,
 \end{align*}
 Plotting the vector field for $\fatf$ reveals circulation around the origin, suggesting rotational flow, but which, with a curl of 0 (everywhere except for
 the origin, where $\fatf$ is undefined), is irrotational\referto{figure}{figure:ZEROCURL}.
-\begin{figure*}[!ht]
+\begin{figure*}
     \includegraphics[scale=0.5]{0_curl.pdf}
     \centering
     \caption{The function $\fatf:x,y\mapsto\begin{pmatrix}
@@ -358,7 +358,7 @@ $\phi$. The fluid must also satisfy the continuity equation, as established in S
 \end{align*}
 This equation is known as Laplace's equation \cite{LEWIS2022131}. As will become evident in Section~\ref{section:BOUNDARY}, it is helpful to define this equation in polar coordinates.
 
-\subsubsection{The polar form of the Laplacian}
+\subsubsection{The polar form of the Laplacian}\label{section:POLAR-LAPLACIAN}
 \begin{lemma}[The polar form of the Laplacian]
     For the scalar field $\phi$, the Laplacian is defined in polar coordinates as
     $$\laplacian\phi=\pdv[2]{\phi}{r}+\frac{1}{r}\pdv{\phi}{r}+\frac{1}{r^2}\pdv[2]{\phi}{\theta}$$
@@ -438,66 +438,162 @@ This equation is known as Laplace's equation \cite{LEWIS2022131}. As will become
 
 \section{Formulation of the problem}
 Let the velocity field of the fluid be denoted as $\vec{V}$. The 2 dimensional solid cylinder is placed at the origin $\point{0}{0}$ and has a radius $L$. Due to the circular nature of the cylinder,
-it is helpful to define the problem in polar coordinates.
+it is helpful to define the problem in polar coordinates. For unique polar coordinates, consider the restrictions $r\in(0,\infty)$ and $\theta\in[0,2\pi)$.
+
+\subsection{Polar form of the gradient}
+Since the velocity field is defined in terms of the velocity potential (such that $\vec{V}=\gradient{\phi}$), the polar coordinate form of the gradient, similarly to the Laplacian\referto{Section}{section:POLAR-LAPLACIAN}, must be derived.
+\begin{lemma}
+    In Polar coordinates, the gradient of some scalar valued function $\phi$ is given by
+    $$
+        \gradient{\phi}=\pdv{\phi}{r}\rhat+\frac{1}{r}\pdv{\phi}{\theta}\thetahat
+    $$
+    \begin{proof}
+        In Cartesian coordinates, the gradient is defined as
+        $$
+            \gradient{\phi}=\pdv{\phi}{x}\ihat+\pdv{\phi}{y}\jhat
+        $$
+        Let the unit vectors in the direction of positive change for $r$ and $\theta$ be called $\rhat$ and $\thetahat$ respectively\referto{Figure}{figure:POLAR}.
+        \begin{figure}
+            \begin{center}        
+                \begin{tikzpicture}
+                    \begin{polaraxis}[
+                        no marks, samples=1000, xmin=0, xmax=180, ymin=-4, ymax=4,
+                        xtick={22.5, 45, 67.5, 90, 112.5, 135, 157.5}, xticklabels={},
+                        ytick={-3, -2, -1, 0, 1, 2, 3},
+                        major tick length=0pt,
+                        legend style={at={(0.9,0.9)}, font=\footnotesize},
+                        yticklabel style={anchor=north}]
+                        \coordinate (P) at (45, 2);
+                
+                        \draw[->, thick, thin] (0, 0) -- (P);
+                        \draw[->, color=red, thick] (P) -- node[right, pos=1.1, anchor=west] { $\hat{r}$ } (45, 3);
+                
+                        \draw[->, color=blue, thick] (P) -- node[above, pos=0.9, anchor=south east] { $\hat{\theta}$ } (71.57, 2.2360679775);
+                
+                        \addplot[black, densely dotted, domain=0:360] {2};
+                    \end{polaraxis}
+                \end{tikzpicture}
+            \end{center}
+            \caption{The polar coordinate unit vectors $\rhat$ and $\thetahat$}
+            \label{figure:POLAR}
+        \end{figure}
+        In terms of Cartesian coordinates, the polar coordinate unit vectors would be defined as
+        \begin{align*}
+            \rhat&=\ihat\cos\theta+\jhat\sin\theta\\
+            \thetahat&=-\ihat\sin\theta+\jhat\cos\theta
+        \end{align*}
+        Thus, stating the relationship using a transformation matrix,
+        $$
+            \begin{bmatrix}
+                \rhat\\
+                \thetahat
+            \end{bmatrix}=\begin{bmatrix}
+                \cos\theta&\sin\theta\\
+                -\sin\theta&\cos\theta
+            \end{bmatrix}\begin{bmatrix}
+                \ihat\\
+                \jhat
+            \end{bmatrix}
+        $$
+        To, invert the matrix, use the formula
+        \begin{align*}
+            \vec{M}^{-1}=\begin{bmatrix}
+                a&b\\
+                c&d
+            \end{bmatrix}^{-1}&=\frac{1}{\det\vec{M}}\begin{bmatrix}
+                d&-b\\
+                -c&a
+            \end{bmatrix}\\
+            \implies\begin{bmatrix}
+                \cos\theta&\sin\theta\\
+                -\sin\theta&\cos\theta
+            \end{bmatrix}^{-1}&=\frac{1}{\cos^2\theta+\sin^2\theta}\begin{bmatrix}
+                \cos\theta&-\sin\theta\\
+                \sin\theta&\cos\theta
+            \end{bmatrix}=\begin{bmatrix}
+                \cos\theta&-\sin\theta\\
+                \sin\theta&\cos\theta
+            \end{bmatrix}
+        \end{align*}
+        Consequently,
+        \begin{align*}
+            \begin{bmatrix}
+                \cos\theta&-\sin\theta\\
+                \sin\theta&\cos\theta
+            \end{bmatrix}\begin{bmatrix}
+                \rhat\\
+                \thetahat
+            \end{bmatrix}&=\overbrace{\begin{bmatrix}
+                \cos\theta&-\sin\theta\\
+                \sin\theta&\cos\theta
+            \end{bmatrix}\begin{bmatrix}
+                \cos\theta&\sin\theta\\
+                -\sin\theta&\cos\theta
+            \end{bmatrix}}^{\vec{M}\vec{M}^{-1}=\begin{bmatrix}
+                1&0\\
+                0&1
+            \end{bmatrix}}\begin{bmatrix}
+                \ihat\\
+                \jhat
+            \end{bmatrix}\\
+            \implies\begin{bmatrix}
+                \ihat\\
+                \jhat
+            \end{bmatrix}&=\begin{bmatrix}
+                \cos\theta&-\sin\theta\\
+                \sin\theta&\cos\theta
+            \end{bmatrix}\begin{bmatrix}
+                \rhat\\
+                \thetahat
+            \end{bmatrix}
+        \end{align*}
+        Thus, the Cartesian coordinate unit vectors are defined in terms of the polar coordinate vectors as
+        \begin{align*}
+            \ihat&=\rhat\cos\theta-\thetahat\sin\theta\\
+            \jhat&=\thetahat\cos\theta+\rhat\sin\theta
+        \end{align*}
+        Substituting these into the definition of the gradient leads to
+        \begin{align*}
+            \gradient{\phi}&=\pdv{\phi}{x}\left(\rhat\cos\theta-\thetahat\sin\theta\right)+\pdv{\phi}{y}\left(\thetahat\cos\theta+\rhat\sin\theta\right)\\
+            &=\left(\pdv{\phi}{x}\cos\theta+\pdv{\phi}{y}\sin\theta\right)\rhat+\left(\pdv{\phi}{y}\cos\theta-\pdv{\phi}{x}\sin\theta\right)\thetahat
+        \end{align*}
+        Substituting in the equations of $\pdv*{\phi}{r}$ from \eqref{equation:polar-laplacian:1} and $\frac{1}{r}\pdv*{\phi}{\theta}$ from \eqref{equation:polar-laplacian:2} derived in the proof of the polar coordinate form of the Laplacian\referto{Section}{section:POLAR-LAPLACIAN},
+        $$
+            \gradient{\phi}=\pdv{\phi}{r}\rhat+\frac{1}{r}\pdv{\phi}{\theta}\thetahat
+        $$
+    \end{proof}
+\end{lemma}
 
 \subsection{Boundary equations}\label{section:BOUNDARY}
 \subsubsection{Fluid behaviour infinitely far away from the cylinder}
 As a consequence of the flow being steady, infinitely far away from the cylinder, the fluid particles are moving at constant velocity along the $x$ axis\referto{Figure}{figure:STEADY_FLOW}. Let the speed of the undisturbed fluid
 be denoted $U$.
-\begin{figure}[!ht]
+\begin{figure}
     \includegraphics[scale=0.5]{uniform_rightwards_flow.pdf}
     \centering
     \caption{Uniform steady flow in the direction of $\ihat$}
     \label{figure:STEADY_FLOW}
 \end{figure}
 $$
-    \vec{V}:x,y\mapsto U\ihat\quad(\text{as $x,y\rightarrow\infty$})
+    \vec{V}:x,y\mapsto U\ihat\qquad\text{as $x,y\rightarrow\infty$}
 $$
-To translate this condition to polar coordinates, let the unit vectors in the direction of positive change for $r$ and $\theta$ be called $\rhat$ and $\thetahat$ respectively\referto{Figure}{figure:POLAR}.
-\begin{figure}[!ht]
-    \begin{center}        
-        \begin{tikzpicture}
-            \begin{polaraxis}[
-                no marks, samples=1000, xmin=0, xmax=180, ymin=-4, ymax=4,
-                xtick={22.5, 45, 67.5, 90, 112.5, 135, 157.5}, xticklabels={},
-                ytick={-3, -2, -1, 0, 1, 2, 3},
-                major tick length=0pt,
-                legend style={at={(0.9,0.9)}, font=\footnotesize},
-                yticklabel style={anchor=north}]
-                \coordinate (P) at (45, 2);
-        
-                \draw[->, thick, thin] (0, 0) -- (P);
-                \draw[->, color=red, thick] (P) -- node[right, pos=1.1, anchor=west] { $\hat{r}$ } (45, 3);
-        
-                \draw[->, color=blue, thick] (P) -- node[above, pos=0.9, anchor=south east] { $\hat{\theta}$ } (71.57, 2.2360679775);
-        
-                \addplot[black, densely dotted, domain=0:360] {2};
-            \end{polaraxis}
-        \end{tikzpicture}
-    \end{center}
-    \caption{The polar coordinate unit vectors $\rhat$ and $\thetahat$}
-    \label{figure:POLAR}
-\end{figure}
-In terms of cartesian coordinates, the unit vectors would be defined as
+Or, in terms of the velocity potential $\phi$:
+$$
+    \gradient{\phi}=U\ihat\qquad\text{as $x,y\rightarrow\infty$}
+$$
+Thus, in polar coordinates the equation of the vector field in terms of the velocity potential infinitely far away from the cylinder is given by the equation
+$$
+    \gradient{\phi}=U(\rhat\cos\theta-\thetahat\sin\theta)\qquad\text{as $r\rightarrow\infty$}
+$$
+
+\subsubsection{Fluid behaviour when $r=L$}
+The fluid may not penetrate the cylinder, thus, at the points $r=L$ the normal component of the velocity must be zero. Since $\rhat$ always points in the direction of positive radial change, which is normal to the surface of the cylinder,
+$$
+    \vec{V}\cdot\rhat=0\qquad\text{when $r=L$}
+$$
+In terms of the velocity potential,
 \begin{align*}
-    \rhat&=\ihat\cos\theta+\jhat\sin\theta\\
-    \thetahat&=-\ihat\sin\theta+\jhat\cos\theta
+    \gradient{\phi}\cdot\rhat&=0\\
+    \implies\left(\pdv{\phi}{r}\rhat+\frac{1}{r}\pdv{\phi}{\theta}\thetahat\right)\cdot\rhat&=0\\
+    \therefore\pdv{\phi}{r}&=0\qquad\text{when $r=L$}
 \end{align*}
-Solving for $\ihat$ and $\jhat$:
-\begin{align}
-    \label{equation:polar-i-hat:1}\ihat&=\frac{\rhat-\jhat\sin\theta}{\cos\theta}\\
-    \label{equation:polar-i-hat:2}\jhat&=\frac{\thetahat+\ihat\sin\theta}{\cos\theta}
-\end{align}
-Substituting \eqref{equation:polar-i-hat:2} into \eqref{equation:polar-i-hat:1},
-\begin{align*}
-    \ihat&=\frac{\rhat-\left(\frac{\thetahat+\ihat\sin\theta}{\cos\theta}\right)\sin\theta}{\cos\theta}\\
-    &=\frac{\rhat}{\cos\theta}-\frac{\thetahat\sin\theta+\ihat\sin^2\theta}{\cos^2\theta}\\
-    \implies\ihat+\frac{\ihat\sin^2\theta}{\cos^2\theta}&=\frac{\rhat}{\cos\theta}-\frac{\thetahat\sin\theta}{\cos^2\theta}\\
-    \implies\frac{\ihat\cos^2\theta+\ihat\sin^2\theta}{\cos^2\theta}&=\frac{\rhat\cos\theta-\thetahat\sin\theta}{\cos^2\theta}\\
-    \implies\ihat\cos^2\theta+\ihat\sin^2\theta&=\rhat\cos\theta-\thetahat\sin\theta\\
-    \therefore\ihat&=\rhat\cos\theta-\thetahat\sin\theta
-\end{align*}
-Thus, in polar coordinates the equation of the vector field infinitely far away from the cylinder is given by the equation
-$$
-    \vec{V}:x,y\mapsto U(\rhat\cos\theta-\thetahat\sin\theta)
-$$
