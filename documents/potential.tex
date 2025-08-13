@@ -84,7 +84,7 @@ imagine a water wheel at some point in the fluid, and it spins, then the flow is
 However, flow being irrotational does not imply that it cannot curve, for example $\curl{\fatf}=0$ in cases such as:
 \begin{align*}
     &\fatf:x,y\mapsto X(x,y)\ihat+Y(x,y)\jhat\quad\forall\point{x}{y}\neq\point{0}{0}\\
-    &X:x,y\mapsto-\frac{y}{x^2+y^2}\,,\quad Y:x,y\mapsto\frac{x}{x^2+y^2}
+    &X:x,y\mapsto-\frac{y}{x^2+y^2}\,\qc Y:x,y\mapsto\frac{x}{x^2+y^2}
 \end{align*}
 Applying the quotient rule to compute the derivatives for both $X$ and $Y$ gives:
 \begin{align*}
@@ -438,7 +438,7 @@ This equation is known as Laplace's equation \cite{LEWIS2022131}. As will become
 
 \section{Formulation of the problem}
 Let the velocity field of the fluid be denoted as $\vec{V}$. The 2 dimensional solid cylinder is placed at the origin $\point{0}{0}$ and has a radius $L$. Due to the circular nature of the cylinder,
-it is helpful to define the problem in polar coordinates. For unique polar coordinates, consider the restrictions $r\in(0,\infty)$ and $\theta\in[0,2\pi)$.
+it is helpful to define the problem in polar coordinates.
 
 \subsection{Polar form of the gradient}
 Since the velocity field is defined in terms of the velocity potential (such that $\vec{V}=\gradient{\phi}$), the polar coordinate form of the gradient, similarly to the Laplacian\referto{Section}{section:POLAR-LAPLACIAN}, must be derived.

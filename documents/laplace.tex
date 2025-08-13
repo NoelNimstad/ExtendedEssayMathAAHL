@@ -1,1 +1,70 @@
 \section{Solving Laplace's equation}
+To solve the equation $\laplacian\phi=0$, assume the function $\phi$ can be separated into two functions $R$ and $\Theta$
+dependent on $r$ and $\theta$ respectively such that
+$$
+    \phi:r,\theta\mapsto R(r)\Theta(\theta)
+$$
+Thus, the partial derivatives of $\phi$ would be given as
+\begin{align*}
+    &\pdv{\phi}{r}=R'(r)\Theta(\theta)\quad&&\pdv{\phi}{\theta}=R(r)\Theta'(\theta)\\
+    &\pdv[2]{\phi}{r}=R''(r)\Theta(\theta)\quad&&\pdv[2]{\phi}{\theta}=R(r)\Theta''(\theta)
+\end{align*}
+Substituting these expressions into the polar form of the Laplacian derived in Section~\ref{section:POLAR-LAPLACIAN} gives
+\begin{align*}
+    \laplacian\phi&=\pdv[2]{\phi}{r}+\frac{1}{r}\pdv{\phi}{r}+\frac{1}{r^2}\pdv[2]{\phi}{\theta}\\
+    &=R''(r)\Theta(\theta)+\frac{1}{r}R'(r)\Theta(\theta)+\frac{1}{r^2}R(r)\Theta''(\theta)=0
+\end{align*}
+Consequently the expressions can be separated as
+\begin{align*}
+    r^2R''(r)\Theta(\theta)+rR'(r)\Theta(\theta)+R(r)\Theta''(\theta)&=0\\
+    r^2\frac{R''(r)}{R(r)}+r\frac{R'(r)}{R(r)}+\frac{\Theta''(\theta)}{\Theta(\theta)}&=0\\
+    \implies r^2\frac{R''(r)}{R(r)}+r\frac{R'(r)}{R(r)}=-\frac{\Theta''(\theta)}{\Theta(\theta)}
+\end{align*}
+Then, let $\lambda\in\mathbb{R}$ be such that
+\begin{align}
+    \label{equation:laplace-equation:1}\lambda&=r^2\frac{R''(r)}{R(r)}+r\frac{R'(r)}{R(r)}\\
+    \label{equation:laplace-equation:2}-\lambda&=\frac{\Theta''(\theta)}{\Theta(\theta)}
+\end{align}
+
+\subsection{Solving for $\Theta$}
+Through \eqref{equation:laplace-equation:2} it can be shown that
+\begin{align}
+    \notag\frac{\Theta''(\theta)}{\Theta(\theta)}&=-\lambda\\
+    \label{equation:laplace-equation:3}\implies\Theta''(\theta)+\lambda\Theta(\theta)&=0
+\end{align}
+Since $\Theta$ must be periodic such that $\Theta(\theta)=\Theta(\theta+2\pi)$, one function fitting this differential equation is
+the complex exponential equation
+\begin{equation}
+    \label{equation:laplace-equation:4}\Theta:\theta\mapsto Ce^{\mu\theta}
+\end{equation}
+Where $C$ is some complex constant and $\mu\in\mathbb{C}$ such that $\imaginary(\mu)\neq0$. Taking the second derivative of \eqref{equation:laplace-equation:4} with respect to $\theta$ using the chain rule,
+$$
+    \dv[2]{\Theta}{\theta}=C\mu^2e^{\mu\theta}
+$$
+Thus, for the equation to satisfy \eqref{equation:laplace-equation:3}, $\mu=\pm\sqrt{-\lambda}=\pm i\sqrt{\lambda}$. To ensure
+$\imaginary(\mu)\neq0$, thereby keeping $\Theta$ periodic, $\lambda>0$.
+$$
+    \Theta:\theta\mapsto Ce^{\pm i\sqrt{\lambda}\theta}
+$$
+Since the two solutions are linearly independent, the general solution is the linear combination of them,
+\begin{align*}
+    \Theta:\theta\mapsto C_1e^{i\sqrt{\lambda}\theta}+C_2e^{-i\sqrt{\lambda}\theta}\qc C_1,C_2\in\mathbb{C}
+\end{align*}
+By applying Euler's formula ($e^{i\alpha}=\cos\alpha+i\sin\alpha$) and some trigonometric identities it can be shown that
+\begin{align*}
+    C_1e^{i\sqrt{\lambda}\theta}+C_2e^{-i\sqrt{\lambda}\theta}&=C_1\left(\cos\left(\sqrt{\lambda}\theta\right)+i\sin\left(\sqrt{\lambda}\theta\right)\right)+C_2\left(\cos\left(-\sqrt{\lambda}\theta\right)+i\sin\left(-\sqrt{\lambda}\theta\right)\right)\\
+    &=C_1\cos\left(\sqrt{\lambda}\theta\right)+C_1i\sin\left(\sqrt{\lambda}\theta\right)+C_2\cos\left(\sqrt{\lambda}\theta\right)-C_2i\sin\left(\sqrt{\lambda}\theta\right)\\
+    &=\left(C_1+C_2\right)\cos\left(\sqrt{\lambda}\theta\right)+\left(C_1-C_2\right)i\sin\left(\sqrt{\lambda}\theta\right)
+\end{align*}
+Defining the constants $A=C_1+C_2$ and $B=(C_1-C_2)i$ leads to the definition of $\Theta$ as
+$$
+    \Theta:\theta\mapsto A\cos\left(\sqrt{\lambda}\theta\right)+B\sin\left(\sqrt{\lambda}\theta\right)
+$$
+Finally, to ensure the periodicity of $\Theta$, $\sqrt{\lambda}$ must be an integer, called $n$, leading to the discrete solutions of $\Theta_n$ as
+$$
+    \Theta_n:\theta\mapsto A\cos\left(n\theta\right)+B\sin\left(n\theta\right)
+$$
+
+\subsection{Solving for $R$}
+
+\subsection{The equation of the velocity potential}
