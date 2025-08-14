@@ -26,7 +26,7 @@ Then, let $\lambda\in\mathbb{R}$ be such that
     \label{equation:laplace-equation:2}-\lambda&=\frac{\Theta''(\theta)}{\Theta(\theta)}
 \end{align}
 
-\subsection{Solving for $\Theta$}
+\subsection{Solving for $\Theta$}\label{section:laplace:theta}
 Through \eqref{equation:laplace-equation:2} it can be shown that
 \begin{align}
     \notag\frac{\Theta''(\theta)}{\Theta(\theta)}&=-\lambda\\
@@ -46,7 +46,7 @@ $\imaginary(\mu)\neq0$, thereby keeping $\Theta$ periodic, $\lambda>0$.
 $$
     \Theta:\theta\mapsto Ce^{\pm i\sqrt{\lambda}\theta}
 $$
-Since the two solutions are linearly independent, the general solution is the linear combination of them,
+Since the two solutions are distinct, the general solution is the linear combination of them,
 \begin{align*}
     \Theta:\theta\mapsto C_1e^{i\sqrt{\lambda}\theta}+C_2e^{-i\sqrt{\lambda}\theta}\qc C_1,C_2\in\mathbb{C}
 \end{align*}
@@ -60,11 +60,72 @@ Defining the constants $A=C_1+C_2$ and $B=(C_1-C_2)i$ leads to the definition of
 $$
     \Theta:\theta\mapsto A\cos\left(\sqrt{\lambda}\theta\right)+B\sin\left(\sqrt{\lambda}\theta\right)
 $$
-Finally, to ensure the periodicity of $\Theta$, $\sqrt{\lambda}$ must be an integer, which will be called $n$, leading to the discrete solutions of $\Theta_n$ as
-$$
+Finally, to ensure the periodicity of $\Theta$, $\sqrt{\lambda}$ must be an integer, which will be called $n\in\mathbb{N}$, leading to the discrete solutions of $\Theta_n$ as
+\begin{equation}\label{equation:laplace-equation:9}
     \Theta_n:\theta\mapsto A\cos\left(n\theta\right)+B\sin\left(n\theta\right)
-$$
+\end{equation}
 
 \subsection{Solving for $R$}
+Rearranging \eqref{equation:laplace-equation:3} shows that
+\begin{align}
+   \notag r^2\frac{R''(r)}{R(r)}+r\frac{R'(r)}{R(r)}&=\lambda\\
+    \label{equation:laplace-equation:8}\implies r^2R''(r)+rR'(r)-\lambda R(r)&=0
+\end{align}
+This type of differential equation, known as a Cauchy--Euler equation, can be solved using Frobenius method, which has the goal of finding a power series such that
+\begin{equation}
+    \label{equation:laplace-equation:5}R:r\mapsto\sum_{k=0}^\infty C_k r^{k+s}\qc C_0\neq0
+\end{equation}
+The first and second order derivatives of \eqref{equation:laplace-equation:5} are given by
+\begin{align*}
+    \dv{R}{r}&=\sum_{k=0}^\infty(k+s)C_k r^{k+s-1}\\
+    \dv[2]{R}{r}&=\sum_{k=0}^\infty(k+s)(k+s-1)C_k r^{k+s-2}
+\end{align*}
+Consequently,
+\begin{align}
+    \label{equation:laplace-equation:6}rR'(r)&=\sum_{k=0}^\infty(k+s)C_k r^{k+s}\\
+    \label{equation:laplace-equation:7}r^2R''(r)&=\sum_{k=0}^\infty(k+s)(k+s-1)C_k r^{k+s}
+\end{align}
+Let $C_k r^{k+s}$ be called $\sigma$ temporarily. Substituting the equations of \eqref{equation:laplace-equation:6} and
+\eqref{equation:laplace-equation:7} back into \eqref{equation:laplace-equation:8},
+\begin{align*}
+    \sum_{k=0}^\infty(k+s)(k+s-1)\sigma+\sum_{k=0}^\infty(k+s)\sigma-\lambda\sum_{k=0}^\infty\sigma&=0\\
+    \implies\sum_{k=0}^\infty(k+s)(k+s-1)\sigma+(k+s)\sigma-\lambda\sigma&=0
+\end{align*}
+Let $\mu=k+s$,
+\begin{align*}
+    0&=\sum_{k=0}^\infty\mu(\mu-1)\sigma+\mu\sigma-\lambda\sigma\\
+    &=\sum_{k=0}^\infty\sigma\left(\mu(\mu-1)+\mu-\lambda\right)\\
+    &=\sum_{k=0}^\infty\sigma\left(\mu^2-\lambda\right)\\
+\end{align*}
+Therefore,
+$$
+    \sum_{k=0}^\infty C_k r^{k+s}(\mu^2-\lambda)=0\qc C_0\neq0
+$$
+Thus, for the equation to hold,
+\begin{align*}
+    \mu^2-\lambda&=0\\
+    \implies\mu&=\pm\sqrt{\lambda}\\
+    \therefore k+s&=\pm\sqrt{\lambda}
+\end{align*}
+Using the definition of $n=\sqrt{\lambda}$ from Section~\ref{section:laplace:theta} and considering the case where $k=0$,
+\begin{align*}
+    0+s&=\pm n\\
+    \implies s&=\pm n
+\end{align*}
+For the cases $k>0$, to ensure the equation holds, since the term $(k+s)^2-\lambda$ will no longer be $0$, meaning that $C_k r^{k+s}=0$. Therefore,
+$$
+    R:r\mapsto Cr^{n}
+$$
+Since $n\in\mathbb{N}$\referto{Section}{section:laplace:theta} these solutions are distinct, and therefore the general solution is the linear combination of them,
+\begin{equation}\label{equation:laplace-equation:8}
+    R_n:r\mapsto ar^n+br^{-n}
+\end{equation}
+Where $a$ and $b$ are some real constants.
 
 \subsection{The equation of the velocity potential}
+Finally, the equation of the velocity potential $\phi$ can be derived by combining the equation of $\Theta_n$ from \eqref{equation:laplace-equation:9}
+and $R_n$ from \eqref{equation:laplace-equation:8},
+\begin{align*}
+    \phi_n:r,\theta&\mapsto R_n(r)\Theta_n(\theta)\\
+    \implies\phi_n:r,\theta&\mapsto\left(ar^n+br^{-n}\right)\left(A\cos\left(n\theta\right)+B\sin\left(n\theta\right)\right)
+\end{align*}
