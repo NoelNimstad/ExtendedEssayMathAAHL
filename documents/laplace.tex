@@ -196,7 +196,7 @@ $$
 Finally, to convert back to Cartesian coordinates, $r$ is equivalent to the magnitude of the vector pointing from the origin to a point on the graph, $\sqrt{x^2+y^2}$. For the angular part, since the velocity potential is only dependent
 on $\cos\theta$, consider the geometric meaning of the expression. 
 \begin{center}        
-    \begin{tikzpicture}
+    \begin{tikzpicture}[scale=0.75]
         \draw [thick] (0,0) node[anchor=north]{$\point{0}{0}$}
         -- (6,0) node[anchor=north]{$\point{x}{0}$}
         -- (6,4) node[anchor=south]{$\point{x}{y}$}
@@ -209,9 +209,27 @@ on $\cos\theta$, consider the geometric meaning of the expression.
         \node [left] at (3,2.5) {$r$};
     \end{tikzpicture}
 \end{center}
-Cosine is defined as the ratio between the adjacent side ($x$) and hypotenuse ($r$) in a triangle. Thus, $\cos\theta=\frac{x}{r}=\frac{x}{\sqrt{x^2+y^2}}$.
+Cosine is defined as the ratio between the adjacent side ($x$) and hypotenuse ($r$) in a triangle, thus, $\cos\theta=\frac{x}{r}=\frac{x}{\sqrt{x^2+y^2}}$. Substituting this into the equation of the velocity potential gives
 \begin{align*}
     \phi:x,y&\mapsto\left(Ur+\frac{L^2}{r}\right)\cos\theta\\
     &=\left(U\sqrt{x^2+y^2}+\frac{L^2}{\sqrt{x^2+y^2}}\right)\frac{x}{\sqrt{x^2+y^2}}\\
-    &=Ux+\frac{L^2x}{x^2+y^2}&\text{when }x^2+y^2\geq L^2
+    &=Ux+\frac{L^2x}{x^2+y^2}
 \end{align*}
+The partial derivative of $\phi$ with respect to $x$ can be computed using the quotient rule:
+\begin{align*}
+    \pdv{\phi}{x}&=U+L^2\frac{x^2+y^2-x(2x)}{\left(x^2+y^2\right)^2}\\
+    &=U+L^2\frac{y^2-x^2}{\left(x^2+y^2\right)^2}
+\end{align*}
+And for the partial derivative of $\phi$ with respect to $y$, the chain rule can be applied, giving:
+\begin{align*}
+    \pdv{\phi}{y}&=0+L^2x\pdv{y}\left(x^2+y^2\right)^{-1}\\
+    &=-L^2x(2y)\left(x^2+y^2\right)^{-2}\\
+    &=-L^2\frac{2xy}{(x^2+y^2)^2}
+\end{align*}
+Therefore, the velocity field ($\vec{V}=\nabla\phi$) in a Cartesian coordinate system must be
+$$
+    \vec{V}:x,y\mapsto\left\{\begin{matrix}
+        \left(U+L^2\frac{y^2-x^2}{\left(x^2+y^2\right)^2}\right)\ihat-L^2\frac{2xy}{(x^2+y^2)^2}\jhat&x^2+y^2\geq L^2\\
+        \vec{0}&x^2+y^2<L^2
+    \end{matrix}\right.
+$$
