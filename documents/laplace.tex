@@ -101,22 +101,23 @@ Therefore,
 $$
     \sum_{k=0}^\infty C_k r^{k+s}(\mu^2-\lambda)=0\qc C_0\neq0
 $$
-Thus, for the equation to hold,
+Thus, for the equation to hold when $k=0$,
 \begin{align*}
     \mu^2-\lambda&=0\\
-    \implies\mu&=\pm\sqrt{\lambda}\\
-    \therefore k+s&=\pm\sqrt{\lambda}
+    \implies\pm\sqrt{\lambda}&=\mu\\
+    &=k+s\\
+    &=s
 \end{align*}
-Using the definition of $n=\sqrt{\lambda}$ from Section~\ref{section:laplace:theta} and considering the case where $k=0$,
+Using the definition of $n=\sqrt{\lambda}$ from Section~\ref{section:laplace:theta},
 \begin{align*}
     0+s&=\pm n\\
     \implies s&=\pm n
 \end{align*}
-For the cases $k>0$, to ensure the equation holds, since the term $(k+s)^2-\lambda$ will no longer be $0$, meaning that $C_k r^{k+s}=0$. Therefore,
+For the cases $k>0$, to ensure the equation holds, because the term $(k+s)^2-\lambda$ will no longer be $0$, $C_k r^{k+s}=0$. Therefore, all terms but $k=0$ must vanish, meaning that
 $$
-    R:r\mapsto Cr^{n}
+    R:r\mapsto C_0r^{\pm n}
 $$
-Since $n\in\mathbb{N}$\referto{Section}{section:laplace:theta} these solutions are distinct, and therefore the general solution is the linear combination of them,
+Since $n\in\mathbb{N}$\referto{Section}{section:laplace:theta}, these solutions are distinct, and therefore the general solution is the linear combination of them,
 \begin{equation}\label{equation:laplace-equation:8}
     R_n:r\mapsto ar^n+br^{-n}
 \end{equation}
