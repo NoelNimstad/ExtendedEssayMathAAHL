@@ -128,5 +128,90 @@ Finally, the equation of the velocity potential $\phi$ can be derived by combini
 and $R_n$ from \eqref{equation:laplace-equation:8},
 \begin{align*}
     \phi_n:r,\theta&\mapsto R_n(r)\Theta_n(\theta)\\
-    \implies\phi_n:r,\theta&\mapsto\left(ar^n+br^{-n}\right)\left(A\cos\left(n\theta\right)+B\sin\left(n\theta\right)\right)
+    \implies\phi_n:r,\theta&\mapsto\left(ar^n+\frac{b}{r^n}\right)\left(A\cos n\theta+B\sin n\theta\right)
+\end{align*}
+The values of the constants $a,b,A,B$ and $n$ must now be chosen such that they obey the boundary equations, which were 
+\begin{align*}
+    \gradient{\phi}&=U(\rhat\cos\theta-\thetahat\sin\theta) &&\text{as $r\rightarrow\infty$}\\
+    \pdv{\phi}{r}&=0                                        &&\text{when $r=L$}
+\end{align*}
+Computing the partial derivatives of $\phi$,
+\begin{align*}
+    \pdv{\phi_n}{r}&=\left(anr^{n-1}-\frac{nb}{r^{n+1}}\right)\left(A\cos n\theta+B\sin n\theta\right)\\
+    &=n\left(ar^{n-1}-\frac{b}{r^{n+1}}\right)\left(A\cos n\theta+B\sin n\theta\right)\\
+    \pdv{\phi_n}{\theta}&=\left(ar^n+\frac{b}{r^n}\right)\left(-An\sin n\theta+Bn\cos n\theta\right)\\
+    &=n\left(ar^n+\frac{b}{r^n}\right)\left(B\cos n\theta-A\sin n\theta\right)\\
+\end{align*}
+Therefore, using the polar coordinate form of the gradient derived in Section~\ref{section:polar-gradient},
+\begin{align*}
+    \nabla\phi_n&=\pdv{\phi_n}{r}\rhat+\frac{1}{r}\pdv{\phi_n}{\theta}\thetahat\\
+    &=n\left(ar^{n-1}-\frac{b}{r^{n+1}}\right)\left(A\cos n\theta+B\sin n\theta\right)\rhat+\frac{n}{r}\left(ar^n+\frac{b}{r^n}\right)\left(B\cos n\theta-A\sin n\theta\right)\thetahat\\
+    &=n\left[\left(ar^{n-1}-\frac{b}{r^{n+1}}\right)\left(A\cos n\theta+B\sin n\theta\right)\rhat+\left(ar^{n-1}+\frac{b}{r^{n+1}}\right)\left(B\cos n\theta-A\sin n\theta\right)\thetahat\right]\\
+\end{align*}
+Considering the case where $n=1$,
+\begin{align*}
+    \nabla\phi_1&=\left(ar^{1-1}-\frac{b}{r^{1+1}}\right)\left(A\cos\theta+B\sin\theta\right)\rhat+\left(ar^{1-1}+\frac{b}{r^{1+1}}\right)\left(B\cos\theta-A\sin\theta\right)\thetahat\\
+    &=\left(a-\frac{b}{r^{2}}\right)\left(A\cos\theta+B\sin\theta\right)\rhat+\left(a+\frac{b}{r^{2}}\right)\left(B\cos\theta-A\sin\theta\right)\thetahat
+\end{align*}
+As $r\rightarrow\infty$,
+\begin{align*}
+    \lim_{r\rightarrow\infty}\nabla\phi_1&=\left(a-\frac{b}{\infty^2}\right)\left(A\cos\theta+B\sin\theta\right)\rhat+\left(a+\frac{b}{\infty^2}\right)\left(B\cos\theta-A\sin\theta\right)\thetahat\\
+    &=\left(a-0\right)\left(A\cos\theta+B\sin\theta\right)\rhat+\left(a+0\right)\left(B\cos\theta-A\sin\theta\right)\thetahat\\
+    &=a\left(\left(A\cos\theta+B\sin\theta\right)\rhat+\left(B\cos\theta-A\sin\theta\right)\thetahat\right)
+\end{align*}
+To match the first boundary equation which was $U(\rhat\cos\theta-\thetahat\sin\theta)$ as $r\rightarrow\infty$, the value of the variables must be
+\begin{align*}
+    \nabla\phi_1&\left\{\begin{matrix}
+        a=U\\
+        b\in\mathbb{R}\\
+        A=1\\
+        B=0
+    \end{matrix}\right.\\
+    \leadsto\lim_{r\rightarrow\infty}\nabla\phi_1&=U\left(\left(\cos\theta+0\sin\theta\right)\rhat+\left(0\cos\theta-1\sin\theta\right)\thetahat\right)\\
+    &=U\left(\rhat\cos\theta-\thetahat\sin\theta\right)
+\end{align*}
+Now consider the value of $\pdv*{\phi_1}{r}$ when $r=L$,
+\begin{align*}
+    \eval{\pdv{\phi_1}{r}}_{r=L}&=\left(Ur^{1-1}-\frac{b}{r^{1+1}}\right)\left(\cos\theta+0\sin\theta\right)\\
+    &=\left(U-\frac{b}{r^{2}}\right)\cos\theta
+\end{align*}
+The second boundary equation stated that $\pdv*{\phi_1}{r}=0$ when $r=L$, therefore $b=r^2=L^2$. Thus, for the case $n=1$, it has been demonstrated that
+\begin{align*}
+    \nabla\phi_1&\left\{\begin{matrix}
+        a=U\\
+        b=L^2\\
+        A=1\\
+        B=0
+    \end{matrix}\right.\\
+    \implies\phi_1:r,\theta&\mapsto\left(Ur+\frac{L^2}{r}\right)\cos\theta\\
+    \implies\vec{V}_1:r,\theta\mapsto\nabla\phi_1&=\rhat\left(U-\frac{L^2}{r^{2}}\right)\cos\theta-\thetahat\left(U+\frac{L^2}{r^{2}}\right)\sin\theta
+\end{align*}
+Since this equation matches the boundary equations perfectly, the case of $n=1$ is accepted as the principal solution. Lastly, to avoid undefined behaviour inside the cylinder, let the velocity of the fluid be defined as $\vec{0}$ when $r<L$.
+$$
+    \vec{V}:r,\theta\mapsto\left\{\begin{matrix}
+        \rhat\left(U-\frac{L^2}{r^{2}}\right)\cos\theta-\thetahat\left(U+\frac{L^2}{r^{2}}\right)\sin\theta&r\geq L\\
+        \vec{0}&r<L
+    \end{matrix}\right.
+$$
+Finally, to convert back to Cartesian coordinates, $r$ is equivalent to the magnitude of the vector pointing from the origin to a point on the graph, $\sqrt{x^2+y^2}$. For the angular part, since the velocity potential is only dependent
+on $\cos\theta$, consider the geometric meaning of the expression. 
+\begin{center}        
+    \begin{tikzpicture}
+        \draw [thick] (0,0) node[anchor=north]{$\point{0}{0}$}
+        -- (6,0) node[anchor=north]{$\point{x}{0}$}
+        -- (6,4) node[anchor=south]{$\point{x}{y}$}
+        -- cycle;
+        \draw [color=red, thick] (1,-1) ++({1*cos(90)},{1*sin(90)}) 
+            arc [start angle=0, end angle=33.69,
+                        x radius=1, y radius=1];
+        \node [right] at (1.05,0.4) {$\theta$};
+        \node [below] at (3,-0.25) {$x$};
+        \node [left] at (3,2.5) {$r$};
+    \end{tikzpicture}
+\end{center}
+Cosine is defined as the ratio between the adjacent side ($x$) and hypotenuse ($r$) in a triangle. Thus, $\cos\theta=\frac{x}{r}=\frac{x}{\sqrt{x^2+y^2}}$.
+\begin{align*}
+    \phi:x,y&\mapsto\left(Ur+\frac{L^2}{r}\right)\cos\theta\\
+    &=\left(U\sqrt{x^2+y^2}+\frac{L^2}{\sqrt{x^2+y^2}}\right)\frac{x}{\sqrt{x^2+y^2}}\\
+    &=Ux+\frac{L^2x}{x^2+y^2}&\text{when }x^2+y^2\geq L^2
 \end{align*}
