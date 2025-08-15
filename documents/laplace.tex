@@ -226,10 +226,29 @@ And for the partial derivative of $\phi$ with respect to $y$, the chain rule can
     &=-L^2x(2y)\left(x^2+y^2\right)^{-2}\\
     &=-L^2\frac{2xy}{(x^2+y^2)^2}
 \end{align*}
-Therefore, the velocity field ($\vec{V}=\nabla\phi$) in a Cartesian coordinate system must be
+Therefore, the velocity field, $\vec{V}=\nabla\phi=\ihat(\pdv*{\phi}{x})+\jhat(\pdv*{\phi}{y})$, in a Cartesian coordinate system must be given by the equation
 $$
     \vec{V}:x,y\mapsto\left\{\begin{matrix}
         \left(U+L^2\frac{y^2-x^2}{\left(x^2+y^2\right)^2}\right)\ihat-L^2\frac{2xy}{(x^2+y^2)^2}\jhat&x^2+y^2\geq L^2\\
         \vec{0}&x^2+y^2<L^2
     \end{matrix}\right.
 $$
+
+% \subsection{Summary}
+% In summary, by finding general solutions to Laplace's equation and then applying constraints in the form of the boundary equations, it has been showed that the velocity field and potential are expressed as
+% \begin{align*}
+%     \phi:r,\theta&\mapsto\left(Ur+\frac{L^2}{r}\right)\cos\theta\\
+%     \vec{V}:r,\theta&\mapsto\left\{\begin{matrix}
+%         \rhat\left(U-\frac{L^2}{r^{2}}\right)\cos\theta-\thetahat\left(U+\frac{L^2}{r^{2}}\right)\sin\theta&r\geq L\\
+%         \vec{0}&r<L
+%     \end{matrix}\right.
+% \end{align*}
+% in a polar coordinate system and as
+% \begin{align*}
+%     \phi:x,y&\mapsto Ux+\frac{L^2x}{x^2+y^2}\\
+%     \vec{V}:x,y&\mapsto\left\{\begin{matrix}
+%         \left(U+L^2\frac{y^2-x^2}{\left(x^2+y^2\right)^2}\right)\ihat-L^2\frac{2xy}{(x^2+y^2)^2}\jhat&x^2+y^2\geq L^2\\
+%         \vec{0}&x^2+y^2<L^2
+%     \end{matrix}\right.
+% \end{align*}
+% in a Cartesian coordinate system.

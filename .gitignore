@@ -8,3 +8,9 @@
 *.blg
 *.aux
 *.lof
+*.gcx
+*.synctex(busy)
+FSim/FSim
+FSim/.vscode/
+FSim/out/render.mov
+.vscode/
