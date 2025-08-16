@@ -1,6 +1,30 @@
 \section{Appendix}
+% \subsection{Kelvin's circulation theorem}\label{appendix:KELVIN}
+% Irrationality throughout the flow is a property guaranteed by the condition the idealisations made in this essay, as asserted by
+% Kelvin's circulation theorem. A proof of Kelvin's circulation theorem requires the use of line integrals, a part of integral calculus.
+% Furthermore, the theorem relies upon the Euler equations, a set of governing partial differential equations describing incompressible and
+% inviscid flow. The derivation of the Euler equations aren't too involved but combined with a proof and introduction to line integrals for
+% Kelvin's theorem would make this essay lose its focus, and thus it was left outside the scope.
 
-\subsection{Fluid particle simulator source code}
+% \subsubsection{The material derivative}
+% \begin{defn}
+%   The \definedterm{material derivative} is another type of vector calculus operator defined for some function $F$ as:
+%   $$
+%     \mdv{F}{t}=\pdv{F}{t}+\vec{V}\cdot\gradient{F}
+%   $$
+%   This equation describes the rate of change of a physical quantity of a fluid particle (also referred to as a material element, hence it's name)
+%   modelled by a space and time dependent function $F$ as it moves along a trajectory (described by the velocity field $\vec{V}$).
+% \end{defn}
+
+% \subsubsection{The Euler equations} 
+% The Euler equations are a system of multiple partial differential equations applicable for inviscid and incompressible fluids,
+% but most relevant to Kelvin's circulation theorem is:
+% $$
+%   \mdv{\vec{v}}{t}=-\frac{1}{\rho}\gradient{p}+\vec{F}
+% $$
+% where $\vec{v}$ is the velocity of the fluid particle, $\rho$ the density at the point of evaluation, $p$ the pressure and $\vec{F}$ the force acting on the particle.
+
+\subsection{Fluid simulator source code}
 The fluid simulator works directly on the formula derived in Section~\ref{section:THE-FORMULAE} by creating particles
 at pseudorandom $y$ coordinates and then moving them by the velocity given by the velocity field at the point they are at.
 The rendering is done using SDL3 and then combining individually drawn frames into a video format using FFmpeg. The full source
@@ -14,6 +38,7 @@ code is as given below:
                   basicstyle=\ttfamily\scriptsize,
                   breakatwhitespace=false,         
                   breaklines=true,
+                  numbers=left,
                   frame=lines,
                   captionpos=b,                    
                   keepspaces=true,                    

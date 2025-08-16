@@ -2,33 +2,34 @@
 #include <stdlib.h>
 #include <SDL3/SDL.h>
 
-#define SIMULATION_LENGTH   2000
+#define SIMULATION_DEBUG    0
+#define SIMULATION_LENGTH   3000
 #define SIMULATION_WIDTH    750
 #define SIMULATION_HEIGHT   500
 #define SIMULATION_PRERUN   0
+#define SAVE_EVERY					100
 
 #define GRID_SIZE           50
 #define PARTICLE_COUNT      50000
 #define SIMULATION_SPEED    1
 #define DISTROBUTION        25
-#define MAX_VELOCITY        4       // honestly, I justt guessed here,
-																		// though there may be a smart way to calculate it
+#define MAX_VELOCITY        4       // just guessed here
 
 #define U                   1
 #define L                   (SIMULATION_HEIGHT / 6)
 
 #define SQ(_n)              ((_n) * (_n))
-#define TX(_p)              ((_p.position_x) - SIMULATION_WIDTH / 2)    // true x
-#define TY(_p)              ((_p.position_y) - SIMULATION_HEIGHT / 2)   // true y
+#define TX(_p)              (((_p).position_x) - SIMULATION_WIDTH / 2)	// true x
+#define TY(_p)              (((_p).position_y) - SIMULATION_HEIGHT / 2)	// true y
 
 // referenced from https://github.com/Inseckto/HSV-to-RGB/blob/master/HSV2RGB.c
 void hsv2rgb(float H, float *red, float *green, float *blue)
 {
-	float s = 1.0f;
-	float v = 1.0f;
+	float s = 1.0f; // full saturation
+	float v = 1.0f; // full brightness
 	float r, g, b;
 
-	float h = H / 60.0f;
+	float h = H / 60.0f; // sector 0 to 5
 	int i = (int)h;
 	float f = h - i;
 	float p = v * (1 - s);
@@ -68,14 +69,12 @@ typedef struct
 	SDL_Surface *surface;
 } state_t;
 
-// getVelocity_x and getVelocity_y were implemented
-// directly according to the formula derived in Section 5.3
-// EXCEPT for the fact that if a particle ends up inside
-// the sphere that getVelocity_x returns -0.5 to push it out
-// this is due to the use of Euler's methods rather than more
-// mature ODE solution methods like RK4 (Runge-Kutta 4 step method)
-// this isn't needed in the mathematical formula because this could
-// never physically happen.
+// getVelocity_x and getVelocity_y were implemented directly
+// according to the formula derived in Section 5.3 EXCEPT for
+// the fact that if a particle ends up inside the sphere that
+// getVelocity_x returns -0.5 to push it out. note that this
+// isn't needed in the mathematical formula because since it
+// would be physically impossible to penetrate the cylinder
 double getVelocity_x(particle_t particle)
 {
 	return ((SQ(TX(particle)) + SQ(TY(particle))) >= SQ(L))
@@ -96,18 +95,17 @@ void tick(state_t *state)
 	SDL_RenderClear(state->renderer);
 
 	SDL_SetRenderDrawColor(state->renderer, 25, 25, 25, 255);
-	for(size_t x = 0; x < SIMULATION_WIDTH / GRID_SIZE; x++)
+	for(size_t x = 0; SIMULATION_WIDTH / GRID_SIZE > x; x++)
 	{
 		uint16_t position_x = x * GRID_SIZE;
 		SDL_RenderLine(state->renderer, position_x, 0, position_x, SIMULATION_HEIGHT);
 	}
-
-	for(size_t y = 0; y < SIMULATION_HEIGHT / GRID_SIZE; y++)
+	for(size_t y = 0; SIMULATION_HEIGHT / GRID_SIZE > y; y++)
 	{
 		uint16_t position_y = y * GRID_SIZE;
 		SDL_RenderLine(state->renderer, 0, position_y, SIMULATION_WIDTH, position_y);
 	}
-	
+    
 	SDL_SetRenderDrawColor(state->renderer, 0, 0, 255, 255);
 	for(size_t i = 0; PARTICLE_COUNT > i; i++)
 	{
@@ -129,31 +127,39 @@ void tick(state_t *state)
 		hsv2rgb(hue, &r, &g, &b);
 		SDL_SetRenderDrawColor(state->renderer, r, g, b, 255);
 
-		SDL_RenderPoint(state->renderer,	// draw "star" shape
-										state->particles[i].position_x - 1, state->particles[i].position_y);
-		SDL_RenderPoint(state->renderer,
-										state->particles[i].position_x, state->particles[i].position_y - 1);
-		SDL_RenderPoint(state->renderer,
-										state->particles[i].position_x, state->particles[i].position_y);
-		SDL_RenderPoint(state->renderer,
-										state->particles[i].position_x, state->particles[i].position_y + 1);
-		SDL_RenderPoint(state->renderer,
-										state->particles[i].position_x + 1, state->particles[i].position_y);
+		SDL_FPoint *star = (SDL_FPoint *)malloc(5 * sizeof(SDL_FPoint));
+		if(NULL == star)
+		{
+			printf("Failed to allocate memory for SDL_FPoint\n");
+			continue;
+		}
+
+		star[0] = (SDL_FPoint){ state->particles[i].position_x - 1, state->particles[i].position_y  };
+		star[1] = (SDL_FPoint){ state->particles[i].position_x, state->particles[i].position_y - 1  };
+		star[2] = (SDL_FPoint){ state->particles[i].position_x, state->particles[i].position_y      };
+		star[3] = (SDL_FPoint){ state->particles[i].position_x + 1, state->particles[i].position_y  };
+		star[4] = (SDL_FPoint){ state->particles[i].position_x, state->particles[i].position_y  + 1 };
+
+		SDL_RenderPoints(state->renderer, star, 5);
+		free(star);
 	}
 
-	SDL_DestroySurface(state->surface);
-	state->surface = SDL_RenderReadPixels(state->renderer, NULL);
-	if(NULL == state->surface)
+	if(!SIMULATION_DEBUG) // save computation time in debug
 	{
-		printf("Failed to read surface pixels: %s\n", SDL_GetError());
+		SDL_DestroySurface(state->surface);
+		state->surface = SDL_RenderReadPixels(state->renderer, NULL);
+		if(NULL == state->surface)
+		{
+			printf("Failed to read surface pixels: %s\n", SDL_GetError());
+		}
 	}
-
+	
 	SDL_RenderPresent(state->renderer);
 }
 
-int main(void)
+int main(int argc, char const *argv[])
 {
-  srand(0); // seed random
+	srand(0); // seed random
 
 	if(0 == SDL_Init(SDL_INIT_VIDEO))
 	{
@@ -164,45 +170,59 @@ int main(void)
 	SDL_SetHint(SDL_HINT_RENDER_DRIVER, "software");
 	SDL_SetHint(SDL_HINT_RENDER_LINE_METHOD, "3");
 
-  state_t state;
-	if(0 == SDL_CreateWindowAndRenderer("FSim", SIMULATION_WIDTH, SIMULATION_HEIGHT, 0, &state.window, &state.renderer))
+	state_t state;
+	if(0 == SDL_CreateWindowAndRenderer("FSim", SIMULATION_WIDTH, SIMULATION_HEIGHT, SDL_WINDOW_BORDERLESS, &state.window, &state.renderer))
 	{
 		printf("Failed to initialize SDL: %s\n", SDL_GetError());
 		return 1;
 	}
 
-	for(int i = 0; i < PARTICLE_COUNT; i++)
+	for(int i = 0; PARTICLE_COUNT > i; i++)
 	{
 		double y = rand() % (SIMULATION_HEIGHT + 1);
 		state.particles[i] = (particle_t){ y, (int)(-i / DISTROBUTION), y };
 	}
 
-	for(size_t i = 0; i < SIMULATION_PRERUN; i++) tick(&state);
+	for(size_t i = 0; SIMULATION_PRERUN > i; i++) tick(&state);
 
+	system("mkdir ./out/temp/");
 	state.tick = 0;
-	while(state.tick++ < SIMULATION_LENGTH)
+	while(SIMULATION_LENGTH > state.tick++)
 	{
 		SDL_Event event;
 		while(SDL_PollEvent(&event)){};
 
 		tick(&state);
 
+		if(SIMULATION_DEBUG) continue; // skip if debug
+
 		char buffer[64]; // save frame
-		sprintf(buffer, "./out/frames/%05d.bmp", state.tick);
+		sprintf(buffer, "./out/temp/%05d.bmp", state.tick);
 		if(0 == SDL_SaveBMP(state.surface, buffer))
 		{
 			printf("failed to save frame %d: %s\n", state.tick, SDL_GetError());
 		}
 	}
 
-	system(
-		"ffmpeg -y -framerate 144 -i ./out/frames/%05d.bmp -r 120 "
-		"-c:v prores_ks -profile:v 4 -pix_fmt yuv444p10le "
-		"-movflags +faststart out/render.mov"
-	); // ffmpeg frames to .mov file
-	system("rm ./out/frames/*"); // delete frames
+	if(!SIMULATION_DEBUG)
+	{
+		system(
+			"ffmpeg -y -framerate 144 -i ./out/temp/%05d.bmp -r 60 "
+			"-c:v prores_ks -profile:v 4 -pix_fmt yuv444p10le "
+			"-movflags +faststart out/render.mov"
+		); // ffmpeg frames to mp4
 
-	SDL_DestroySurface(state.surface);
+		for(int i = 0; SIMULATION_LENGTH > i; i += SAVE_EVERY)
+		{
+			char buffer[64];
+			sprintf(buffer, "magick ./out/temp/%05d.bmp ./out/%05d.png", i, i);
+			system(buffer);
+		}
+
+		system("rm -r ./out/temp/"); // delete frames
+	}
+
+  SDL_DestroySurface(state.surface);
 	SDL_DestroyWindow(state.window);
 	SDL_DestroyRenderer(state.renderer);
 	return 0;
