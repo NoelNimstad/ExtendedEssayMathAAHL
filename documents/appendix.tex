@@ -1,9 +1,24 @@
 \section{Appendix}
-\begin{defn}
-	The directional derivative in the direction of some vector $\vec{v}$ of the function $f$ which is differentiable in
-	the open disk $\disk{x_0}{y_0}$ centred at $\point{x_0}{y_0}$ with radius $\delta>0$ is defined as
-	$$
-		\eval{\nabla_{\vec{v}}f\,}_{\point{x_0}{y_0}}=\frac{\eval{\nabla f}_{\point{x_0}{y_0}}\cdot\vec{v}}{\lVert\vec{v}\rVert}
-	$$
-	\cite{GIANNAKIDIS2010129}
-\end{defn}
+
+\subsection{Fluid particle simulator source code}
+The fluid simulator works directly on the formula derived in Section~\ref{section:THE-FORMULAE} by creating particles
+at pseudorandom $y$ coordinates and then moving them by the velocity given by the velocity field at the point they are at.
+The rendering is done using SDL3 and then combining individually drawn frames into a video format using FFmpeg. The full source
+code is as given below:
+\lstinputlisting[ language=C,
+                  backgroundcolor=\color{background_color},   
+                  commentstyle=\color{code_green},
+                  keywordstyle=\color{magenta},
+                  numberstyle=\tiny\color{codegray},
+                  stringstyle=\color{code_yellow},
+                  basicstyle=\ttfamily\scriptsize,
+                  breakatwhitespace=false,         
+                  breaklines=true,
+                  frame=lines,
+                  captionpos=b,                    
+                  keepspaces=true,                    
+                  numbersep=5pt,                  
+                  showspaces=false,                
+                  showstringspaces=false,
+                  showtabs=false,
+                  tabsize=2]{FSim/src/main.c}
