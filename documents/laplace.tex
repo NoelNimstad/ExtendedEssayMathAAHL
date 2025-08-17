@@ -123,7 +123,8 @@ Since $n\in\mathbb{N}$\referto{Section}{section:laplace:theta}, these solutions 
 \end{equation}
 Where $a$ and $b$ are some real constants.
 
-\subsection{The equation of the velocity potential}\label{section:THE-FORMULAE}
+\subsection{The equation of the velocity potential \& velocity field}\label{section:THE-FORMULAE}
+\subsubsection{In polar coordinates}\label{section:VELOCITY:POLAR}
 Finally, the equation of the velocity potential $\phi$ can be derived by combining the equation of $\Theta_n$ from \eqref{equation:laplace-equation:9}
 and $R_n$ from \eqref{equation:laplace-equation:8},
 \begin{align*}
@@ -187,14 +188,16 @@ The second boundary equation stated that $\pdv*{\phi_1}{r}=0$ when $r=L$, theref
     \implies\vec{V}_1:r,\theta\mapsto\nabla\phi_1&=\rhat\left(U-\frac{L^2}{r^{2}}\right)\cos\theta-\thetahat\left(U+\frac{L^2}{r^{2}}\right)\sin\theta
 \end{align*}
 Since this equation matches the boundary equations perfectly, the case of $n=1$ is accepted as the principal solution. Lastly, to avoid undefined behaviour inside the cylinder, let the velocity of the fluid be defined as $\vec{0}$ when $r<L$.
-$$
+\begin{equation}\label{equation:VELOCITY:POLAR}
     \vec{V}:r,\theta\mapsto\left\{\begin{matrix}
         \rhat\left(U-\frac{L^2}{r^{2}}\right)\cos\theta-\thetahat\left(U+\frac{L^2}{r^{2}}\right)\sin\theta&r\geq L\\
         \vec{0}&r<L
     \end{matrix}\right.
-$$
+\end{equation}
+
+\subsubsection{In Cartesian coordinates}\label{section:VELOCITY:CARTESIAN}
 Finally, to convert back to Cartesian coordinates, $r$ is equivalent to the magnitude of the vector pointing from the origin to a point on the graph, $\sqrt{x^2+y^2}$. For the angular part, since the velocity potential is only dependent
-on $\cos\theta$, consider the geometric meaning of the expression. 
+on $\cos\theta$, consider its geometric definition. 
 \begin{center}        
     \begin{tikzpicture}[scale=0.75]
         \draw [thick] (0,0) node[anchor=north]{$\point{0}{0}$}
@@ -234,21 +237,41 @@ $$
     \end{matrix}\right.
 $$
 
-% \subsection{Summary}
-% In summary, by finding general solutions to Laplace's equation and then applying constraints in the form of the boundary equations, it has been showed that the velocity field and potential are expressed as
-% \begin{align*}
-%     \phi:r,\theta&\mapsto\left(Ur+\frac{L^2}{r}\right)\cos\theta\\
-%     \vec{V}:r,\theta&\mapsto\left\{\begin{matrix}
-%         \rhat\left(U-\frac{L^2}{r^{2}}\right)\cos\theta-\thetahat\left(U+\frac{L^2}{r^{2}}\right)\sin\theta&r\geq L\\
-%         \vec{0}&r<L
-%     \end{matrix}\right.
-% \end{align*}
-% in a polar coordinate system and as
-% \begin{align*}
-%     \phi:x,y&\mapsto Ux+\frac{L^2x}{x^2+y^2}\\
-%     \vec{V}:x,y&\mapsto\left\{\begin{matrix}
-%         \left(U+L^2\frac{y^2-x^2}{\left(x^2+y^2\right)^2}\right)\ihat-L^2\frac{2xy}{(x^2+y^2)^2}\jhat&x^2+y^2\geq L^2\\
-%         \vec{0}&x^2+y^2<L^2
-%     \end{matrix}\right.
-% \end{align*}
-% in a Cartesian coordinate system.
+\section{The pressure field}
+With the velocity field derived, the pressure field too can be derived through the Bernoulli equation,
+which states for an incompressible fluid with density $\rho$ that
+\begin{equation}\label{equation:BERNOULLI}
+    P+\frac{\rho v^2}{2}=C
+\end{equation}
+Note that the term $v$ in the Bernoulli equation representing speed is scalar valued, not vector valued.
+To find the value of the constant $C$, the pressure field is evaluated at a point at which the pressure
+is known. At the points $r\rightarrow\infty$, the steady flow must lead to uniform pressure, denoted
+$P_\infty$ and the speed at these points was defined as $U$\referto{Section}{section:INFINITELY-FAR-AWAY},
+therefore
+\begin{equation}\label{equation:PRESSURE}
+    P_\infty+\frac{\rho U^2}{2}=C
+\end{equation}
+Substituting \eqref{equation:PRESSURE} into \eqref{equation:BERNOULLI},
+\begin{align*}
+    P+\frac{\rho v^2}{2}&=P_\infty+\frac{\rho U^2}{2}\\
+    \implies P&=P_\infty+\frac{\rho U^2}{2}-\frac{\rho v^2}{2}\\
+    &=P_\infty+\frac{\rho}{2}\left(U^2-v^2\right)
+\end{align*}
+Thus for a polar coordinate system, using the velocity field derived in \eqref{equation:VELOCITY:POLAR}\referto{Section}{section:VELOCITY:POLAR}
+\begin{align*}
+    P:r,\theta&\mapsto P_\infty+\frac{\rho}{2}\left(U^2-\lVert\vec{V}(r,\theta)\rVert^2\right)\\
+    \lVert\vec{V}(r,\theta)\rVert^2&=\left(U-\frac{L^2}{r^{2}}\right)^2\cos^2\theta+\left(U+\frac{L^2}{r^{2}}\right)^2\sin^2\theta\\
+    &=\left(U^2-\frac{2UL^2}{r^2}+\frac{L^4}{r^4}\right)\cos^2\theta+\left(U^2+\frac{2UL^2}{r^2}+\frac{L^4}{r^4}\right)\sin^2\theta\\
+    &=U^2\left(\cos^2\theta+\sin^2\theta\right)+\frac{L^4}{r^4}\left(\cos^2\theta+\sin^2\theta\right)-\frac{2UL^2}{r^2}\cos^2\theta+\frac{2UL^2}{r^2}\sin^2\theta\\
+    &=U^2+\frac{L^4}{r^4}-\frac{2UL^2}{r^2}\left(\cos^2\theta-\sin^2\theta\right)\\
+    &=U^2+\frac{L^4}{r^4}-\frac{2UL^2}{r^2}\cos2\theta\iff r\geq L\\
+    \lVert\vec{V}(r,\theta)\rVert^2&=0\iff r<L\\
+    \implies P:r,\theta&\mapsto\left\{\begin{matrix}
+        P_\infty+\frac{\rho}{2}\left(U^2-\left[U^2+\frac{L^4}{r^4}-\frac{2UL^2}{r^2}\cos2\theta\right]\right) & r\geq L\\
+        P_\infty+\frac{\rho}{2}\left(U^2-0\right) & r<L
+    \end{matrix}\right.\\
+    &=\left\{\begin{matrix}
+        P_\infty+\rho\left(\frac{UL^2}{r^2}\cos2\theta-\frac{L^4}{2r^4}\right) & r\geq L\\
+        P_\infty+\frac{\rho U^2}{2} & r<L
+    \end{matrix}\right.
+\end{align*}
