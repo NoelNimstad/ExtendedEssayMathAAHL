@@ -197,21 +197,25 @@ Since this equation matches the boundary equations perfectly, the case of $n=1$ 
 
 \subsubsection{In Cartesian coordinates}\label{section:VELOCITY:CARTESIAN}
 Finally, to convert back to Cartesian coordinates, $r$ is equivalent to the magnitude of the vector pointing from the origin to a point on the graph, $\sqrt{x^2+y^2}$. For the angular part, since the velocity potential is only dependent
-on $\cos\theta$, consider its geometric definition. 
-\begin{center}        
-    \begin{tikzpicture}[scale=0.75]
-        \draw [thick] (0,0) node[anchor=north]{$\point{0}{0}$}
-        -- (6,0) node[anchor=north]{$\point{x}{0}$}
-        -- (6,4) node[anchor=south]{$\point{x}{y}$}
-        -- cycle;
-        \draw [color=red, thick] (1,-1) ++({1*cos(90)},{1*sin(90)}) 
-            arc [start angle=0, end angle=33.69,
-                        x radius=1, y radius=1];
-        \node [right] at (1.05,0.4) {$\theta$};
-        \node [below] at (3,-0.25) {$x$};
-        \node [left] at (3,2.5) {$r$};
-    \end{tikzpicture}
-\end{center}
+on $\cos\theta$, consider its geometric definition, as illustrated in Figure~\ref{figure:TRIGENOMETRY}. 
+\begin{figure}
+    \begin{center}        
+        \begin{tikzpicture}[scale=0.75]
+            \draw [thick] (0,0) node[anchor=north]{$\point{0}{0}$}
+            -- (6,0) node[anchor=north]{$\point{x}{0}$}
+            -- (6,4) node[anchor=south]{$\point{x}{y}$}
+            -- cycle;
+            \draw [color=red, thick] (1,-1) ++({1*cos(90)},{1*sin(90)}) 
+                arc [start angle=0, end angle=33.69,
+                            x radius=1, y radius=1];
+            \node [right] at (1.05,0.4) {$\theta$};
+            \node [below] at (3,-0.25) {$x$};
+            \node [left] at (3,2.5) {$r$};
+        \end{tikzpicture}
+    \end{center}
+    \label{figure:TRIGENOMETRY}
+    \caption{Geometric definition of the trigonometric functions, with polar- and Cartesian-coordinates overlaid on a right-angled triangle}
+\end{figure}
 Cosine is defined as the ratio between the adjacent side ($x$) and hypotenuse ($r$) in a triangle, thus, $\cos\theta=\frac{x}{r}=\frac{x}{\sqrt{x^2+y^2}}$. Substituting this into the equation of the velocity potential gives
 \begin{align*}
     \phi:x,y&\mapsto\left(Ur+\frac{L^2}{r}\right)\cos\theta\\
@@ -230,12 +234,12 @@ And for the partial derivative of $\phi$ with respect to $y$, the chain rule can
     &=-L^2\frac{2xy}{(x^2+y^2)^2}
 \end{align*}
 Therefore, the velocity field in a Cartesian coordinate system must be given by the equation
-$$
+\begin{equation}\label{equation:VELOCITY:CARTESIAN} 
     \vec{V}:x,y\mapsto\left\{\begin{matrix}
         \left(U+L^2\frac{y^2-x^2}{\left(x^2+y^2\right)^2}\right)\ihat-L^2\frac{2xy}{(x^2+y^2)^2}\jhat&x^2+y^2\geq L^2\\
         \vec{0}&x^2+y^2<L^2
     \end{matrix}\right.
-$$
+\end{equation}
 
 \section{The pressure field}
 With the velocity field derived, the pressure field too can be derived through the Bernoulli equation,
@@ -257,21 +261,47 @@ Substituting \eqref{equation:PRESSURE} into \eqref{equation:BERNOULLI},
     \implies P&=P_\infty+\frac{\rho U^2}{2}-\frac{\rho v^2}{2}\\
     &=P_\infty+\frac{\rho}{2}\left(U^2-v^2\right)
 \end{align*}
-Thus for a polar coordinate system, using the velocity field derived in \eqref{equation:VELOCITY:POLAR}\referto{Section}{section:VELOCITY:POLAR}
-\begin{align*}
-    P:r,\theta&\mapsto P_\infty+\frac{\rho}{2}\left(U^2-\lVert\vec{V}(r,\theta)\rVert^2\right)\\
-    \lVert\vec{V}(r,\theta)\rVert^2&=\left(U-\frac{L^2}{r^{2}}\right)^2\cos^2\theta+\left(U+\frac{L^2}{r^{2}}\right)^2\sin^2\theta\\
-    &=\left(U^2-\frac{2UL^2}{r^2}+\frac{L^4}{r^4}\right)\cos^2\theta+\left(U^2+\frac{2UL^2}{r^2}+\frac{L^4}{r^4}\right)\sin^2\theta\\
-    &=U^2\left(\cos^2\theta+\sin^2\theta\right)+\frac{L^4}{r^4}\left(\cos^2\theta+\sin^2\theta\right)-\frac{2UL^2}{r^2}\cos^2\theta+\frac{2UL^2}{r^2}\sin^2\theta\\
-    &=U^2+\frac{L^4}{r^4}-\frac{2UL^2}{r^2}\left(\cos^2\theta-\sin^2\theta\right)\\
-    &=U^2+\frac{L^4}{r^4}-\frac{2UL^2}{r^2}\cos2\theta\iff r\geq L\\
-    \lVert\vec{V}(r,\theta)\rVert^2&=0\iff r<L\\
-    \implies P:r,\theta&\mapsto\left\{\begin{matrix}
+Thus for a polar coordinate system, using the velocity field derived in \eqref{equation:VELOCITY:POLAR}\referto{Section}{section:VELOCITY:POLAR},
+\begin{align}
+    \notag P:r,\theta&\mapsto P_\infty+\frac{\rho}{2}\left(U^2-\lVert\vec{V}(r,\theta)\rVert^2\right)\\
+    \notag\lVert\vec{V}(r,\theta)\rVert^2&=\left(U-\frac{L^2}{r^{2}}\right)^2\cos^2\theta+\left(U+\frac{L^2}{r^{2}}\right)^2\sin^2\theta\\
+    \notag&=\left(U^2-\frac{2UL^2}{r^2}+\frac{L^4}{r^4}\right)\cos^2\theta+\left(U^2+\frac{2UL^2}{r^2}+\frac{L^4}{r^4}\right)\sin^2\theta\\
+    \notag&=U^2\left(\cos^2\theta+\sin^2\theta\right)+\frac{L^4}{r^4}\left(\cos^2\theta+\sin^2\theta\right)-\frac{2UL^2}{r^2}\cos^2\theta+\frac{2UL^2}{r^2}\sin^2\theta\\
+    \notag&=U^2+\frac{L^4}{r^4}-\frac{2UL^2}{r^2}\left(\cos^2\theta-\sin^2\theta\right)\\
+    \notag&=U^2+\frac{L^4}{r^4}-\frac{2UL^2}{r^2}\cos2\theta\iff r\geq L\\
+    \notag\lVert\vec{V}(r,\theta)\rVert^2&=0\iff r<L\\
+    \notag\implies P:r,\theta&\mapsto\left\{\begin{matrix}
         P_\infty+\frac{\rho}{2}\left(U^2-\left[U^2+\frac{L^4}{r^4}-\frac{2UL^2}{r^2}\cos2\theta\right]\right) & r\geq L\\
         P_\infty+\frac{\rho}{2}\left(U^2-0\right) & r<L
     \end{matrix}\right.\\
-    &=\left\{\begin{matrix}
-        P_\infty+\rho\left(\frac{UL^2}{r^2}\cos2\theta-\frac{L^4}{2r^4}\right) & r\geq L\\
+    \label{equation:pressure:1}&=\left\{\begin{matrix}
+        P_\infty+\left(\frac{UL^2}{r^2}\cos2\theta-\frac{L^4}{2r^4}\right) & r\geq L\\
         P_\infty+\frac{\rho U^2}{2} & r<L
+    \end{matrix}\right.
+\end{align}
+To convert the pressure field to a Cartesian coordinate system, recall that $r=\sqrt{x^2+y^2}$, then substitute into \eqref{equation:pressure:1},
+\begin{align}
+    \notag P_\infty+\rho\left(\frac{UL^2}{r^2}\cos2\theta-\frac{L^4}{2r^4}\right)&=P_\infty+\rho\left(\frac{UL^2}{\sqrt{x^2+y^2}^2}\cos2\theta-\frac{L^4}{2\sqrt{x^2+y^2}^4}\right)\\
+    \label{equation:pressure:2}&=P_\infty+\rho\left(\frac{UL^2}{x^2+y^2}\cos2\theta-\frac{L^4}{2\left(x^2+y^2\right)^2}\right)
+\end{align}
+To convert the term $\cos2\theta=\cos^2\theta-\sin^2\theta$, consider again the geometric interpretation illustrated in Figure~\ref{figure:TRIGENOMETRY},
+it then follows that
+\begin{align*}
+    \cos\theta&=\frac{x}{r}=\frac{x}{\sqrt{x^2+y^2}}\\
+    \sin\theta&=\frac{y}{r}=\frac{y}{\sqrt{x^2+y^2}}
+\end{align*}
+Consequently,
+\begin{align}
+    \notag\cos2\theta&=\left(\frac{x}{\sqrt{x^2+y^2}}\right)^2-\left(\frac{y}{\sqrt{x^2+y^2}}\right)^2\\
+    \label{equation:pressure:3}&=\frac{x^2-y^2}{\sqrt{x^2+y^2}^2}=\frac{x^2-y^2}{x^2+y^2}
+\end{align}
+Substituting \eqref{equation:pressure:3} into \eqref{equation:pressure:2} and setting up the piecewise function definition,
+\begin{align*}
+    P_\infty+\rho\left(\frac{UL^2}{r^2}\cos2\theta-\frac{L^4}{2r^4}\right)&=P_\infty+\rho\left(\frac{UL^2}{x^2+y^2}\frac{x^2-y^2}{x^2+y^2}-\frac{L^4}{2\left(x^2+y^2\right)^2}\right)\\
+    &=P_\infty+\rho\left(\frac{UL^2\left(x^2-y^2\right)}{\left(x^2+y^2\right)^2}-\frac{L^4}{2\left(x^2+y^2\right)^2}\right)\\
+    &=P_\infty+\rho\left(\frac{2UL^2\left(x^2-y^2\right)-L^4}{2\left(x^2+y^2\right)^2}\right)\\
+    \implies P:x,y&\mapsto\left\{\begin{matrix}
+        P_\infty+\rho\left(\frac{2UL^2\left(x^2-y^2\right)-L^4}{2\left(x^2+y^2\right)^2}\right) & x^2+y^2\geq L^2\\
+        P_\infty+\frac{\rho U^2}{2} & x^2+y^2<L^2
     \end{matrix}\right.
 \end{align*}
