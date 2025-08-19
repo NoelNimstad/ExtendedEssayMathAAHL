@@ -3,17 +3,17 @@
 #include <SDL3/SDL.h>
 
 #define SIMULATION_DEBUG    0
-#define SIMULATION_LENGTH   3000
+#define SIMULATION_LENGTH   20000
 #define SIMULATION_WIDTH    750
 #define SIMULATION_HEIGHT   500
-#define SIMULATION_PRERUN   0
+#define SIMULATION_PRERUN   250000
 #define SAVE_EVERY					100
 
 #define GRID_SIZE           50
 #define PARTICLE_COUNT      50000
-#define SIMULATION_SPEED    1
+#define SIMULATION_SPEED    0.1f
 #define DISTROBUTION        25
-#define MAX_VELOCITY        4       // just guessed here
+#define MAX_VELOCITY        0.0005f	// just guessed here
 
 #define U                   1
 #define L                   (SIMULATION_HEIGHT / 6)
@@ -61,6 +61,7 @@ typedef struct
 typedef struct
 {
 	int tick;
+	uint8_t prerun;
 
 	particle_t particles[PARTICLE_COUNT];
 
@@ -70,40 +71,39 @@ typedef struct
 } state_t;
 
 // getVelocity_x and getVelocity_y were implemented directly
-// according to the formula derived in Section 5.3 EXCEPT for
-// the fact that if a particle ends up inside the sphere that
-// getVelocity_x returns -0.5 to push it out. note that this
-// isn't needed in the mathematical formula because since it
-// would be physically impossible to penetrate the cylinder
+// according to the formula derived in Section 5.3
 double getVelocity_x(particle_t particle)
 {
 	return ((SQ(TX(particle)) + SQ(TY(particle))) >= SQ(L))
-					? (U + SQ(L) * (SQ(TY(particle)) - SQ(TX(particle))) / SQ(SQ(TX(particle)) + SQ(TY(particle))))
-					: -0.5;
+					? (U + SQ(L) * (SQ(TY(particle)) - SQ(TX(particle))) / SQ(SQ(TX(particle)) + SQ(TY(particle)))) * SIMULATION_SPEED
+					: 0;
 }
 
 double getVelocity_y(particle_t particle)
 {
 	return ((SQ(TX(particle)) + SQ(TY(particle))) >= SQ(L))
-					? (-SQ(L) * 2 * TX(particle) * TY(particle) / SQ(SQ(TX(particle)) + SQ(TY(particle))))
+					? (-SQ(L) * 2 * TX(particle) * TY(particle) / SQ(SQ(TX(particle)) + SQ(TY(particle)))) * SIMULATION_SPEED
 					: 0;
 }
 
 void tick(state_t *state)
 {
-	SDL_SetRenderDrawColor(state->renderer, 0, 0, 0, 255);
-	SDL_RenderClear(state->renderer);
-
-	SDL_SetRenderDrawColor(state->renderer, 25, 25, 25, 255);
-	for(size_t x = 0; SIMULATION_WIDTH / GRID_SIZE > x; x++)
+	if(!state->prerun)
 	{
-		uint16_t position_x = x * GRID_SIZE;
-		SDL_RenderLine(state->renderer, position_x, 0, position_x, SIMULATION_HEIGHT);
-	}
-	for(size_t y = 0; SIMULATION_HEIGHT / GRID_SIZE > y; y++)
-	{
-		uint16_t position_y = y * GRID_SIZE;
-		SDL_RenderLine(state->renderer, 0, position_y, SIMULATION_WIDTH, position_y);
+		SDL_SetRenderDrawColor(state->renderer, 0, 0, 0, 255);
+		SDL_RenderClear(state->renderer);
+	
+		SDL_SetRenderDrawColor(state->renderer, 25, 25, 25, 255);
+		for(size_t x = 0; SIMULATION_WIDTH / GRID_SIZE > x; x++)
+		{
+			uint16_t position_x = x * GRID_SIZE;
+			SDL_RenderLine(state->renderer, position_x, 0, position_x, SIMULATION_HEIGHT);
+		}
+		for(size_t y = 0; SIMULATION_HEIGHT / GRID_SIZE > y; y++)
+		{
+			uint16_t position_y = y * GRID_SIZE;
+			SDL_RenderLine(state->renderer, 0, position_y, SIMULATION_WIDTH, position_y);
+		}
 	}
     
 	SDL_SetRenderDrawColor(state->renderer, 0, 0, 255, 255);
@@ -120,6 +120,8 @@ void tick(state_t *state)
 			state->particles[i].position_x = -1;
 			state->particles[i].position_y = state->particles[i].original_y;
 		}
+
+		if(state->prerun) continue;
 		
 		float speedSquare = SQ(velocity_x) + SQ(velocity_y);
 		float hue = (int)((1.0f - speedSquare / MAX_VELOCITY) * 360.0f) % 360;
@@ -127,12 +129,12 @@ void tick(state_t *state)
 		hsv2rgb(hue, &r, &g, &b);
 		SDL_SetRenderDrawColor(state->renderer, r, g, b, 255);
 
-		SDL_FPoint *star = (SDL_FPoint *)malloc(5 * sizeof(SDL_FPoint));
-		if(NULL == star)
-		{
-			printf("Failed to allocate memory for SDL_FPoint\n");
-			continue;
-		}
+		SDL_FPoint star[5];
+		// if(NULL == star)
+		// {
+		// 	printf("Failed to allocate memory for SDL_FPoint\n");
+		// 	continue;
+		// }
 
 		star[0] = (SDL_FPoint){ state->particles[i].position_x - 1, state->particles[i].position_y  };
 		star[1] = (SDL_FPoint){ state->particles[i].position_x, state->particles[i].position_y - 1  };
@@ -141,7 +143,6 @@ void tick(state_t *state)
 		star[4] = (SDL_FPoint){ state->particles[i].position_x, state->particles[i].position_y  + 1 };
 
 		SDL_RenderPoints(state->renderer, star, 5);
-		free(star);
 	}
 
 	if(!SIMULATION_DEBUG) // save computation time in debug
@@ -154,7 +155,7 @@ void tick(state_t *state)
 		}
 	}
 	
-	SDL_RenderPresent(state->renderer);
+	if(!state->prerun) SDL_RenderPresent(state->renderer);
 }
 
 int main(int argc, char const *argv[])
@@ -183,14 +184,19 @@ int main(int argc, char const *argv[])
 		state.particles[i] = (particle_t){ y, (int)(-i / DISTROBUTION), y };
 	}
 
+	state.prerun = 1;
 	for(size_t i = 0; SIMULATION_PRERUN > i; i++) tick(&state);
+	state.prerun = 0;
 
 	system("mkdir ./out/temp/");
 	state.tick = 0;
 	while(SIMULATION_LENGTH > state.tick++)
 	{
 		SDL_Event event;
-		while(SDL_PollEvent(&event)){};
+		while(SDL_PollEvent(&event))
+		{
+			if(SDL_EVENT_QUIT == event.type) state.tick = SIMULATION_LENGTH;
+		}
 
 		tick(&state);
 
@@ -207,12 +213,12 @@ int main(int argc, char const *argv[])
 	if(!SIMULATION_DEBUG)
 	{
 		system(
-			"ffmpeg -y -framerate 144 -i ./out/temp/%05d.bmp -r 60 "
+			"ffmpeg -y -framerate 2000 -i ./out/temp/%05d.bmp -r 60 "
 			"-c:v prores_ks -profile:v 4 -pix_fmt yuv444p10le "
 			"-movflags +faststart out/render.mov"
 		); // ffmpeg frames to mp4
 
-		for(int i = 0; SIMULATION_LENGTH > i; i += SAVE_EVERY)
+		for(int i = SAVE_EVERY; SIMULATION_LENGTH > i; i += SAVE_EVERY)
 		{
 			char buffer[64];
 			sprintf(buffer, "magick ./out/temp/%05d.bmp ./out/%05d.png", i, i);

@@ -24,7 +24,7 @@
 % $$
 % where $\vec{v}$ is the velocity of the fluid particle, $\rho$ the density at the point of evaluation, $p$ the pressure and $\vec{F}$ the force acting on the particle.
 
-\subsection{Fluid simulator source code}
+\subsection{Fluid simulator source code}\label{section:FSIM}
 The fluid simulator works directly on the formula derived in Section~\ref{section:THE-FORMULAE} by creating particles
 at pseudorandom $y$ coordinates and then moving them by the velocity given by the velocity field at the point they are at.
 The rendering is done using SDL3 and then combining individually drawn frames into a video format using FFmpeg. The full source
