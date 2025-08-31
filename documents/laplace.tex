@@ -14,7 +14,7 @@ Substituting these expressions into the polar form of the Laplacian derived in S
     \laplacian\phi&=\pdv[2]{\phi}{r}+\frac{1}{r}\pdv{\phi}{r}+\frac{1}{r^2}\pdv[2]{\phi}{\theta}\\
     &=R''(r)\Theta(\theta)+\frac{1}{r}R'(r)\Theta(\theta)+\frac{1}{r^2}R(r)\Theta''(\theta)=0
 \end{align*}
-Consequently the expressions can be separated as
+Consequently the expressions can be separated as:
 \begin{align*}
     r^2R''(r)\Theta(\theta)+rR'(r)\Theta(\theta)+R(r)\Theta''(\theta)&=0\\
     r^2\frac{R''(r)}{R(r)}+r\frac{R'(r)}{R(r)}+\frac{\Theta''(\theta)}{\Theta(\theta)}&=0\\
@@ -131,7 +131,7 @@ and $R_n$ from \eqref{equation:laplace-equation:8},
     \phi_n:r,\theta&\mapsto R_n(r)\Theta_n(\theta)\\
     \implies\phi_n:r,\theta&\mapsto\left(ar^n+\frac{b}{r^n}\right)\left(A\cos n\theta+B\sin n\theta\right)
 \end{align*}
-The values of the constants $a,b,A,B$ and $n$ must now be chosen such that they obey the boundary equations, which were 
+The values of the constants $a,b,A,B$, and $n$ must now be determined such that they satisfy the boundary equations, which were 
 \begin{align*}
     \gradient{\phi}&=U(\rhat\cos\theta-\thetahat\sin\theta) &&\text{as $r\rightarrow\infty$}\\
     \pdv{\phi}{r}&=0                                        &&\text{when $r=L$}

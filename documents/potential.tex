@@ -32,7 +32,7 @@ and $\bar{\beta}=\frac{\beta_0+\beta_1}{2}$. Assume $\mathbf{V}$ is continuous a
 \end{center}
 
 The mass flow rate ($\dot{m}$, mass per unit time) across a given surface is defined as the flux of mass, which is computed as the product of density, the velocity component normal to the
-surface, and the area of the surface. Thus, along the $x$ axis (in the direction of $\ihat$) the mass flow rate into $WZ$ is given as,
+surface, and the area of the surface. Thus, along the $x$ axis (in the direction of $\ihat$) the mass flow rate into $WZ$ is given as:
 $$
     \dot{m}_{\rightarrow WZ}=\rho X(\alpha_0,\bar{\beta})(\beta_1-\beta_0)
 $$
@@ -114,11 +114,11 @@ the origin, where $\fatf$ is undefined), is irrotational\referto{figure}{figure:
 \end{figure*}
 
 \subsubsection{Kelvin's circulation theorem}\label{section:KELVIN}
-Kelvin's circulation theorem is crucial in the modelling of ideal fluids. While a full proof of the theorem is outside the scope of this essay for the purposes
+Kelvin's circulation theorem is crucial in the modelling of ideal fluids. While a full proof of the theorem is outside the scope of this essay, for the purposes
 of keeping focus, it provides the guarantee of irrotational flow which underpins the derivations made in the rest of this essay.
 
-The theorem states that for an ideal (crucially inviscid) fluid, the circulation around a closed loop moving with the fluid remains constant over time. Therefore,
-implying that if a fluid begins its flow irrotational, it remains irrotational. Irrotational flow enables the use of a velocity potential\referto{Section}{section:POTENTIAL},
+The theorem states that for an ideal (crucially inviscid) fluid, the circulation around a closed loop moving with the fluid remains constant over time. This implies
+that if a fluid begins its flow irrotational, it remains irrotational. Irrotational flow enables the use of a velocity potential\referto{Section}{section:POTENTIAL},
 greatly simplifying the further analysis of the fluid flow.
 \begin{theorem}[Kelvin's circulation theorem]\label{lemma:KELVIN}
     The rate of change of the circulation ($\Gamma$) of an ideal and inviscid fluid with respect to time around a closed contour moving with the flow of the fluid (in a
@@ -145,7 +145,7 @@ Taking the curl of this expression and applying Theorem~\ref{lemma:CLAIRAUT} (Cl
     \curl{\gradient{\phi}}&=\pdv{\phi}{y}{x}-\pdv{\phi}{x}{y}\\
                              &=\pdv{\phi}{y}{x}-\pdv{\phi}{y}{x}=0
 \end{align*}
-Thus, by the definition of irrotational flow,
+Thus, by the definition of irrotational flow:
 \begin{align*}
     \curl{\vec{V}}&=0=\curl{\gradient{\phi}}\\
     \therefore\vec{V}&=\gradient{\phi}
@@ -163,7 +163,7 @@ Here, $\phi$ is known as the velocity potential of $\vec{V}$. The velocity poten
         \vdots\\
         f_m(x_1,x_2,\cdots,x_n)
     \end{bmatrix}$$
-    the Jacobian of $\fatf$ would be given as
+    the Jacobian matrix of $\fatf$ would be given as
     $$
         \jacobian_\fatf=\begin{bmatrix}
             \nabla^\top f_1\\
@@ -178,7 +178,7 @@ Here, $\phi$ is known as the velocity potential of $\vec{V}$. The velocity poten
         \end{bmatrix}\in\mathbb{R}^{m\times n}
     $$
 \end{defn}
-The Jacobian matrix, and its determinant, has many uses within vector calculus, but for the purposes of this essay, the Jacobian chain rule is a fundamental result which allows for the calculation of the derivatives of a composite functions. The following result and proof underpins the proof for the more generalised version in Section~\ref{section:MVCR}.
+The Jacobian matrix, and its determinant, has many uses within vector calculus, but importantly for this essay, the Jacobian chain rule is a fundamental result which allows for the calculation of the derivatives of composite functions. The following result and proof is key for the proof for the more generalised version in Section~\ref{section:MVCR}.
 \begin{lemma}[The Jacobian chain rule]\label{lemma:JACOBIAN-CHAIN}
     Let the function $\fatf:\mathbb{R}^m\rightarrow\mathbb{R}^n$ and the function $\vec{G}:\mathbb{R}^l\rightarrow\mathbb{R}^m$. The Jacobian of the composite
     $\fatf\circ\vec{G}$ evaluated at some point $\vec{p}$ can be expressed as
@@ -360,16 +360,16 @@ This equation is known as Laplace's equation \cite{LEWIS2022131}. As will become
 
 \subsubsection{The polar form of the Laplacian}\label{section:POLAR-LAPLACIAN}
 \begin{lemma}[The polar form of the Laplacian]
-    For the scalar field $\phi$, the Laplacian is defined in polar coordinates as
+    For the scalar field $\phi$, the Laplacian is defined in polar coordinates as:
     $$\laplacian\phi=\pdv[2]{\phi}{r}+\frac{1}{r}\pdv{\phi}{r}+\frac{1}{r^2}\pdv[2]{\phi}{\theta}$$
 
     \begin{proof}
-        The Cartesian coordinates $x$ and $y$ are defined in terms of the polar coordinates $r$ and $\theta$ as
+        The Cartesian coordinates $x$ and $y$ are defined in terms of the polar coordinates $r$ and $\theta$ as:
         \begin{align*}
             x&=r\cos\theta\\
             y&=r\sin\theta
         \end{align*}
-        Consequently the partial derivatives for $x$ and $y$ in terms of $r$ and $\theta$ become
+        Consequently the partial derivatives for $x$ and $y$ in terms of $r$ and $\theta$ become:
         \begin{align*}
             \pdv{x}{r}=\cos\theta\quad&\quad\pdv{x}{\theta}=-r\sin\theta\\
             \pdv{y}{r}=\sin\theta\quad&\quad\pdv{y}{\theta}=r\cos\theta
@@ -385,7 +385,7 @@ This equation is known as Laplace's equation \cite{LEWIS2022131}. As will become
             \notag&=-\pdv{\phi}{x}r\sin\theta+\pdv{\phi}{y}r\cos\theta\\
             \label{equation:polar-laplacian:2}&=r\left(\pdv{\phi}{y}\cos\theta-\pdv{\phi}{x}\sin\theta\right)
         \end{align}
-        Taking the second order partial derivatives with respect to $r$ and using Theorem~\ref{lemma:CLAIRAUT} (Clairaut's theorem), which will henceforth be taken for granted, gives
+        Taking the second order partial derivatives with respect to $r$, and applying Theorem~\ref{lemma:CLAIRAUT} (Clairaut's theorem), which will henceforth be assumed implicit, gives
         \begin{align*}
             \pdv[2]{\phi}{r}&=\pdv{r}\pdv{\phi}{x}\cos\theta+\pdv{r}\pdv{\phi}{y}\sin\theta\\
             &=\pdv{x}\pdv{\phi}{r}\cos\theta+\pdv{y}\pdv{\phi}{r}\sin\theta
@@ -397,7 +397,7 @@ This equation is known as Laplace's equation \cite{LEWIS2022131}. As will become
             &=\pdv[2]{\phi}{x}\cos^2\theta+\pdv[2]{\phi}{y}\sin^2\theta+\left(\pdv{\phi}{y}{x}+\pdv{\phi}{x}{y}\right)\cos\theta\sin\theta\\
             &=\pdv[2]{\phi}{x}\cos^2\theta+\pdv[2]{\phi}{y}\sin^2\theta+2\pdv{\phi}{y}{x}\cos\theta\sin\theta
         \end{align*}
-        Applying the same process for the second partial derivative with respect to $\theta$ leads to
+        Applying the same process for the second partial derivative with respect to $\theta$ leads to:
         \begin{align*}
             \pdv[2]{\phi}{\theta}&=\pdv{\theta}\left(\pdv{\phi}{y}\cos\theta-\pdv{\phi}{x}\sin\theta\right)r\\
             &=\pdv{\theta}\left(\pdv{\phi}{y}r\cos\theta\right)-\pdv{\theta}\left(\pdv{\phi}{x}r\sin\theta\right)
@@ -420,7 +420,7 @@ This equation is known as Laplace's equation \cite{LEWIS2022131}. As will become
         $$
             \pdv[2]{\phi}{\theta}=r^2\left(\pdv[2]{\phi}{y}\cos^2\theta+\pdv[2]{\phi}{x}\sin^2\theta-2\pdv{\phi}{y}{x}\cos\theta\sin\theta\right)-r\left(\pdv{\phi}{x}\cos\theta+\pdv{\phi}{y}\sin\theta\right)
         $$
-        Substituting in \eqref{equation:polar-laplacian:1} leads to
+        Substituting in \eqref{equation:polar-laplacian:1} leads to:
         $$
             \pdv[2]{\phi}{\theta}=r^2\left(\pdv[2]{\phi}{y}\cos^2\theta+\pdv[2]{\phi}{x}\sin^2\theta-2\pdv{\phi}{y}{x}\cos\theta\sin\theta\right)-r\pdv{\phi}{r}
         $$
@@ -437,7 +437,7 @@ This equation is known as Laplace's equation \cite{LEWIS2022131}. As will become
 \end{lemma}
 
 \section{Formulation of the problem}
-Let the velocity field of the fluid be denoted as $\vec{V}$. The 2 dimensional solid cylinder is placed at the origin $\point{0}{0}$ and has a radius $L$. Due to the circular nature of the cylinder,
+Let the velocity field of the fluid be denoted by $\vec{V}$. A two-dimensional solid cylinder is placed at the origin $\point{0}{0}$ and has a radius $L$. Due to the circular nature of the cylinder,
 it is helpful to define the problem in polar coordinates.
 
 \subsection{Polar form of the gradient}\label{section:polar-gradient}
@@ -547,7 +547,7 @@ Since the velocity field is defined in terms of the velocity potential (such tha
                 \thetahat
             \end{bmatrix}
         \end{align*}
-        Thus, the Cartesian coordinate unit vectors are defined in terms of the polar coordinate vectors as
+        Thus, the Cartesian coordinate unit vectors are defined in terms of the polar coordinate vectors as:
         \begin{align*}
             \ihat&=\rhat\cos\theta-\thetahat\sin\theta\\
             \jhat&=\thetahat\cos\theta+\rhat\sin\theta
